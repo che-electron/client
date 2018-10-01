@@ -4,6 +4,7 @@
   "private": true,
   "main": "public/electron.js",
   "dependencies": {
+    "bootstrap": "^4.1.1",
     "electron-is-dev": "^1.0.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
