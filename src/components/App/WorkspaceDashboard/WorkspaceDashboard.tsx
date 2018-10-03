@@ -11,14 +11,14 @@ class WorkspaceDashboard extends React.Component<any,any>{
         this.getWorkspaceData = this.getWorkspaceData.bind(this);
         this.eachWorkspace = this.eachWorkspace.bind(this);
     }
-    
+
     public componentWillMount(){
         this.getWorkspaceData();
     }
     
      public getWorkspaceData () : void {
 
-    const workspaceApi='http://che-mini-che.192.168.42.164.nip.io/api/workspace';
+    const workspaceApi='http://che-mini-che.'+this.getMinishiftIp()+'.nip.io/api/workspace';
     fetch(workspaceApi)
     .then(results => {
         return results.json();
@@ -41,9 +41,13 @@ class WorkspaceDashboard extends React.Component<any,any>{
                 <h2>
                     Workspace Dashboard
                 </h2>
-                {this.state.workspaces.map(this.eachWorkspace)}
+                <div  className="row" >{this.state.workspaces.map(this.eachWorkspace)} </div>
             </div>
         )
+    }
+    private getMinishiftIp()
+    {
+        return '';
     }
 }
 
