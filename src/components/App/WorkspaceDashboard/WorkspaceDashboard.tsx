@@ -1,4 +1,3 @@
-import * as https from 'https';
 import * as React from "react";
 import WorkspaceCard from "./WorkspaceCard/WorkspaceCard";
 
@@ -14,29 +13,20 @@ class WorkspaceDashboard extends React.Component<any,any>{
     }
     
     public componentWillMount(){
-        this.getWorkspaceData("");
+        this.getWorkspaceData();
     }
     
-     public getWorkspaceData (token : string) : void {
-        const options = {
-          host: "che.openshift.io",
-          method: "GET",
-          path: "/api/workspace?token="+token,
-          port: 443
-        }
-    
-        let workspacesBody = "";
-      
-        https.get(options, (resp) => {
-          resp.on("data",(data) => {
-            workspacesBody += data;
-          });
-          resp.on("end", () => {
-            this.setState({
-              workspaces : JSON.parse(workspacesBody)
-            });
-          });
-        });
+     public getWorkspaceData () : void {
+
+    const workspaceApi='http://che-mini-che.192.168.42.164.nip.io/api/workspace';
+    fetch(workspaceApi)
+    .then(results => {
+        return results.json();
+    })
+    .then((data) => {
+        this.setState({workspaces:data})
+    })
+
     }
 
     public eachWorkspace(wksp : any){
