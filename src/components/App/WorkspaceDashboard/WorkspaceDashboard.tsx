@@ -17,8 +17,8 @@ class WorkspaceDashboard extends React.Component<any,any>{
     }
     
      public getWorkspaceData () : void {
-
-    const workspaceApi='http://che-mini-che.'+this.getMinishiftIp()+'.nip.io/api/workspace';
+    const minishiftIp=this.getMinishiftIp();
+    const workspaceApi='http://che-mini-che.'+minishiftIp+'.nip.io/api/workspace';
     fetch(workspaceApi)
     .then(results => {
         return results.json();

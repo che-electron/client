@@ -1,5 +1,7 @@
 import * as React from "react";
-import "./WorkspaceCard.css"
+import {Icon} from 'react-fa';
+import {Button} from "reactstrap";
+import "./WorkspaceCard.css";
 
 export interface IWorkspaceItem extends React.Props<any>{
     name : string;
@@ -15,6 +17,7 @@ class WorkspaceCard extends React.Component <IWorkspaceItem,any>{
             buttonState : false,
             workspaceStatus : this.props.status,
         }
+        this.getMinishiftIp= this.getMinishiftIp.bind(this);
         this.reloadWorkspace = this.reloadWorkspace.bind(this);
         this.startWorkspace=this.startWorkspace.bind(this);
         this.stopWorkspace=this.stopWorkspace.bind(this);
@@ -25,15 +28,20 @@ class WorkspaceCard extends React.Component <IWorkspaceItem,any>{
         let workspaceAction;
 
         if (this.state.workspaceStatus === "STOPPED"){
-            workspaceAction = <button className="Start_Workspace" onClick={this.startWorkspace}>Start Workspace</button>;
+            workspaceAction = <Button className="Start_Workspace" onClick={this.startWorkspace}>Start Workspace</Button>;
         }if(this.state.workspaceStatus === "RUNNING"){
-            workspaceAction = <div><button className="Stop_Workspace" onClick={this.stopWorkspace}>Stop Workspace</button><a href={this.props.url} className="button">View Workspace</a></div>;
+            workspaceAction = <div><Button className="Stop_Workspace" onClick={this.stopWorkspace}>Stop Workspace</Button><Button href={this.props.url} className="button">View Workspace</Button></div>;
         }if (this.state.workspaceStatus === "STARTING")
         {
-            workspaceAction = <button className="Reload_Workspace" onClick={this.reloadWorkspace}>Reload</button>;
+            workspaceAction =<div><Icon spin ={true} name="refresh" />
+            { this.reloadWorkspace() }
+            <span  className="sr-only"/>
+            </div>;
         }if (this.state.workspaceStatus === "STOPPING")
         {
-            workspaceAction = <button className="Reload_Workspace" onClick={this.reloadWorkspace}>Reload</button>;
+            workspaceAction = <div ><Icon spin = {true} name="refresh" />
+            {this.reloadWorkspace()}
+            <span  className="sr-only"/></div>;
         }
         
         return(
@@ -41,7 +49,7 @@ class WorkspaceCard extends React.Component <IWorkspaceItem,any>{
                 <div className="card-body">
                     <h4 className="card-title">{this.props.name}</h4>
                     <h6 className="id">{this.props.id}</h6>
-                    <h5 className="status">{this.props.status}</h5>
+                    <h5 className="status">{this.state.workspaceStatus}</h5>
                     <span>
                     {workspaceAction}
                     </span>
@@ -52,31 +60,45 @@ class WorkspaceCard extends React.Component <IWorkspaceItem,any>{
     }
 
 
-    private reloadWorkspace() {
-        const reloadWorkspace='http://che-mini-che.'+this.getMinishiftIp+'.nip.io/api/workspace/'+this.props.id;
-        fetch(reloadWorkspace).then((response) => response.json())
-        .then((data) => {
-          this.setState({workspaceStatus:data.status});
-    });
+   private reloadWorkspace() {
+        if(this.state.workspaceStatus === 'STARTING' || this.state.workspaceStatus === 'STOPPING')
+        {
+            const minishiftIp=this.getMinishiftIp();
+            const reloadWorkspace='http://che-mini-che.'+{minishiftIp}+'.nip.io/api/workspace/'+this.props.id;
+        fetch(reloadWorkspace, {
+            headers: new Headers({
+                'Content-Type': 'application/json',
+       }),
+       method: 'GET'
+          
+        }).then((response) => response.json())
+        .then((data) => 
+              this.setState(
+                  {workspaceStatus:data.status})
+    );
+}    
     };
 
     private stopWorkspace() {
-        const stopWorkspace='http://che-mini-che.'+this.getMinishiftIp+'.nip.io/api/workspace/'+this.props.id+'/runtime';
+        const minishiftIp=this.getMinishiftIp();
+        const stopWorkspace='http://che-mini-che.'+{minishiftIp}+'.nip.io/api/workspace/'+this.props.id+'/runtime';
         fetch(stopWorkspace, {
             headers: new Headers({
                 'Content-Type': 'application/json',
        }),
        method: 'DELETE'
           
-        });
+        }).then(() =>
        
-          this.setState({workspaceStatus:'STOPPING'});
+          this.setState({workspaceStatus:'STOPPING'})
+    );
+         
 
     }
 
-    
     private startWorkspace (){
-        const startWorkspace='http://che-mini-che.'+this.getMinishiftIp+'.nip.io/api/workspace/'+this.props.id+'/runtime';
+        const minishiftIp=this.getMinishiftIp();
+        const startWorkspace='http://che-mini-che.'+{minishiftIp}+'.nip.io/api/workspace/'+this.props.id+'/runtime';
         fetch(startWorkspace, {
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -88,14 +110,13 @@ class WorkspaceCard extends React.Component <IWorkspaceItem,any>{
           this.setState({workspaceStatus:data.status});
          
     });
-
          
     };
-
     private getMinishiftIp()
     {
         return '';
     }
+
 }
 
 export default WorkspaceCard;
