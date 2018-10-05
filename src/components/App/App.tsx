@@ -8,7 +8,6 @@ class App extends React.Component<any,any> {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Che Native Client</h1>
           <WorkspaceDashboard />
         </header>
       </div>
