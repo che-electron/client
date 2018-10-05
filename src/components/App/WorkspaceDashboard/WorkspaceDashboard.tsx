@@ -17,8 +17,8 @@ class WorkspaceDashboard extends React.Component<any,any>{
     }
     
      public getWorkspaceData () : void {
-    const minishiftIp=this.getMinishiftIp();
-    const workspaceApi='http://che-mini-che.'+minishiftIp+'.nip.io/api/workspace';
+    // const minishiftIp=this.getMinishiftIp();
+    const workspaceApi='http://che-mini-che.'+'192.168.42.177'+'.nip.io/api/workspace';
     fetch(workspaceApi)
     .then(results => {
         return results.json();
@@ -37,18 +37,20 @@ class WorkspaceDashboard extends React.Component<any,any>{
 
     public render(){
         return(
-            <div>
-                <h2>
-                    Workspace Dashboard
-                </h2>
+            <div className="container">
+                <div className="jumbotron jumbotron-fluid">
+                <h1 className="App-title text-center">Eclipse Che</h1>
+
+                <h2 className="display-6 text-center">Workspace Dashboard</h2>
+                </div>
                 <div  className="row" >{this.state.workspaces.map(this.eachWorkspace)} </div>
             </div>
         )
     }
-    private getMinishiftIp()
-    {
-        return '';
-    }
+    // private getMinishiftIp()
+    // {
+    //     return '192.168.42.177';
+    // }
 }
 
 export default WorkspaceDashboard;
