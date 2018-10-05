@@ -6,6 +6,7 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
 const url = require('url');
 const isDev = require('electron-is-dev');
+const ipcMain = electron.ipcMain;
 
 let mainWindow;
 
@@ -27,4 +28,8 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+ipcMain.on('launch', (event, arg)=>{
+  mainWindow.loadURL(arg);
 });
