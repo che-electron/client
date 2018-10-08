@@ -10,6 +10,7 @@ class WorkspaceDashboard extends React.Component<any,any>{
         }
         this.getWorkspaceData = this.getWorkspaceData.bind(this);
         this.eachWorkspace = this.eachWorkspace.bind(this);
+        this.getMinishiftIp=this.getMinishiftIp.bind(this);
     }
 
     public componentWillMount(){
@@ -17,8 +18,8 @@ class WorkspaceDashboard extends React.Component<any,any>{
     }
     
      public getWorkspaceData () : void {
-    // const minishiftIp=this.getMinishiftIp();
-    const workspaceApi='http://che-mini-che.'+'192.168.42.177'+'.nip.io/api/workspace';
+     const minishiftIp=this.getMinishiftIp();
+    const workspaceApi='http://che-mini-che.'+minishiftIp+'.nip.io/api/workspace';
     fetch(workspaceApi)
     .then(results => {
         return results.json();
@@ -47,10 +48,10 @@ class WorkspaceDashboard extends React.Component<any,any>{
             </div>
         )
     }
-    // private getMinishiftIp()
-    // {
-    //     return '192.168.42.177';
-    // }
+     private getMinishiftIp()
+     {
+         return '';
+     }
 }
 
 export default WorkspaceDashboard;
