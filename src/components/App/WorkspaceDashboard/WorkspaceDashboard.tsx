@@ -50,7 +50,7 @@ class WorkspaceDashboard extends React.Component<any,any>{
     }
      private getMinishiftIp()
      {
-         return '';
+         return '192.168.42.177';
      }
 }
 

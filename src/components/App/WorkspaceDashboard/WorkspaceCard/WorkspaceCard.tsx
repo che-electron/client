@@ -1,5 +1,6 @@
 import * as React from "react";
 import {Icon} from 'react-fa';
+import {ipcRenderer} from 'electron';
 import "./WorkspaceCard.css"; 
 
 export interface IWorkspaceItem extends React.Props<any>{
@@ -17,7 +18,7 @@ class WorkspaceCard extends React.Component <IWorkspaceItem,any>{
             buttonState : false,
             workspaceStatus : this.props.status,
         }
-     //   this.getMinishiftIp= this.getMinishiftIp.bind(this);
+       this.getMinishiftIp= this.getMinishiftIp.bind(this);
         this.reloadWorkspace = this.reloadWorkspace.bind(this);
         this.startWorkspace=this.startWorkspace.bind(this);
         this.stopWorkspace=this.stopWorkspace.bind(this);
@@ -30,7 +31,8 @@ class WorkspaceCard extends React.Component <IWorkspaceItem,any>{
         if (this.state.workspaceStatus === "STOPPED"){
             workspaceAction = <button className="btn btn-lg btn-block Start_Workspace" onClick={this.startWorkspace}>Start Workspace</button >;
         }if(this.state.workspaceStatus === "RUNNING"){
-            workspaceAction = <div><button  className="Stop_Workspace btn btn-lg btn-block btn-secondary" onClick={this.stopWorkspace}>Stop Workspace</button><a href={this.props.url} className="btn btn-primary btn-lg btn-block">View Workspace</a></div>;
+            workspaceAction = <div><button  className="Stop_Workspace btn btn-lg btn-block btn-secondary" onClick={this.stopWorkspace}>Stop Workspace</button>
+            <button onClick={ipcRenderer.sendSync('synchronous-message', 'ping')} className="btn btn-primary btn-lg btn-block">View Workspace</button></div>;
         }if ((this.state.workspaceStatus === "STARTING") ||  (this.state.workspaceStatus === "STOPPING"))
         {
             workspaceAction =<div><Icon spin ={true} name="refresh" />
@@ -112,7 +114,7 @@ class WorkspaceCard extends React.Component <IWorkspaceItem,any>{
     };
      private getMinishiftIp()
      {
-         return '';
+         return '192.168.42.177';
      }
 
 }

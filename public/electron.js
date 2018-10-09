@@ -12,7 +12,7 @@ let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({width: 1500, height: 950});
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
+  mainWindow.loadURL('http://che-mini-che.192.168.42.177.nip.io/dashboard/#/');
   mainWindow.on('closed', () => mainWindow = null);
 }
 
@@ -30,6 +30,3 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.on('launch', (event, arg)=>{
-  mainWindow.loadURL(arg);
-});
