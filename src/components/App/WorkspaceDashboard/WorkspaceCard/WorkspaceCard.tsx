@@ -16,7 +16,7 @@ class WorkspaceCard extends React.Component <IWorkspaceItem,any>{
     constructor(props:any){
         super(props);
         this.state = {
-            
+            showIDE : false,
             workspaceStatus : this.props.status,
         }
         this.loadIDE=this.loadIDE.bind(this);
@@ -32,13 +32,16 @@ class WorkspaceCard extends React.Component <IWorkspaceItem,any>{
         if (this.state.workspaceStatus === "STOPPED"){
             workspaceAction = <button className="btn btn-lg btn-block Start_Workspace" onClick={this.startWorkspace}>Start Workspace</button >;
         }if(this.state.workspaceStatus === "RUNNING"){
-            workspaceAction = <div><button  className="Stop_Workspace btn btn-lg btn-block btn-secondary" onClick={this.stopWorkspace}>Stop Workspace</button><button onClick={this.loadIDE} className="btn btn-primary btn-lg btn-block">View Workspace</button><LoadIDE url={this.props.url}/></div>;
+            workspaceAction = <div><button  className="Stop_Workspace btn btn-lg btn-block btn-secondary" onClick={this.stopWorkspace}>Stop Workspace</button><button onClick={this.loadIDE} className="btn btn-primary btn-lg btn-block">View Workspace</button></div>;
         }if ((this.state.workspaceStatus === "STARTING") ||  (this.state.workspaceStatus === "STOPPING"))
         {
             workspaceAction =<div><Icon spin ={true} name="refresh" />
             { this.reloadWorkspace() }
             <span  className="sr-only"/>
             </div>;
+        } if(this.state.showIDE === true)
+        {
+            workspaceAction = <LoadIDE url={this.props.url}/>;
         }
         
         return(
@@ -53,8 +56,9 @@ class WorkspaceCard extends React.Component <IWorkspaceItem,any>{
                     </div>
                 </div>
             </div>
-
             </div>
+
+
 
         )
     }
@@ -115,7 +119,7 @@ class WorkspaceCard extends React.Component <IWorkspaceItem,any>{
 
     private loadIDE(){
         
-      return  <LoadIDE url={this.props.url}/>
+        this.setState({showIDE: true})
     };
 
      private getMinishiftIp()

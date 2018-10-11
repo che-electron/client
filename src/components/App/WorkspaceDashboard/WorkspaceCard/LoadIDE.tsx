@@ -16,7 +16,7 @@ class LoadIDE extends React.Component <ILoadWorkspace,any>{
         {
             global.console.log("loading ide");
             return(
-                <div><iframe src={this.state.loadUrl} width="1500" height="950"/></div>
+                <iframe src={this.state.loadUrl} width="1500" height="950"/>
             );
         }
 }
