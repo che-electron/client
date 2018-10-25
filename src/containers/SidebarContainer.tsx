@@ -12,7 +12,6 @@ const mapStateToProps = (state: IState) => ({
     PsidebarIsActive : getSidebarIsActive(state),
     PwkspsIsFetching : getWkspsIsFetching(state),
     Pworkspaces : getWorkspaces(state),
-    
 })
 
 const mapDispatchToProps = {

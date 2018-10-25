@@ -12,7 +12,6 @@ export enum ActionTypes {
     FETCH_WORKSPACES = '[sidebar_wksps] FETCH_WORKSPACES',
     REQUEST_WORKSPACES = '[sidebar_wksps] REQUEST_WORKSPACES',
     RECEIVE_WORKSPACES = '[sidebar_wksps] RECEIVE_WORKSPACES'
-
 }
 
 /*
@@ -45,13 +44,10 @@ export interface IRequestWorkpsacesAction {
 export interface IReceiveWorkpsacesAction {
     type : ActionTypes.RECEIVE_WORKSPACES,
     payload : {
+
         workspaces : Workspace[]
     }
 }
-
-/*
-    Functions which are going to be used by the Actions
-*/
 
 /*
     Actions as funcitons
@@ -116,8 +112,10 @@ export function fetchWorkspaces(){
         } else {
             return 
         }
+
     }
 }
 
 
 export type Action = IToggleSidebarAction | IFetchWorkpsacesAction | IRequestWorkpsacesAction | IReceiveWorkpsacesAction
+

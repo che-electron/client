@@ -38,6 +38,4 @@ export function requestLogin(){
         type : ActionTypes.OSIO_LOGIN_REQUEST
     }
 }
-
-
 export type Action = ICheckLoginAction | IOSIOLoginRequestAction
