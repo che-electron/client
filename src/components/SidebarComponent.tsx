@@ -45,7 +45,7 @@ class SidebarComponent extends React.Component<IProps,any> {
     public renderContent() { 
         if (this.props.PsidebarIsActive){    
             const componentstyle = {
-                
+
                 "width" : "100%",
             }
                 

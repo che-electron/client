@@ -6,11 +6,12 @@ import SidebarComponent from "../components/SidebarComponent"
 
 import { fetchWorkspaces, toggleSidebar} from "../actions/Sidebar"
 
-import {getSidebarIsActive, getWorkspaces} from "../selectors/Sidebar"
+import {getSidebarIsActive, getWkspsIsFetching, getWorkspaces} from "../selectors/Sidebar"
 
 const mapStateToProps = (state: IState) => ({
     PsidebarIsActive : getSidebarIsActive(state),
-    Pworkspaces : getWorkspaces(state)
+    PwkspsIsFetching : getWkspsIsFetching(state),
+    Pworkspaces : getWorkspaces(state),
 })
 
 const mapDispatchToProps = {

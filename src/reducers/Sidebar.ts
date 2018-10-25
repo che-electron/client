@@ -5,52 +5,48 @@ import Workspace from "../models/Workspace";
 
 export interface IState {
     sidebarIsActive : boolean,
-    workspaces : Workspace[]
+    workspaces : Workspace[],
+    wkspsIsFetching : boolean,
+    wkspsFetchError : boolean
 }
 
 export const initialState : IState = {
     sidebarIsActive : true,
-    workspaces : []
+    wkspsFetchError : false,
+    wkspsIsFetching :false,
+    workspaces : [],
 }
 
 
 export function reducer(state: IState = initialState, action: Action){
     switch(action.type){
         case ActionTypes.TOGGLE_SIDEBAR: {
-            
-            return {
-                ...state,
+            return Object.assign({}, state, {
                 sidebarIsActive : !state.sidebarIsActive,
-            }
+            })
         }
 
-        case ActionTypes.FETCH_WORKSPACES: {
-
-            const Workspaces : Workspace[] =[] 
-
-            const request = async () => {
-                const response = await fetch("http://che-mini-che.192.168.42.121.nip.io/api/workspace"/* "https://che.openshift.io/api/workspace?token="+localStorage.OSIOAuthToken*/)
-                const data = await response.json()   
-                
-                data.map((workspace:any,index:number)=>{
-                    const wksp : Workspace = {
-                        id : workspace.id,
-                        name : workspace.config.name,
-                        status : workspace.status,
-                        url : workspace.links.ide,
-                    }
-                    global.console.log(wksp)
-                    Workspaces[index] = wksp
-                })
-            }
-
-            request()
-
-            return {
-                ...state,
-                workspaces : Workspaces
-            }
+        case ActionTypes.FETCH_WORKSPACES: {            
+            return Object.assign({}, state, {
+                workspaces : action.payload.workspaces,
+            })
         }
+
+        case ActionTypes.REQUEST_WORKSPACES: {
+            return Object.assign({}, state, {
+                wkspsFetchError : false,
+                wkspsIsFetching :true,
+              })
+        }
+        
+        case ActionTypes.RECEIVE_WORKSPACES: {
+            return Object.assign({}, state, {
+                wkspsFetchError : false,
+                wkspsIsFetching : false,
+                workspaces : action.payload.workspaces,
+              })
+        }
+        
 
         default : {
             return state

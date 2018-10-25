@@ -17,9 +17,9 @@ export function reducer(state: IState = initialState, action: Action){
         case ActionTypes.CHECK_LOGIN: {
             let existsInURL : boolean
             // const tokenFromKeytar = getPassword("OSIO","Che")
-            const tokenFromKeytar = localStorage.getItem("OSIOAuthToken")
+            const tokenFromLocalStorage = localStorage.getItem("OSIOAuthToken")
 
-            if (tokenFromKeytar){
+            if (tokenFromLocalStorage){
                 return {
                     ...state,
                     authenticated : true
@@ -57,7 +57,7 @@ export function reducer(state: IState = initialState, action: Action){
                 existsInURL = false
             }
 
-            if (tokenFromKeytar === null && !existsInURL){
+            if (tokenFromLocalStorage === null && !existsInURL){
                 return {
                     ...state,
                     authenticated : false

@@ -25,7 +25,6 @@ class ServersComponent extends React.Component<IProps,any> {
             )
         }
 
-
     }
 
     public render(){
