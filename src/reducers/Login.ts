@@ -2,17 +2,17 @@ import { Action, ActionTypes } from '../actions/Login';
 
 // import {getPassword, setPassword} from 'keytar'
 
-export interface IState {
+export interface IStateLogin {
     fetching : boolean,
     authenticated : boolean,
 }
 
-export const initialState : IState = {
+export const initialState : IStateLogin = {
     authenticated : false,
     fetching : false,
 }
 
-export function reducer(state: IState = initialState, action: Action){
+export function loginReducer(state: IStateLogin = initialState, action: Action){
     switch(action.type){
         case ActionTypes.CHECK_LOGIN: {
             let existsInURL : boolean

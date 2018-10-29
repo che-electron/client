@@ -1,10 +1,10 @@
 import { IState } from '../reducers'
 
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
 import SidebarComponent from "../components/SidebarComponent"
 
-import { fetchWorkspaces, toggleSidebar} from "../actions/Sidebar"
+import {fetchWorkspaces, toggleSidebar} from "../actions/Sidebar"
 
 import {getSidebarIsActive, getWkspsIsFetching, getWorkspaces} from "../selectors/Sidebar"
 

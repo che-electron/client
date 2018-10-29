@@ -5,7 +5,7 @@ class IDEComponent extends React.Component<any,any> {
 
         const style = {
             "backgroundColor" : '#FFF', 
-            "border" : "5px solid blue",
+            "border" : "1px solid blue",
             "height" : "100%",
             "margin" : "10px",
             "top" : "0",

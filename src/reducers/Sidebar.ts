@@ -1,16 +1,14 @@
 import { Action, ActionTypes } from '../actions/Sidebar';
 import Workspace from "../models/Workspace";
 
-// import {getPassword, setPassword} from 'keytar'
-
-export interface IState {
+export interface IStateSidebar {
     sidebarIsActive : boolean,
     workspaces : Workspace[],
     wkspsIsFetching : boolean,
     wkspsFetchError : boolean
 }
 
-export const initialState : IState = {
+export const initialState : IStateSidebar = {
     sidebarIsActive : true,
     wkspsFetchError : false,
     wkspsIsFetching :false,
@@ -18,7 +16,7 @@ export const initialState : IState = {
 }
 
 
-export function reducer(state: IState = initialState, action: Action){
+export function sidebarReducer(state: IStateSidebar = initialState, action: Action){
     switch(action.type){
         case ActionTypes.TOGGLE_SIDEBAR: {
             return Object.assign({}, state, {
@@ -46,7 +44,6 @@ export function reducer(state: IState = initialState, action: Action){
                 workspaces : action.payload.workspaces,
               })
         }
-        
 
         default : {
             return state

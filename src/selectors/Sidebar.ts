@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect'
+import { createSelector } from "reselect";
 import { IState } from '../reducers'
 
 const getSidebarState = ((state:IState)=>state.sidebar)

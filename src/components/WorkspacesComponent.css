@@ -1,0 +1,20 @@
+.green-running {
+    height: 10px;
+    width: 10px;
+    background-color: #008000;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.red-stopped {
+    height: 10px;
+    width: 10px;
+    background-color: #FF0000;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.bm-item:hover {
+    background-color: #3e5e8e;
+    color: white;
+  }

@@ -1,5 +1,7 @@
-import * as React from "react"
+import * as React from "react";
 import IWorkspace from "../models/Workspace";
+import "./WorkspacesComponent.css";
+
 
 interface IProps {
     Pworkspaces : IWorkspace[],
@@ -8,34 +10,48 @@ interface IProps {
 
 class WorkspacesComponent extends React.Component<IProps,any> {
 
-    public checkSidebar(){
-        const style = {
-            "border" : "2px solid green",
-            "flex" : "0 0 12px",
-            "margin" : "10px",
-        }
-        return style
+    constructor(props : any){
+        super(props);
     }
 
     public workspaceToCard(wksp : any){
         const style = {
-            "margin" : "10px",
-            "width" : "100%"
+            "height": "100%" , 
         }
-        return (
-            <div style={style} className="Workspace" key={wksp.id}>
-                Name : {wksp.name},
-                ID : {wksp.id},
-                URL : {wksp.url},
-                Status : {wksp.status}
-            </div>
+        const style1={
+            "background-color" : "" ,
+            "height" : "100%",
+            "margin" : "10px 0",            
+            "padding": "5px",
+            "text-align" : "left",
+            "width" : "100%",            
+        }
+
+        const style2={
+            "margin" : "5px",            
+        }
+        
+        return (  
+            <div className="Workspace bm-menu" key={wksp.id} style={style}>
+            <nav className="bm-item-list" >
+            <button className="bm-item" style={style1}>
+            <i className={ (wksp.status === 'STOPPED' || wksp.status === 'STOPPING')? "red-stopped":"green-running"}/>
+            <span style={style2}>{wksp.name}</span>
+            </button>
+           </nav>
+           </div>
         )
     }
 
     public render(){
-        const style = this.checkSidebar()
+        
+        const style = {
+            "flex" : "0 0 12px",
+            "margin" : "10px",
+        }
         return (
             <div className="WorkspacesList" style={style}>
+            <h2><strong>Workspaces</strong></h2>
                 {this.props.Pworkspaces.map(this.workspaceToCard)}
             </div>
         )

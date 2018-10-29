@@ -1,8 +1,8 @@
-import Workspace from "../models/Workspace"
+import Workspace from "../models/Workspace";
 
-import { Dispatch } from "redux"
+import { Dispatch } from "redux";
 
-import { IState } from '../reducers/Sidebar';
+import { IStateSidebar } from '../reducers/Sidebar';
 
 import IWorkspace from '../models/Workspace';
 
@@ -11,7 +11,8 @@ export enum ActionTypes {
     TOGGLE_SIDEBAR = '[sidebar] TOGGLE_SIDEBAR',
     FETCH_WORKSPACES = '[sidebar_wksps] FETCH_WORKSPACES',
     REQUEST_WORKSPACES = '[sidebar_wksps] REQUEST_WORKSPACES',
-    RECEIVE_WORKSPACES = '[sidebar_wksps] RECEIVE_WORKSPACES'
+    RECEIVE_WORKSPACES = '[sidebar_wksps] RECEIVE_WORKSPACES',
+    RECEIVE_IDE = 'RECEIVE_IDE'
 }
 
 /*
@@ -60,7 +61,7 @@ export function toggleSidebar(){
     }
 }
 
-function shouldFetchWorkspaces(state : IState ){
+function shouldFetchWorkspaces(state : IStateSidebar ){
     if (!state.workspaces){
         return true
     }
@@ -82,21 +83,40 @@ function receiveWorkspaces(Workspaces : IWorkspace[]){
     }
 }
 
+function receiveIde(Ide : string){
+    return {
+        payload : {
+            ide : Ide
+        },
+        type: ActionTypes.RECEIVE_IDE
+    }
+}
+
 function makeRequestWorkspaces(){
     return ( dispatch : Dispatch )=> {
         dispatch(requestWorkspaces())
         fetch("https://che.openshift.io/api/workspace?token="+localStorage.OSIOAuthToken).then((response) => {
             return response.json()
         }).then(data => {     
-            const workspaces : Workspace[] = [] 
+            const workspaces : Workspace[] = []
+            
             data.map((workspace:any,index:number)=>{
-                const wksp : Workspace = {
+            
+                fetch("https://che.openshift.io/api/workspace/"+workspace.id+"?token="+localStorage.OSIOAuthToken).then((response) => {
+                    return response.json()
+                }).then(wdata => {     
+                     
+            dispatch(receiveIde(wdata.links.ide));    
+            const wksp : Workspace = {
                     id : workspace.id,
                     name : workspace.config.name,
                     status : workspace.status,
-                    url : workspace.links.ide,
+                    url : wdata.links.ide,
+                                
                 }
                 workspaces[index] = wksp
+                
+            })
             })
             return workspaces
         }).then((workspaces) => {

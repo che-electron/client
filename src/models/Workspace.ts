@@ -1,6 +1,6 @@
 export default interface IWorkspace {
     id : string,
+    url : string
     name : string,
-    url : string,
-    status : string
+    status : string    
 }
