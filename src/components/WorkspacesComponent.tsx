@@ -1,7 +1,9 @@
 import * as React from "react";
+import { ContextMenu, ContextMenuTrigger} from "react-contextmenu";
+import {Icon} from "react-fa"; 
 import IWorkspace from "../models/Workspace";
 import "./WorkspacesComponent.css";
-
+import WorkspaceStatusComponent from "./WorkspaceStatusComponent";
 
 interface IProps {
     Pworkspaces : IWorkspace[],
@@ -14,30 +16,32 @@ class WorkspacesComponent extends React.Component<IProps,any> {
         super(props);
     }
 
-    public workspaceToCard(wksp : any){
-        const style = {
-            "height": "100%" , 
-        }
-        const style1={
-            "background-color" : "" ,
-            "height" : "100%",
-            "margin" : "10px 0",            
-            "padding": "5px",
-            "text-align" : "left",
-            "width" : "100%",            
-        }
-
-        const style2={
-            "margin" : "5px",            
+    public displayWorkspaces(wksp : any){
+               
+        let showIcon;
+        if(wksp.status === 'STOPPED'){
+            showIcon =<i className="workspace-status-stopped"/>;
+        }else if(wksp.status === 'RUNNING'){
+            showIcon=<i className="workspace-status-running"/>
+        }else if(wksp.status === 'ERROR'){
+            showIcon=<i className="workspace-status-error"/>
+        }else if(wksp.status === 'STOPPING' || wksp.status === 'STARTING'){
+            showIcon=<i className="workspace-status-spinner"><div className="workspace-status-spinner"><div className="rect1" /><div className="rect2"/><div className="rect3"/></div></i>
         }
         
         return (  
-            <div className="Workspace bm-menu" key={wksp.id} style={style}>
+            <div className="workspace-bm-menu" key={wksp.id} >
             <nav className="bm-item-list" >
-            <button className="bm-item" style={style1}>
-            <i className={ (wksp.status === 'STOPPED' || wksp.status === 'STOPPING')? "red-stopped":"green-running"}/>
-            <span style={style2}>{wksp.name}</span>
+            <ContextMenuTrigger id="my_menu">          
+            <button className="bm-item" contextMenu="mymenu" >
+            {showIcon} &nbsp;
+            <span>{wksp.name}</span>
             </button>
+            </ContextMenuTrigger> 
+
+            <ContextMenu id="my_menu">
+            <WorkspaceStatusComponent workspaceId={wksp.id} workspaceStatus={wksp.status} />
+            </ContextMenu>
            </nav>
            </div>
         )
@@ -45,14 +49,11 @@ class WorkspacesComponent extends React.Component<IProps,any> {
 
     public render(){
         
-        const style = {
-            "flex" : "0 0 12px",
-            "margin" : "10px",
-        }
         return (
-            <div className="WorkspacesList" style={style}>
-            <h2><strong>Workspaces</strong></h2>
-                {this.props.Pworkspaces.map(this.workspaceToCard)}
+            <div className="workspaces-list" >
+            <h2>Workspaces</h2>
+            <button className="create-workspace"><Icon name="plus"/>&nbsp;&nbsp;Create Workspace</button>
+                {this.props.Pworkspaces.map(this.displayWorkspaces)}
             </div>
         )
     }

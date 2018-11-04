@@ -1,10 +1,8 @@
-import * as React from "react"
-
-import ServersComponent from "./ServersComponent"
-import WorkspacesComponent from "./WorkspacesComponent"
-
+import * as React from "react";
 import IWorkspace from "../models/Workspace";
-
+import ServersComponent from "./ServersComponent";
+import "./SidebarComponent.css";
+import WorkspacesComponent from "./WorkspacesComponent";
 
 interface IProps {
     PfetchWorkspaces : () => void,
@@ -27,15 +25,13 @@ class SidebarComponent extends React.Component<IProps,any> {
     }
     public checkSidebar(){
         const style = {
-            "border" : "5px solid blue",
             "display" : "flex",
             "height" : "100%",
-            "margin" : "10px",
-            "top" : "0",
-            "width" : "25%",
+            "margin" : "5px",
+            "width" : "15%",
         }
         if (this.props.PsidebarIsActive){
-            style.width = "25%"
+            style.width = "15%"
         } else {
             style.width = "5%"
         }
@@ -65,13 +61,11 @@ class SidebarComponent extends React.Component<IProps,any> {
         const containerstyle = this.checkSidebar()
         
         return (
-            <div className="SidebarContainer" style={containerstyle} onClick={this.props.PtoggleSidebar}>
+            <div className="SidebarComponent" style={containerstyle} onClick={this.props.PtoggleSidebar}>
                 {this.renderContent()}
             </div>
         )
     }
 }
-// <button style={{margin:"10px", padding: "10px"}} onClick={this.props.PtoggleSidebar}>Sidebar Toggle</button>
-
 
 export default SidebarComponent
