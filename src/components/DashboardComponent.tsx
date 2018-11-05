@@ -1,7 +1,8 @@
-import * as React from "react"
-
+import * as React from "react";
 import SidebarContainer from "../containers/SidebarContainer";
-import IDEComponent from "./IDEComponent"
+import "./DashboardComponent.css";
+import IDEComponent from "./IDEComponent";
+
 
 class DashboardComponent extends React.Component {
 
@@ -10,11 +11,8 @@ class DashboardComponent extends React.Component {
     }
 
     public render(){
-        const style = {
-            display : "flex"
-        }
         return (
-            <div className="Dashboard" style={style}>
+            <div className="Dashboard">
                 <SidebarContainer />
                 <IDEComponent />
             </div>

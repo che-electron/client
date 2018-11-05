@@ -1,21 +1,11 @@
 import * as React from "react";
+import "./IDEComponent.css";
 
 class IDEComponent extends React.Component<any,any> {
-    public render(){
-
-        const style = {
-            "backgroundColor" : '#FFF', 
-            "border" : "1px solid blue",
-            "height" : "100%",
-            "margin" : "10px",
-            "top" : "0",
-            "width" : "100%",
-        }
-
-
+    public render(){       
         return (
-            <div style={style} className="IDE">
-                IDE
+            <div className="IDE-flex-1">
+                <div className="IDE-flex-2">IDE</div>
             </div>
         )
     }

@@ -1,0 +1,6 @@
+.Dashboard{
+    height: 930px;
+    width: 1900px;
+    display: flex;
+    flex-direction: row;
+}
