@@ -4,7 +4,7 @@ interface IProps {
     PsidebarIsActive : boolean,
 }
 
-class ServersComponent extends React.Component<IProps,any> {
+class ServersComponent extends React.Component<IProps> {
 
     public renderServers(){
 

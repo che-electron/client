@@ -10,13 +10,13 @@ interface IProps {
     PsidebarIsActive : boolean,
 }
 
-class WorkspacesComponent extends React.Component<IProps,any> {
+class WorkspacesComponent extends React.Component<IProps> {
 
-    constructor(props : any){
+    constructor(props : IProps){
         super(props);
     }
 
-    public displayWorkspaces(wksp : any){
+    public displayWorkspaces(wksp : IWorkspace){
                
         let showIcon;
         if(wksp.status === 'STOPPED'){
@@ -40,7 +40,7 @@ class WorkspacesComponent extends React.Component<IProps,any> {
             </ContextMenuTrigger> 
 
             <ContextMenu id="my_menu">
-            <WorkspaceStatusComponent workspaceId={wksp.id} workspaceStatus={wksp.status} />
+            <WorkspaceStatusComponent PworkspaceId={wksp.id} PworkspaceStatus={wksp.status} />
             </ContextMenu>
            </nav>
            </div>

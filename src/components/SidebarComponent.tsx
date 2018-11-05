@@ -12,9 +12,9 @@ interface IProps {
 
 }
 
-class SidebarComponent extends React.Component<IProps,any> {
+class SidebarComponent extends React.Component<IProps> {
 
-    constructor(props : any){
+    constructor(props : IProps){
         super(props)
     }
 

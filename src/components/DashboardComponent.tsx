@@ -6,10 +6,6 @@ import IDEComponent from "./IDEComponent";
 
 class DashboardComponent extends React.Component {
 
-    constructor(props : any){
-        super(props)
-    }
-
     public render(){
         return (
             <div className="Dashboard">

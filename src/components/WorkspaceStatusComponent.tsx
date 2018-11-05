@@ -3,9 +3,14 @@ import { MenuItem} from "react-contextmenu";
 import {Icon} from 'react-fa';
 import "./WorkspaceStatusComponent.css";
 
-class WorkspaceStatusComponent extends React.Component<any,any> {
+interface IProps {
+    PworkspaceId : string,
+    PworkspaceStatus : string,
+}
 
-    constructor(props : any){
+class WorkspaceStatusComponent extends React.Component<IProps> {
+
+    constructor(props : IProps){
         super(props);
         this.startWorkspace=this.startWorkspace.bind(this);
         this.stopWorkspace=this.stopWorkspace.bind(this);
@@ -13,7 +18,7 @@ class WorkspaceStatusComponent extends React.Component<any,any> {
 
     public render(){
         let showButton;
-        if(this.props.workspaceStatus === 'STOPPED' || this.props.workspaceStatus === 'STOPPING')
+        if(this.props.PworkspaceStatus === 'STOPPED' || this.props.PworkspaceStatus === 'STOPPING')
         {
             showButton=<MenuItem><button className="start-workspace-button" onClick={this.startWorkspace}><Icon name="play" />&nbsp;Run</button ></MenuItem>;
         }
@@ -30,7 +35,7 @@ class WorkspaceStatusComponent extends React.Component<any,any> {
     }
 
     private startWorkspace(){
-        const startWorkspace="https://che.openshift.io/api/workspace/"+this.props.workspaceId+"/runtime+?token="+localStorage.OSIOAuthToken;
+        const startWorkspace="https://che.openshift.io/api/workspace/"+this.props.PworkspaceId+"/runtime+?token="+localStorage.OSIOAuthToken;
         fetch(startWorkspace, {
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -45,7 +50,7 @@ class WorkspaceStatusComponent extends React.Component<any,any> {
 }
 
     private stopWorkspace(){
-        const stopWorkspace="https://che.openshift.io/api/workspace/"+this.props.workspaceId+"/runtime+?token="+localStorage.OSIOAuthToken;
+        const stopWorkspace="https://che.openshift.io/api/workspace/"+this.props.PworkspaceId+"/runtime+?token="+localStorage.OSIOAuthToken;
         fetch(stopWorkspace, {
                 headers: new Headers({
                     'Content-Type': 'application/json',

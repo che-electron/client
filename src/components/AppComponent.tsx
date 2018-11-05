@@ -9,7 +9,7 @@ interface IProps {
     Pauthenticated : boolean
 }
 
-class Appcomponent extends React.Component<IProps,any> {
+class Appcomponent extends React.Component<IProps> {
 
     constructor(props: IProps){
         super(props)

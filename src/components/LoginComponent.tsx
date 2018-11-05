@@ -5,9 +5,9 @@ interface IProps {
     PrequestLogin : () => void
 }
 
-class LoginComponent extends React.Component<IProps, any> {
+class LoginComponent extends React.Component<IProps> {
 
-    constructor(props : any){
+    constructor(props : IProps){
         super(props)
     }
 

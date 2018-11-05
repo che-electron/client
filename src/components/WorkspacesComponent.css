@@ -48,12 +48,6 @@
     font-size: 8px;
 }
 
-div{
-      width: 2px;
-      border-radius: 0;
-      margin-right: 2px;
-    }
-
 .workspace-status-error{
     height: 8px;
     width: 8px;
