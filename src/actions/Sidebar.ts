@@ -1,10 +1,12 @@
-import Workspace from "../models/Workspace";
+import Workspace from '../models/Workspace';
 
 import { Dispatch } from "redux";
 
 import { IStateSidebar } from '../reducers/Sidebar';
 
 import IWorkspace from '../models/Workspace';
+
+import { workspaceApi, workspacesApi} from '../apicalls/GetApi';
 
 
 export enum ActionTypes {
@@ -95,14 +97,14 @@ function receiveIde(Ide : string){
 function makeRequestWorkspaces(){
     return ( dispatch : Dispatch )=> {
         dispatch(requestWorkspaces())
-        fetch("https://che.openshift.io/api/workspace?token="+localStorage.OSIOAuthToken).then((response) => {
+        fetch(workspacesApi()).then((response) => {
             return response.json()
         }).then(data => {     
             const workspaces : Workspace[] = []
             
             data.map((workspace:any,index:number)=>{
             
-                fetch("https://che.openshift.io/api/workspace/"+workspace.id+"?token="+localStorage.OSIOAuthToken).then((response) => {
+                fetch(workspaceApi(workspace.id)).then((response) => {
                     return response.json()
                 }).then(wdata => {     
                      
