@@ -1,7 +1,12 @@
 import * as React from "react";
+
 import { MenuItem} from "react-contextmenu";
+
 import {Icon} from 'react-fa';
+
 import "./WorkspaceStatusComponent.css";
+
+import {startWorkspaceApi, stopWorkspaceApi, workspaceApi} from '../apicalls/GetApi';
 
 interface IProps {
     PworkspaceId : string,
@@ -12,15 +17,21 @@ class WorkspaceStatusComponent extends React.Component<IProps> {
 
     constructor(props : IProps){
         super(props);
+        this.state = {
+            status : this.props.PworkspaceStatus,
+        }
+        this.reloadWorkspace=this.reloadWorkspace.bind(this);
         this.startWorkspace=this.startWorkspace.bind(this);
         this.stopWorkspace=this.stopWorkspace.bind(this);
     }
 
+
     public render(){
         let showButton;
-        if(this.props.PworkspaceStatus === 'STOPPED' || this.props.PworkspaceStatus === 'STOPPING')
+         global.console.log("render");
+        if(status === 'STOPPED' || status === 'STOPPING')
         {
-            showButton=<MenuItem><button className="start-workspace-button" onClick={this.startWorkspace}><Icon name="play" />&nbsp;Run</button ></MenuItem>;
+            showButton=<MenuItem><button className="start-workspace-button" onClick={this.startWorkspace}><Icon name="play" />&nbsp;Run</button></MenuItem>;
         }
         else
         {
@@ -28,15 +39,14 @@ class WorkspaceStatusComponent extends React.Component<IProps> {
         }
        
         return (
-            <div className="StartWorkspaceButton">
+            <div className="WorkspaceButton">
             {showButton}
             </div>
         )
     }
 
     private startWorkspace(){
-        const startWorkspace="https://che.openshift.io/api/workspace/"+this.props.PworkspaceId+"/runtime+?token="+localStorage.OSIOAuthToken;
-        fetch(startWorkspace, {
+        fetch(startWorkspaceApi(this.props.PworkspaceId), {
             headers: new Headers({
                 'Content-Type': 'application/json',
        }),
@@ -50,8 +60,7 @@ class WorkspaceStatusComponent extends React.Component<IProps> {
 }
 
     private stopWorkspace(){
-        const stopWorkspace="https://che.openshift.io/api/workspace/"+this.props.PworkspaceId+"/runtime+?token="+localStorage.OSIOAuthToken;
-        fetch(stopWorkspace, {
+        fetch(stopWorkspaceApi(this.props.PworkspaceId), {
                 headers: new Headers({
                     'Content-Type': 'application/json',
         }),
@@ -62,5 +71,19 @@ class WorkspaceStatusComponent extends React.Component<IProps> {
             this.setState({status:'STOPPING'})
       );
     }
+
+    private reloadWorkspace() {
+        fetch(workspaceApi(this.props.PworkspaceId), {
+            headers: new Headers({
+                'Content-Type': 'application/json',
+       }),
+       method: 'GET'
+          
+        }).then((response) => response.json())
+        .then((data) => 
+              this.setState(
+                  {status:data.status})
+            );  
+    };
 }
 export default WorkspaceStatusComponent;
