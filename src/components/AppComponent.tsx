@@ -6,10 +6,10 @@ import DashboardContainer from '../containers/DashboardContainer'
 
 interface IProps {
     PcheckLogin : () => void,
-    Pauthenticated : boolean
+    POSIOAuthenticated : boolean
 }
 
-class Appcomponent extends React.Component<IProps,any> {
+class Appcomponent extends React.Component<IProps> {
 
     constructor(props: IProps){
         super(props)
@@ -32,7 +32,7 @@ class Appcomponent extends React.Component<IProps,any> {
     }
 
     public render() {
-        if (this.props.Pauthenticated){
+        if (this.props.POSIOAuthenticated){
             return this.renderDashboard()
         }else{
             return this.renderLogin()

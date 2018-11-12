@@ -1,4 +1,4 @@
-import { Action, ActionTypes } from '../actions/Sidebar';
+/*import { Action, ActionTypes } from '../actions/Sidebar';
 import Workspace from "../models/Workspace";
 
 export interface IStateSidebar {
@@ -49,4 +49,4 @@ export function sidebarReducer(state: IStateSidebar = initialState, action: Acti
             return state
         }
     }
-}
+}*/

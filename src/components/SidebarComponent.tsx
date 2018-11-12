@@ -1,71 +1,67 @@
 import * as React from "react";
-import IWorkspace from "../models/Workspace";
-import ServersComponent from "./ServersComponent";
+import {SERVERS_ENUMS, ServersComponent} from "./ServersComponent";
 import "./SidebarComponent.css";
-import WorkspacesComponent from "./WorkspacesComponent";
+import { WORKSPACES_ENUMS, WorkspacesComponent} from "./WorkspacesComponent";
 
-interface IProps {
-    PfetchWorkspaces : () => void,
-    PsidebarIsActive : boolean,
-    PtoggleSidebar : () => void,
-    Pworkspaces : IWorkspace[],
 
+const SIDEBAR_ENUMS = {
+    ...SERVERS_ENUMS,
+    ...WORKSPACES_ENUMS,
+    TOGGLE_SIDEBAR : '[dashboard_sidebar] TOGGLE_SIDEBAR',
 }
 
-class SidebarComponent extends React.Component<IProps,any> {
+interface IProps {
+    PtoggleSidebar : () => void,
+    callbackHandler : (type:string, data:any) => void,
+    PsidebarIsActive : boolean
+}
 
-    constructor(props : any){
+class SidebarComponent extends React.Component<IProps> {
+
+    constructor(props : IProps){
         super(props)
+        this.toggleSidebar = this.toggleSidebar.bind(this)
     }
 
-    public componentWillMount(){    
-        if (this.props.Pworkspaces.length < 1){
-            this.props.PfetchWorkspaces()
-        }
-    }
     public checkSidebar(){
         const style = {
             "display" : "flex",
             "height" : "100%",
-            "margin" : "5px",
             "width" : "15%",
         }
         if (this.props.PsidebarIsActive){
-            style.width = "15%"
+            style.width = "10%"
         } else {
             style.width = "5%"
         }
         return style
     }
 
-    public renderContent() { 
-        if (this.props.PsidebarIsActive){    
-            const componentstyle = {
+    public toggleSidebar(event : any){
+        this.props.PtoggleSidebar()
+    }
 
-                "width" : "100%",
-            }
-                
-            return(     
-                <div style={componentstyle} className="Sidebar">
-                    <ServersComponent PsidebarIsActive={this.props.PsidebarIsActive}/>
-                    <WorkspacesComponent Pworkspaces={this.props.Pworkspaces} PsidebarIsActive={this.props.PsidebarIsActive}/>
-                </div>
-            )
-        } else {
-            return <div />
+    public renderContent() { 
+        const componentstyle = {
+            "width" : "100%",
         }
+           
+        return(     
+            <div style={componentstyle} className="Sidebar">
+                <ServersComponent PsidebarIsActive={this.props.PsidebarIsActive}/>
+                <WorkspacesComponent PsidebarIsActive={this.props.PsidebarIsActive}/>
+            </div>
+        )
     }
 
     public render(){
-   
         const containerstyle = this.checkSidebar()
-        
         return (
-            <div className="SidebarComponent" style={containerstyle} onClick={this.props.PtoggleSidebar}>
+            <div className="SidebarComponent" style={containerstyle} onClick={this.toggleSidebar}>
                 {this.renderContent()}
             </div>
         )
     }
 }
 
-export default SidebarComponent
+export {SIDEBAR_ENUMS, SidebarComponent}

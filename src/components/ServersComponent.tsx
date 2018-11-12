@@ -1,10 +1,18 @@
 import * as React from "react";
 
-interface IProps {
-    PsidebarIsActive : boolean,
+const SERVERS_ENUMS = {
+
 }
 
-class ServersComponent extends React.Component<IProps,any> {
+interface IProps {
+    PsidebarIsActive : boolean
+}
+
+class ServersComponent extends React.Component<IProps> {
+
+    constructor(props:any){
+        super(props)
+    }
 
     public renderServers(){
 
@@ -24,14 +32,11 @@ class ServersComponent extends React.Component<IProps,any> {
                 <div/>
             )
         }
-
     }
 
     public render(){
-
         return this.renderServers()
-        
     }
 }
 
-export default ServersComponent;
+export {ServersComponent, SERVERS_ENUMS}

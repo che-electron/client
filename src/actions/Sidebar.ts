@@ -1,4 +1,4 @@
-import Workspace from "../models/Workspace";
+/*import Workspace from "../models/Workspace";
 
 import { Dispatch } from "redux";
 
@@ -14,10 +14,6 @@ export enum ActionTypes {
     RECEIVE_WORKSPACES = '[sidebar_wksps] RECEIVE_WORKSPACES',
     RECEIVE_IDE = 'RECEIVE_IDE'
 }
-
-/*
-    Interfaces defining the payload for actions
-*/
 
 export interface IToggleSidebarAction {
     type : ActionTypes.TOGGLE_SIDEBAR,
@@ -50,9 +46,6 @@ export interface IReceiveWorkpsacesAction {
     }
 }
 
-/*
-    Actions as funcitons
-*/
 
 
 export function toggleSidebar(){
@@ -139,3 +132,4 @@ export function fetchWorkspaces(){
 
 export type Action = IToggleSidebarAction | IFetchWorkpsacesAction | IRequestWorkpsacesAction | IReceiveWorkpsacesAction
 
+*/

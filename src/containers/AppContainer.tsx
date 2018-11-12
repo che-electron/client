@@ -1,6 +1,6 @@
 import {  checkLogin } from '../actions/Login'
 
-import { getAuthenticated } from '../selectors/Login';
+import { getOSIOAuthenticated } from '../selectors/Login';
 
 import { IState } from '../reducers'
 
@@ -10,7 +10,7 @@ import AppComponent from "../components/AppComponent"
 
 
 const mapStateToProps = (state: IState) => ({
-  Pauthenticated : getAuthenticated(state),
+  POSIOAuthenticated : getOSIOAuthenticated(state),
 })
 
 const mapDispatchToProps = {
