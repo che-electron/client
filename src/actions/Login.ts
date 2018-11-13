@@ -1,23 +1,34 @@
 import { Dispatch } from 'redux';
 
+// import * as Keycloak from 'keycloak-js'
+
 export enum ActionTypes {
-    CHECK_LOGIN = '[login] CHECK_LOGIN',
+    CHECK_OSIO_LOGIN = '[login] CHECK_OSIO_LOGIN',
+    CHECK_CHE_LOGIN = '[login] CHECK_CHE_LOGIN',
     // OSIO Che Login
     OSIO_LOGIN_REQUEST = '[login_osio] LOGIN_REQUEST',
     // Multiuser Che Login
     CHE_LOGIN_REQUEST = '[login_che] LOGIN_REQUEST',
     CHE_LOGIN_VALIDATE = '[login_che] VALIDATE',
-    CHE_LOGIN_RECEIVE = '[login_che] LOGIN_RECEICE'
+    CHE_LOGIN_RECEIVE = '[login_che] LOGIN_RECEIVE'
 }
 
 /*
     Interfaces defining the payload for actions
 */
 
-export interface ICheckLoginAction {
-    type : ActionTypes.CHECK_LOGIN,
+export interface ICheckOSIOLoginAction {
+    type : ActionTypes.CHECK_OSIO_LOGIN,
     payload : {
-        authenticated : boolean,
+        OSIOAuthenticated : boolean,
+    }   
+}
+
+
+export interface ICheckCheLoginAction {
+    type : ActionTypes.CHECK_CHE_LOGIN,
+    payload : {
+        CheAuthenticatedOnce : boolean,
     }   
 }
 
@@ -34,26 +45,34 @@ export interface IOSIOLoginRequestAction {
 
 export interface ICheLoginRequestAction {
     type : ActionTypes.CHE_LOGIN_REQUEST,
+    payload : {
+        CheURL : string,
+        CheFetching : boolean
+    }
 }
 
 export interface ICheLoginValidateAction {
     type : ActionTypes.CHE_LOGIN_VALIDATE,
     payload : {
-        authenticated : boolean,
+        CheURL : string,
+        CheAuthenticated : boolean,
     }
 }
 
 export interface ICheLoginReceiveAction {
-    type : ActionTypes.CHE_LOGIN_RECEIVE
+    type : ActionTypes.CHE_LOGIN_RECEIVE,
+    payload : {
+        CheURL : string,
+        CheFetching : boolean
+    }
 }
-
 
 /*
     Actions as funcitons
 */
 
-export function checkLogin(){
-    let existsInURL : boolean
+export function checkOSIOLogin(){
+    // let existsInURL : boolean
     const localStorageCheServers = JSON.parse(localStorage.getItem("Servers") || "{}")
 
     if (localStorageCheServers.osioche){
@@ -61,7 +80,7 @@ export function checkLogin(){
             payload : {
                 OSIOAuthenticated : true
             },
-            type: ActionTypes.CHECK_LOGIN
+            type: ActionTypes.CHECK_OSIO_LOGIN
         }
     }else{
         const result : any = {}
@@ -74,42 +93,67 @@ export function checkLogin(){
             });
         }
 
+        localStorageCheServers.osioche = result.access_token
         if(result.access_token){
-            localStorageCheServers.osioche = result.access_token
-            localStorage.setItem("Servers",JSON.stringify(localStorageCheServers))
-            existsInURL = true
+            // existsInURL = true
             return {
                 payload : {
                     OSIOAuthenticated : true, 
                 },
-                type: ActionTypes.CHECK_LOGIN
+                type: ActionTypes.CHECK_OSIO_LOGIN
             }
+        }else{
+            localStorageCheServers.osioche = ""
         }
+        localStorage.setItem("Servers",JSON.stringify(localStorageCheServers))
+
         if(result.error){
             return {
                 payload : {
                     OSIOAuthError : result.error,
                     OSIOAuthenticated : false
                 },
-                type: ActionTypes.CHECK_LOGIN
+                type: ActionTypes.CHECK_OSIO_LOGIN
             }   
         }
-        existsInURL = false
+        // existsInURL = false
     }
     
-    if (localStorageCheServers.osioche === null && !existsInURL){
+    return {
+        payload : {
+            OSIOAuthenticated : false,
+        },
+        type: ActionTypes.CHECK_OSIO_LOGIN
+    }
+    
+    
+}
+
+export function checkCheLogin(){
+    const localStorageCheServers : {} = JSON.parse(localStorage.getItem("Servers") || "{}")
+    let auths : number = 0
+    for (const key in localStorageCheServers){
+        if (key !== "osioche" && Object.keys(localStorageCheServers).length > 1 && JSON.stringify(localStorageCheServers[key]) !== "{}"){
+            auths++
+        }
+    }
+    if (auths > 0){
         return {
             payload : {
-                OSIOAuthenticated : false,
+                CheAuthenticatedOnce : true,
             },
-            type: ActionTypes.CHECK_LOGIN
+            type: ActionTypes.CHECK_CHE_LOGIN
         }
-    } else {
+    }else{
         return {
-            type: ActionTypes.CHECK_LOGIN
+            payload : {
+                CheAuthenticatedOnce : false,
+            },
+            type: ActionTypes.CHECK_CHE_LOGIN
         }
     }
 }
+
 
 
 /* Changes to make to login request actions:- 
@@ -140,7 +184,7 @@ export function requestCheLogin(cheServerURL : string, cheUserName : string, che
     }
 }
 
-function checkLocalStorageForCheServer(cheServerURL:string, cheServerAuth: string){
+function setLocalStorageForCheServer(cheServerURL:string, cheServerAuth: string){
     const localStorageServers : string = JSON.parse(localStorage.getItem("Servers") || "{}")
     if (!localStorage.getItem("Servers") || localStorageServers === "{}"){
         localStorage.setItem("Servers","{}")
@@ -150,21 +194,23 @@ function checkLocalStorageForCheServer(cheServerURL:string, cheServerAuth: strin
     }
 }
 
-function checkHTTPStatus(status : number) : boolean {
-    if (status === 200){
-        return true
-    }else{
-        return false
+    function checkHTTPStatus(status : number) : boolean {
+        if (status === 200){
+            return true
+        }else{
+            return false
+        }
     }
-}
 
 function cheLoginRequest(cheServerURL : string, cheUserName : string, chePassword : string, dispatch : Dispatch) {
     
     let keycloakSettings = {}
     
     const cheClientId = "che.keycloak.client_id"
-    const cheTokenEndpoint= "che.keycloak.token.endpoint"
-    global.console.log(cheServerURL)
+    // const cheAuthEndpoint= "che.keycloak.auth_server_url"
+    const cheTokenEndpoint = "che.keycloak.token.endpoint"
+    // const cheRealm = "che.keycloak.realm"
+    
     if (cheServerURL !== " " || !cheServerURL){    
         fetch("http://"+cheServerURL+"/api/keycloak/settings").then((response) =>{
             return response.json()
@@ -179,20 +225,38 @@ function cheLoginRequest(cheServerURL : string, cheUserName : string, chePasswor
                     method : "POST",
                 }).then((response: any) => {
                     if (checkHTTPStatus(response.status)){
-                        dispatch(cheLoginValidate(true,cheServerURL))
-                        return response.json()
+                        global.console.log(cheServerURL + " LOGGED IN !")
                     }else{
-                        dispatch(cheLoginValidate(false,cheServerURL))
+                        dispatch(cheLoginValidate(false,cheServerURL,dispatch))
                     }
+                    return response.json()
                 }).then((body : any) => {
-                    checkLocalStorageForCheServer(cheServerURL,body)
                     global.console.log(body)
+                    setLocalStorageForCheServer(cheServerURL,body)
+                    dispatch(cheLoginValidate(true,cheServerURL,dispatch))
                 })
+                
+
+                /*
+
+                keycloak.init({ onLoad: 'check-sso', checkLoginIframeInterval: 1 }).success(authenticated => {
+                    if (keycloak.authenticated) {
+                        checkLocalStorageForCheServer(cheServerURL,JSON.stringify(keycloak.token))
+                        setInterval(() => {
+                            keycloak.updateToken(10).error(() => keycloak.logout());
+                            checkLocalStorageForCheServer(cheServerURL,JSON.stringify(keycloak.token))
+                            global.console.log(keycloak.token)
+                        }, 10000);
+                    }else{
+                        keycloak.login();
+                    } 
+                });*/
+               
             }
         })
     }
+
     
-    // return keycloakSettings
 }
 
 function makeRequestCheLogin(){
@@ -201,15 +265,15 @@ function makeRequestCheLogin(){
     }
 }
 
-function cheLoginValidate(isAuthenticated : boolean, cheURL : string){
+function cheLoginValidate(isAuthenticated : boolean, cheURL : string, dispatch : Dispatch){
+    dispatch(checkCheLogin())
     return {
         payload : {
-            authenticated : isAuthenticated,
-            cheServerURL : cheURL
-
+            CheAuthenticated : isAuthenticated,
+            CheURL : cheURL,
         },
         type : ActionTypes.CHE_LOGIN_VALIDATE,
     }
-}
+} 
 
-export type Action = IOSIOLoginRequestAction | ICheckLoginAction | ICheLoginRequestAction | ICheLoginValidateAction 
+export type Action = IOSIOLoginRequestAction | ICheckOSIOLoginAction | ICheckCheLoginAction | ICheLoginRequestAction | ICheLoginValidateAction 

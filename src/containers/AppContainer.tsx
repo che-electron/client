@@ -1,6 +1,6 @@
-import {  checkLogin } from '../actions/Login'
+import {  checkCheLogin, checkOSIOLogin } from '../actions/Login'
 
-import { getOSIOAuthenticated } from '../selectors/Login';
+import { getCheAuthenticatedOnce, getOSIOAuthenticated, } from '../selectors/Login';
 
 import { IState } from '../reducers'
 
@@ -10,11 +10,13 @@ import AppComponent from "../components/AppComponent"
 
 
 const mapStateToProps = (state: IState) => ({
+  PCheAuthenticatedOnce : getCheAuthenticatedOnce(state),
   POSIOAuthenticated : getOSIOAuthenticated(state),
 })
 
 const mapDispatchToProps = {
-  PcheckLogin : checkLogin
+  PcheckCheLogin : checkCheLogin,
+  PcheckOSIOLogin : checkOSIOLogin,
 }
 
 export default connect<any,any,any>(mapStateToProps, mapDispatchToProps)(AppComponent)
