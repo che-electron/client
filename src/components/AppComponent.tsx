@@ -35,7 +35,6 @@ class Appcomponent extends React.Component<IProps> {
     }
 
     public render() {
-        global.console.log(JSON.stringify(this.props.PCheAuthenticatedOnce))
         if (this.props.POSIOAuthenticated || this.props.PCheAuthenticatedOnce){
             return this.renderDashboard()
         }else{

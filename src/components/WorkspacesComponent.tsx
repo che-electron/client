@@ -16,8 +16,14 @@ class WorkspacesComponent extends React.Component<IProps> {
     }
 
     public renderWorkspaces(){
+        const style = {
+            "margin" : "10px",         
+        }
+
         return (
-            <div/>
+            <div style={style}>
+                Workspaces
+            </div>
         )
     }
 

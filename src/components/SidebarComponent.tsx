@@ -43,6 +43,7 @@ class SidebarComponent extends React.Component<IProps> {
 
     public renderContent() { 
         const componentstyle = {
+            "display" : "flex",
             "width" : "100%",
         }
            

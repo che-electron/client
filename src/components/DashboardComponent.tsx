@@ -39,7 +39,7 @@ class DashboardComponent extends React.Component<IProps> {
                     // Workpsaces
                     
                     // Servers
-
+                    
                 />
                 <IDEComponent />
             </div>

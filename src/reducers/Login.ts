@@ -36,7 +36,7 @@ export function loginReducer(state: IStateLogin = initialState, action: Action){
             })
         }
 
-        // CHE : check -> request(validate) ->
+        // CHE : check -> request(validate) -> check
         // CHE ACTIONS        
 
         case ActionTypes.CHECK_CHE_LOGIN : {
@@ -53,7 +53,7 @@ export function loginReducer(state: IStateLogin = initialState, action: Action){
 
 
             return Object.assign({}, state, {
-                ...cheServersAuthenticated
+                CheServersLogin : {...cheServersAuthenticated}
             })
         }
 

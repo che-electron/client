@@ -74,8 +74,8 @@ export interface ICheLoginReceiveAction {
 export function checkOSIOLogin(){
     // let existsInURL : boolean
     const localStorageCheServers = JSON.parse(localStorage.getItem("Servers") || "{}")
-
-    if (localStorageCheServers.osioche){
+    global.console.log(localStorageCheServers)
+    if (localStorageCheServers.osioche !== "" && localStorageCheServers.osioche){
         return {
             payload : {
                 OSIOAuthenticated : true
@@ -93,9 +93,11 @@ export function checkOSIOLogin(){
             });
         }
 
-        localStorageCheServers.osioche = result.access_token
-        if(result.access_token){
+        let key = "access_token"
+        if(result[key] !== "" && result[key]){
             // existsInURL = true
+            localStorageCheServers.osioche = result[key]
+            localStorage.setItem("Servers",JSON.stringify(localStorageCheServers))
             return {
                 payload : {
                     OSIOAuthenticated : true, 
@@ -104,13 +106,14 @@ export function checkOSIOLogin(){
             }
         }else{
             localStorageCheServers.osioche = ""
+            localStorage.setItem("Servers",JSON.stringify(localStorageCheServers))
         }
-        localStorage.setItem("Servers",JSON.stringify(localStorageCheServers))
-
-        if(result.error){
+        
+        key = "error"
+        if(result[key]){
             return {
                 payload : {
-                    OSIOAuthError : result.error,
+                    OSIOAuthError : result[key],
                     OSIOAuthenticated : false
                 },
                 type: ActionTypes.CHECK_OSIO_LOGIN
@@ -220,20 +223,26 @@ function cheLoginRequest(cheServerURL : string, cheUserName : string, chePasswor
                 fetch(keycloakSettings[cheTokenEndpoint], {
                     body : "grant_type=password&client_id="+keycloakSettings[cheClientId]+"&username="+cheUserName+"&password="+chePassword+"",
                     headers : {
-                        "Content-Type": "application/x-www-form-urlencoded"
+                        'Access-Control-Allow-Credentials': 'true',
+                        // 'Access-Control-Allow-Origin': '*',
+                        "Content-Type": "application/x-www-form-urlencoded",
                     },
                     method : "POST",
+                    // mode :'no-cors'
                 }).then((response: any) => {
                     if (checkHTTPStatus(response.status)){
                         global.console.log(cheServerURL + " LOGGED IN !")
                     }else{
-                        dispatch(cheLoginValidate(false,cheServerURL,dispatch))
+                        dispatch(cheLoginValidate(false,cheServerURL))
                     }
                     return response.json()
                 }).then((body : any) => {
                     global.console.log(body)
-                    setLocalStorageForCheServer(cheServerURL,body)
-                    dispatch(cheLoginValidate(true,cheServerURL,dispatch))
+                    setLocalStorageForCheServer(cheServerURL,body.access_token)
+                    dispatch(cheLoginValidate(true,cheServerURL))
+                    dispatch(checkCheLogin())
+                }).catch(err => {
+                    global.console.log(err)
                 })
                 
 
@@ -265,8 +274,7 @@ function makeRequestCheLogin(){
     }
 }
 
-function cheLoginValidate(isAuthenticated : boolean, cheURL : string, dispatch : Dispatch){
-    dispatch(checkCheLogin())
+function cheLoginValidate(isAuthenticated : boolean, cheURL : string){
     return {
         payload : {
             CheAuthenticated : isAuthenticated,
