@@ -1,20 +1,20 @@
-import { combineReducers } from "redux";
+import { combineReducers } from "redux"
 
+import * as Dashboard from './Dashboard'
 import * as Login from './Login';
-import * as Sidebar from './Sidebar'
 
 
 export interface IState {
+    dashboard : Dashboard.IStateDashboard,
     login : Login.IStateLogin,
-    sidebar : Sidebar.IStateSidebar
 }
 
 export const initialState: IState = {
+    dashboard: Dashboard.initialState,
     login: Login.initialState,
-    sidebar: Sidebar.initialState
 }
 
 export const reducer = combineReducers<IState>({
+    dashboard : Dashboard.dashboardReducer,
     login: Login.loginReducer,
-    sidebar : Sidebar.sidebarReducer
 })

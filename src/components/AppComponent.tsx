@@ -5,8 +5,10 @@ import LoginContainer from '../containers/LoginContainer'
 import DashboardContainer from '../containers/DashboardContainer' 
 
 interface IProps {
-    PcheckLogin : () => void,
-    Pauthenticated : boolean
+    PcheckCheLogin : () => void,
+    PcheckOSIOLogin : () => void,
+    POSIOAuthenticated : boolean,
+    PCheAuthenticatedOnce : boolean
 }
 
 class Appcomponent extends React.Component<IProps> {
@@ -16,7 +18,8 @@ class Appcomponent extends React.Component<IProps> {
     }
 
     public componentWillMount(){
-        this.props.PcheckLogin()
+        this.props.PcheckOSIOLogin()
+        this.props.PcheckCheLogin()
     }
 
     public renderLogin(){
@@ -32,7 +35,7 @@ class Appcomponent extends React.Component<IProps> {
     }
 
     public render() {
-        if (this.props.Pauthenticated){
+        if (this.props.POSIOAuthenticated || this.props.PCheAuthenticatedOnce){
             return this.renderDashboard()
         }else{
             return this.renderLogin()

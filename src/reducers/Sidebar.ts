@@ -30,20 +30,20 @@ export function sidebarReducer(state: IStateSidebar = initialState, action: Acti
             })
         }
 
-        case ActionTypes.REQUEST_WORKSPACES: {
-            return Object.assign({}, state, {
-                wkspsFetchError : false,
-                wkspsIsFetching :true,
-              })
-        }
+        // case ActionTypes.REQUEST_WORKSPACES: {
+        //     return Object.assign({}, state, {
+        //         wkspsFetchError : false,
+        //         wkspsIsFetching :true,
+        //       })
+        // }
         
-        case ActionTypes.RECEIVE_WORKSPACES: {
-            return Object.assign({}, state, {
-                wkspsFetchError : false,
-                wkspsIsFetching : false,
-                workspaces : action.payload.workspaces,
-              })
-        }
+        // case ActionTypes.RECEIVE_WORKSPACES: {
+        //     return Object.assign({}, state, {
+        //         wkspsFetchError : false,
+        //         wkspsIsFetching : false,
+        //         workspaces : action.payload.workspaces,
+        //       })
+        // }
 
         default : {
             return state

@@ -1,3 +1,16 @@
 .SidebarComponent{
   background-color: #282e44;
 }
+
+.flexItem{
+  flex-grow : 1;
+}
+
+.toggle-sidebar-button {
+  border : 1px solid green;
+  color : white;
+  flex-grow : 1;
+  font-family : Courier-New;
+  margin : 10px;
+  padding : 6px;
+}

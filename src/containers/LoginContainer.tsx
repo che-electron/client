@@ -4,18 +4,17 @@ import { connect } from 'react-redux'
 
 import LoginComponent from "../components/LoginComponent"
 
-import { requestLogin } from '../actions/Login'
+import { requestCheLogin, requestOSIOLogin, } from '../actions/Login'
 
-import { getAuthenticated } from '../selectors/Login';
-
-
+import { getOSIOAuthenticated } from '../selectors/Login';
 
 const mapStateToProps = (state: IState) => ({
-    Pauthenticated : getAuthenticated
+    POSIOAuthenticated : getOSIOAuthenticated
 })
 
 const mapDispatchToProps = {
-    PrequestLogin : requestLogin
+    PrequestCheLogin : requestCheLogin,
+    PrequestOSIOLogin : requestOSIOLogin,
 }
 
 export default connect<any,any,any>(mapStateToProps, mapDispatchToProps)(LoginComponent)
