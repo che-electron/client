@@ -1,0 +1,90 @@
+.container{
+    background-color:#1b2b57;
+    height: 960px;
+    color: #4a90e2;
+    
+}
+
+.card{
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-family: arial;
+    height: 400px;
+    width: 500px;
+    position: absolute;
+    left: 40%;
+    margin-left: -50px;
+    top: 30%;
+    margin-top: -50px;    
+}
+
+.text-box {
+    width: 375px;
+    height: 46px;
+    margin: 0 0 10px 0;
+    border-radius: 5px;
+    padding-left: 21px;
+    color: #fff;
+    background: #2d407d;
+    font-size: 16px;
+    font-size: 18px;
+    vertical-align: middle;
+    border: none;
+}
+
+.text-box:focus{
+    background: #3f55ae;
+}
+
+.che-logo{
+    width: 145px;
+    height: 90px;
+    margin-left: 6px;
+}
+
+.title{
+    color : white;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.login{
+    width: 185px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: #44a73b;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 20px;
+    margin-right: 10px;
+    border:none;
+}
+
+.osio-login{
+    width: 185px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: #44a73b;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
+    border: none;
+}
+
+.login:hover{
+    background-color: #398842;
+    color: white;
+}
+
+.osio-login:hover{
+    background-color: #398842;
+    color: white;
+}
+

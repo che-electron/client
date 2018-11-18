@@ -1,4 +1,6 @@
-import * as React from "react"
+import * as React from "react";
+import logo from "./eclipse-che.png";
+import "./LoginComponent.css";
 
 interface IProps {
     Pauthenticated : boolean,
@@ -57,23 +59,24 @@ class LoginComponent extends React.Component<IProps, IState> {
     public render(){
         return (
             <div>
-                <div>
-                    <button onClick={this.props.PrequestOSIOLogin}> OSIO Login </button>
-                    {JSON.stringify(this.props.Pauthenticated)}
-                </div>
-                <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Che Server URL : 
-                        <input type="text" onChange={this.handleCheServerURLChange} />
-                        Username :
-                        <input type="text" onChange={this.handleUsernameChange} />
-                        Password :
-                        <input type="password" onChange={this.handlePasswordChange} />
-                    </label>
-                    <input type="submit" value="Login" />
-                </form>
-                </div>
+                <div className="container">
+                    <div className="card">  
+                    <table><tr><td><img className="che-logo" src={logo}/></td>                
+                        <td><span className="title"> Eclipse Che Native</span></td></tr></table>
+                        <input type="text" onChange={this.handleCheServerURLChange} className="text-box" placeholder="Che Server URL"/>
+                           <input type="text" onChange={this.handleUsernameChange} className="text-box" placeholder="Username or email"/>
+                           <input type="password" onChange={this.handlePasswordChange} className="text-box" placeholder="Password"/>
+                           
+                        <button onClick={this.handleSubmit} className="login">Login</button>
+                        <button onClick={this.props.PrequestOSIOLogin} className="osio-login"> OSIO Login </button>
+                        
+                        {JSON.stringify(this.props.Pauthenticated)}
+                       
+                        
+                       
+                    </div>
+                    
+                </div> 
             </div>
         )
     }
