@@ -1,6 +1,7 @@
 .container{
     background-color:#1b2b57;
     height: 960px;
+    width: 100%;
     color: #4a90e2;
     
 }
@@ -11,7 +12,7 @@
     font-family: arial;
     height: 400px;
     width: 500px;
-    position: absolute;
+    position: relative;
     left: 40%;
     margin-left: -50px;
     top: 30%;
@@ -37,15 +38,18 @@
 }
 
 .che-logo{
-    width: 145px;
-    height: 90px;
-    margin-left: 6px;
+    float: left;
+    width: 200px;
+    height: 100px;
 }
 
 .title{
+    position: relative;;
     color : white;
     font-size: 32px;
     font-weight: bold;
+    top: 26px;
+    right: 45px;
 }
 
 .login{
