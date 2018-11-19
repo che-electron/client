@@ -1,5 +1,16 @@
 .servers-list{
     color : white;
-    font-family : Courier-New;
-    padding : 6px;
+    width: 130px;
+    padding : 3px;
 }
+
+.add-che-server{
+    background-color: #282e44;
+    color: white;
+    border: none;
+  }
+  
+  .add-che-server:hover {
+    background-color: #3b629c;
+    color: "white";
+  }

@@ -1,6 +1,6 @@
 import * as React from "react";
 // import { ContextMenu, ContextMenuTrigger} from "react-contextmenu";
-// import {Icon} from "react-fa"; 
+import {Icon} from "react-fa"; 
 // import IWorkspace from "../models/Workspace";
 import "./WorkspacesComponent.css";
 // import WorkspaceStatusComponent from "./WorkspaceStatusComponent";
@@ -48,18 +48,16 @@ class WorkspacesComponent extends React.Component<IProps> {
     // }
 
     public render(){
-        const style = {
-            "border" : "1px solid green",
-            "margin" : "10px",         
-        }
+        
         return (
             /* <div className="workspaces-list" >
                 <h2>Workspaces</h2>
                 <button className="create-workspace"><Icon name="plus"/>&nbsp;&nbsp;Create Workspace</button>
                 {this.props.Pworkspaces.map(this.displayWorkspaces)}
             </div>*/
-            <div style={style} className="workspaces-list" >
-                Workspaces
+            <div className="workspaces-list" >
+                <h3>Workspaces</h3>
+<button className="create-workspace"><Icon name="plus"/>&nbsp;&nbsp;Create Workspace</button>
             </div>
         )
     }

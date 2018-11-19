@@ -13,10 +13,15 @@ interface IProps {
  
 }
 
-class SidebarComponent extends React.Component<IProps> {
+interface IState{
+    collapsed: boolean,
+}
+
+class SidebarComponent extends React.Component<IProps,IState> {
 
     constructor(props : IProps){
         super(props)
+        this.isOpen= this.isOpen.bind(this);
     }
 
     // public componentWillMount(){    
@@ -29,10 +34,10 @@ class SidebarComponent extends React.Component<IProps> {
         const style = {
             "display" : "flex",
             "height" : "960px",
-            "width" : "15%",
+            "width" : "18%",
         }
         if (this.props.PsidebarIsActive){
-            style.width = "15%"
+            style.width = "18%"
         } else {
             style.width = "5%"
         }
@@ -44,7 +49,7 @@ class SidebarComponent extends React.Component<IProps> {
             const componentstyle = {
                 "display" : "flex",
                 "height" : "960px",
-                "width" : "100%",
+                "width" : "18%",
             }
   
             return(     
@@ -53,7 +58,7 @@ class SidebarComponent extends React.Component<IProps> {
                         <ServersComponent PsidebarIsActive={this.props.PsidebarIsActive} PtoggleIDELogin={this.props.PtoggleIDELogin}/>
                     </div>
                     <div className="flexItem" id="2">
-                        <WorkspacesComponent  PsidebarIsActive={this.props.PsidebarIsActive} /* Pworkspaces={this.props.Pworkspaces}*/ />
+                        <WorkspacesComponent PsidebarIsActive={this.props.PsidebarIsActive} /* Pworkspaces={this.props.Pworkspaces}*/ />
                     </div>
                 </div>
             )
@@ -62,14 +67,31 @@ class SidebarComponent extends React.Component<IProps> {
         }
     }
 
+    public isOpen(){
+        let button;
+        if(!this.props.PsidebarIsActive)
+            {
+                button=<span className="double-right-pointing-angle">&#187;</span>
+             
+            }
+            else{
+                button=<span className="double-left-pointing-angle">&#171;</span>
+            }
+            return button;
+    }
+    
     public render(){
    
-        const containerstyle = this.checkSidebar()
+         const containerstyle = this.checkSidebar();    
         
         return (
             <div className="SidebarComponent" style={containerstyle}>
-                <div className="toggle-sidebar-button" onClick={this.props.PtoggleSidebar}>O</div>
-                {this.renderContent()}
+            <button className="toggle-sidebar" onClick={this.props.PtoggleSidebar}>
+            {this.isOpen()}
+            </button>   
+                    
+            {this.renderContent()}
+                          
             </div>
         )
     }
