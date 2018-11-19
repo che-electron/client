@@ -28,7 +28,7 @@ class SidebarComponent extends React.Component<IProps> {
     public checkSidebar(){
         const style = {
             "display" : "flex",
-            "height" : "100%",
+            "height" : "960px",
             "width" : "15%",
         }
         if (this.props.PsidebarIsActive){
@@ -43,6 +43,7 @@ class SidebarComponent extends React.Component<IProps> {
         if (this.props.PsidebarIsActive){    
             const componentstyle = {
                 "display" : "flex",
+                "height" : "960px",
                 "width" : "100%",
             }
   
