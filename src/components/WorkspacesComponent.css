@@ -1,23 +1,20 @@
 .workspaces-list{
     color : white;
-    font-family : Courier-New;
-    padding : 6px;
-}
-
-.create-workspace{
-  background-color: #282e44;
-  color: white;
-  border: none;
-  height : 100%;
-  margin : 5px 0; 
-  text-align : left;
-  width : 100%;
+    margin-right: 20x;
+    width:150px;
+    padding : 3px;
 }
 
 .create-workspace:hover {
   background-color: #3b629c;
   color: white;
 }
+
+.create-workspace{
+    background-color: #282e44;
+    color: white;
+    border: none;
+  }
 
 .workspace-status-running {
     height: 8px;
