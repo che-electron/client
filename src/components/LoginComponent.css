@@ -12,11 +12,10 @@
     font-family: arial;
     height: 400px;
     width: 500px;
-    position: relative;
-    left: 40%;
-    margin-left: -50px;
-    top: 30%;
-    margin-top: -50px;    
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);   
 }
 
 .text-box {

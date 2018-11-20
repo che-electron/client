@@ -18,7 +18,7 @@ class ServersComponent extends React.Component<IProps> {
 
         return (
             <div className="servers-list" >
-                <h3> Che Servers</h3>
+                <h3>Che Servers</h3>
                 <button className="add-che-server" onClick={this.props.PtoggleIDELogin}><Icon name="plus"/>&nbsp;&nbsp;Add Server</button>
             </div>
         )
