@@ -62,7 +62,7 @@ class LoginComponent extends React.Component<IProps, IState> {
                 <div className="container">
                     <div className="card">  
                         <img className="che-logo" src={logo}/>               
-                        <span className="title"> Eclipse Che Native</span>
+                        <span className="title"> Eclipse Che NC</span>
                         <input type="text" onChange={this.handleCheServerURLChange} className="text-box" placeholder="Che Server URL"/>
                            <input type="text" onChange={this.handleUsernameChange} className="text-box" placeholder="Username or email"/>
                            <input type="password" onChange={this.handlePasswordChange} className="text-box" placeholder="Password"/>
