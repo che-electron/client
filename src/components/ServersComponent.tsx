@@ -1,4 +1,5 @@
 import * as React from "react";
+import {Icon} from "react-fa"; 
 import "./ServersComponent.css";
 
 interface IProps {
@@ -14,17 +15,11 @@ class ServersComponent extends React.Component<IProps> {
 
     public renderServers(){
 
-        const style = {
-            "border" : "1px solid green",
-            "margin" : "10px",         
-        }
 
         return (
-            <div className="servers-list" style={style}>
-                Servers
-                <div className="add-server-button">
-                    <button onClick={this.props.PtoggleIDELogin}> + </button>
-                </div>
+            <div className="servers-list" >
+                <h3>Che Servers</h3>
+                <button className="add-che-server" onClick={this.props.PtoggleIDELogin}><Icon name="plus"/>&nbsp;&nbsp;Add Server</button>
             </div>
         )
     }
