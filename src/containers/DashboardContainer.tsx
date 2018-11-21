@@ -4,23 +4,32 @@ import { connect } from 'react-redux';
 
 import DashboardComponent from "../components/DashboardComponent";
 
-import { toggleIDELogin, toggleSidebar } from '../actions/Dashboard';
-import {  getIDELoginIsActive, getSidebarIsActive, } from '../selectors/Dashboard';
+import { populateServers, toggleIDELogin, toggleSidebar } from '../actions/Dashboard';
+import { getIDELoginIsActive,  getServers, getSidebarIsActive,} from '../selectors/Dashboard';
 
 
 const mapStateToProps = (state: IState) => ({
     // IDE
     PIDELoginIsActive : getIDELoginIsActive(state),
+
+    // Servers
+    Pservers : getServers(state),
+   
     // Sidebar
     PsidebarIsActive : getSidebarIsActive(state),
+
     
 })
 
 const mapDispatchToProps = {
-    // IDE
-    PtoggleIDELogin : toggleIDELogin,
+    // Servers
+    PpopulateServers : populateServers,
+
     // Sidebar
-    PtoggleSidebar : toggleSidebar 
+    PtoggleSidebar : toggleSidebar,
+
+    // toggle IDE -> Login 
+    PtoggleIDELogin : toggleIDELogin,
 } 
 
 export default connect<any,any,any>(mapStateToProps, mapDispatchToProps)(DashboardComponent)

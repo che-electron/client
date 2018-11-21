@@ -72,6 +72,27 @@ export function toggleIDELogin( state : IStateDashboard = initialState){
     }
 }
 
+export function populateServers(state : IStateDashboard = initialState){
+
+    const localStorageServersAuth = JSON.parse(localStorage.getItem("Servers") || "{}")
+    const mapLocalStoragetoModel : Server[] = []
+    
+    for (const key in localStorageServersAuth) {
+        if (localStorageServersAuth.hasOwnProperty(key)) {
+            mapLocalStoragetoModel.push({
+                authToken : localStorageServersAuth[key],
+                url : key,
+            })
+        }
+    }
+
+    return {
+        payload : {
+            servers : mapLocalStoragetoModel
+        },
+        type : ActionTypes.POPULATE_SERVERS,
+    }
+}
 
 export function workspaceStart(state : {}, id : string){
     /*
@@ -90,4 +111,3 @@ export function workspaceStart(state : {}, id : string){
 }
 
 export type Action = IToggleSidebarAction | IPopulateServersAction | IToggleIDELoginAction
-

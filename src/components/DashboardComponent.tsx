@@ -5,13 +5,16 @@ import SidebarComponent from "./SidebarComponent";
 
 import LoginContainer from '../containers/LoginContainer';
 
+import Server from '../models/Server';
+
 
 interface IProps { 
     // Sidebar
     PsidebarIsActive : boolean
     PtoggleSidebar : () => void
     // Servers
-
+    PpopulateServers : () => void
+    Pservers : Server[]
     // Workspaces
 
     // IDE|Login Toggle
@@ -48,8 +51,9 @@ class DashboardComponent extends React.Component<IProps> {
                     // Workpsaces
                     
                     // Servers
-
-                    // IDE -> Login -> IDE -> Login -> ...
+                    PpopulateServers={this.props.PpopulateServers}
+                    Pservers={this.props.Pservers}
+                    // Toggle IDE -> Login -> IDE -> Login -> ...
                     PtoggleIDELogin={this.props.PtoggleIDELogin}
                 />
                 {this.renderIDEorLogin()}

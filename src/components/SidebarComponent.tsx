@@ -4,12 +4,17 @@ import ServersComponent from "./ServersComponent";
 import "./SidebarComponent.css";
 import WorkspacesComponent from "./WorkspacesComponent";
 
+import Server from '../models/Server'
+
 interface IProps {
+    PpopulateServers : () => void,
+    Pservers : Server[]
     // PfetchWorkspaces : () => void,
     PsidebarIsActive : boolean,
     PtoggleSidebar : () => void,
     // Pworkspaces : IWorkspace[],
     PtoggleIDELogin : () => void
+    
  
 }
 
@@ -55,7 +60,12 @@ class SidebarComponent extends React.Component<IProps,IState> {
             return(     
                 <div style={componentstyle} className="Sidebar">
                     <div className="flexItem" id="1">    
-                        <ServersComponent PsidebarIsActive={this.props.PsidebarIsActive} PtoggleIDELogin={this.props.PtoggleIDELogin}/>
+                        <ServersComponent 
+                            PsidebarIsActive={this.props.PsidebarIsActive} 
+                            PtoggleIDELogin={this.props.PtoggleIDELogin}
+                            PpopulateServers = {this.props.PpopulateServers}
+                            Pservers={this.props.Pservers}
+                        />
                     </div>
                     <div className="flexItem" id="2">
                         <WorkspacesComponent PsidebarIsActive={this.props.PsidebarIsActive} /* Pworkspaces={this.props.Pworkspaces}*/ />

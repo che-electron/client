@@ -1,5 +1,7 @@
 import { Dispatch } from 'redux';
 
+import { populateServers } from '../actions/Dashboard';
+
 // import * as Keycloak from 'keycloak-js'
 const osioCheURL = "che.openshift.io"
 
@@ -142,6 +144,7 @@ export function checkCheLogin(){
         }
     }
     if (auths > 0){
+        
         return {
             payload : {
                 CheAuthenticatedOnce : true,
@@ -235,13 +238,12 @@ function cheLoginRequest(cheServerURL : string, cheUserName : string, chePasswor
                     }else{
                         dispatch(cheLoginValidate(false,cheServerURL))
                     }
-                    global.console.log(response)
                     return response.json()
                 }).then((body : any) => {
-                    global.console.log(body)
                     setLocalStorageForCheServer(cheServerURL,body.access_token)
                     dispatch(cheLoginValidate(true,cheServerURL))
                     dispatch(checkCheLogin())
+                    dispatch(populateServers())
                 }).catch(err => {
                     global.console.log(err)
                 })
@@ -285,4 +287,4 @@ function cheLoginValidate(isAuthenticated : boolean, cheURL : string){
     }
 } 
 
-export type Action = IOSIOLoginRequestAction | ICheckOSIOLoginAction | ICheckCheLoginAction | ICheLoginRequestAction | ICheLoginValidateAction 
+export type Action = IOSIOLoginRequestAction | ICheckOSIOLoginAction | ICheckCheLoginAction | ICheLoginRequestAction | ICheLoginValidateAction  

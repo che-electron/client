@@ -42,6 +42,12 @@ export function dashboardReducer(state: IStateDashboard = initialState, action: 
             })
         }
 
+        case ActionTypes.POPULATE_SERVERS: {
+            return Object.assign({}, state, {
+                servers : action.payload.servers
+            })
+        }
+
 
         default : {
             return state

@@ -2,31 +2,55 @@ import * as React from "react";
 import {Icon} from "react-fa"; 
 import "./ServersComponent.css";
 
+import Server from '../models/Server'
+
+import { Button } from 'reactstrap'
+
 interface IProps {
+    PpopulateServers : () => void,
+    Pservers : Server[]
     PsidebarIsActive : boolean,
-    PtoggleIDELogin : () => void
+    PtoggleIDELogin : () => void,
 }
 
 class ServersComponent extends React.Component<IProps> {
 
-    constructor(props : any){
+    constructor(props : IProps){
         super(props)
+    }
+
+    public componentWillMount(){
+        this.props.PpopulateServers()
     }
 
     public renderServers(){
 
+        const servers = this.props.Pservers.map((server) => {
+            return (
+                <Button key={server.url} size="lg">
+                    {server.url}
+                </Button>
+            )
+        })
 
         return (
-            <div className="servers-list" >
-                <h3>Che Servers</h3>
-                <button className="add-che-server" onClick={this.props.PtoggleIDELogin}><Icon name="plus"/>&nbsp;&nbsp;Add Server</button>
+            <div>
+                {servers}
             </div>
         )
     }
 
     public render(){
 
-        return this.renderServers()
+        return (
+            <div className="ServersComponent" >
+                <h3>Servers</h3>
+                <div className="servers-list">
+                    {this.renderServers()}
+                </div>
+                <button className="add-che-server" onClick={this.props.PtoggleIDELogin}><Icon name="plus"/>&nbsp;&nbsp;Add Server</button>
+            </div>
+        )
         
     }
 }

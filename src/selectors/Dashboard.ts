@@ -5,3 +5,4 @@ const getDashboardState = ((state:IState)=>state.dashboard)
 
 export const getSidebarIsActive = createSelector([getDashboardState], (s:any) => s.sidebarIsActive)
 export const getIDELoginIsActive = createSelector([getDashboardState], (s:any) => s.IDELoginIsActive)
+export const getServers = createSelector([getDashboardState], (s:any) => s.servers)
