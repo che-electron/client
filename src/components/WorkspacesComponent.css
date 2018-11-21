@@ -12,8 +12,10 @@
 
 .create-workspace{
     background-color: #282e44;
+    font-size: 14px;
     color: white;
     border: none;
+    cursor: pointer;
   }
 
 .workspace-status-running {

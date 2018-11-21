@@ -27,8 +27,8 @@ class ServersComponent extends React.Component<IProps> {
 
         const servers = this.props.Pservers.map((server) => {
             return (
-                <Button key={server.url} size="lg">
-                    {server.url}
+                <Button className="server-name" key={server.url}>
+                   <span>{server.url}</span>
                 </Button>
             )
         })
@@ -45,10 +45,10 @@ class ServersComponent extends React.Component<IProps> {
         return (
             <div className="ServersComponent" >
                 <h3>Servers</h3>
+                <button className="add-che-server" onClick={this.props.PtoggleIDELogin}><Icon name="plus"/>&nbsp;&nbsp;Add Server</button>
                 <div className="servers-list">
                     {this.renderServers()}
                 </div>
-                <button className="add-che-server" onClick={this.props.PtoggleIDELogin}><Icon name="plus"/>&nbsp;&nbsp;Add Server</button>
             </div>
         )
         
