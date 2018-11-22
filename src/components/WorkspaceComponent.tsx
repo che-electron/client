@@ -22,10 +22,10 @@ class WorkspaceComponent extends React.Component<IProps> {
     }
 
 
-    public render(){       
+    public render(){ 
         return (
             <div className="WorkspaceComponent">
-                {JSON.stringify(this.props.PworkspaceInfo.id)}
+                {this.props.PworkspaceInfo.id}
             </div>
         )
     }
