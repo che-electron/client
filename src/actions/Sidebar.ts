@@ -1,67 +1,41 @@
-import Workspace from '../models/Workspace';
+// import Workspace from '../models/Workspace';
 
-// import { Dispatch } from "redux";
+// // import { Dispatch } from "redux";
 
-// import { IStateSidebar } from '../reducers/Sidebar';
+// // import { IStateSidebar } from '../reducers/Sidebar';
 
-// import IWorkspace from '../models/Workspace';
+// // import IWorkspace from '../models/Workspace';
 
-// import { workspaceApi, workspacesApi} from '../apicalls/GetApi';
+// // import { workspaceApi, workspacesApi} from '../apicalls/GetApi';
 
 
 export enum ActionTypes {
     TOGGLE_SIDEBAR = '[sidebar] TOGGLE_SIDEBAR',
-    FETCH_WORKSPACES = '[sidebar_wksps] FETCH_WORKSPACES',
-    // REQUEST_WORKSPACES = '[sidebar_wksps] REQUEST_WORKSPACES',
-    // RECEIVE_WORKSPACES = '[sidebar_wksps] RECEIVE_WORKSPACES',
-    // RECEIVE_IDE = 'RECEIVE_IDE'
+
+    RECEIVE_IDE = 'RECEIVE_IDE'
 }
 
-/*
-    Interfaces defining the payload for actions
-*/
+// /*
+//     Interfaces defining the payload for actions
+// */
 
-export interface IToggleSidebarAction {
-    type : ActionTypes.TOGGLE_SIDEBAR,
-    payload : {
-        sidebarIsActive : boolean
-    }
-}
-
-export interface IFetchWorkpsacesAction {
-    type : ActionTypes.FETCH_WORKSPACES,
-    payload : {
-        wkspsIsFetching : boolean,
-        wkspsFetchError : boolean,
-        workspaces : Workspace[]
-    }
-}
-
-// export interface IRequestWorkpsacesAction {
-//     type : ActionTypes.REQUEST_WORKSPACES,
+// export interface IToggleSidebarAction {
+//     type : ActionTypes.TOGGLE_SIDEBAR,
 //     payload : {
-//         workspaces : Workspace[]
+//         sidebarIsActive : boolean
 //     }
 // }
 
-// export interface IReceiveWorkpsacesAction {
-//     type : ActionTypes.RECEIVE_WORKSPACES,
-//     payload : {
+// /*
+//     Actions as funcitons
+// */
 
-//         workspaces : Workspace[]
+
+// export function toggleSidebar(){
+//     return {
+//         type : ActionTypes.TOGGLE_SIDEBAR
 //     }
 // }
-
-/*
-    Actions as funcitons
-*/
-
-
-export function toggleSidebar(){
-    return {
-        type : ActionTypes.TOGGLE_SIDEBAR
-    }
-}
 
 // function shouldFetchWorkspaces(state : IStateSidebar ){
 //     if (!state.workspaces){
@@ -139,5 +113,5 @@ export function toggleSidebar(){
 // }
 
 
-export type Action = IToggleSidebarAction | IFetchWorkpsacesAction // | IRequestWorkpsacesAction | IReceiveWorkpsacesAction
+// export type Action = IToggleSidebarAction | IFetchWorkpsacesAction // | IRequestWorkpsacesAction | IReceiveWorkpsacesAction
 

@@ -2,15 +2,16 @@ import * as React from "react";
 import {Icon} from "react-fa"; 
 import "./ServersComponent.css";
 
-import Server from '../models/Server'
-
-import { Button } from 'reactstrap'
+// import Server from '../models/Server'
+import ServerComponent from './ServerComponent';
 
 interface IProps {
     PpopulateServers : () => void,
-    Pservers : Server[]
+    Pservers : {}
     PsidebarIsActive : boolean,
+    PsetCurrentServer : (server : string) => void,
     PtoggleIDELogin : () => void,
+
 }
 
 class ServersComponent extends React.Component<IProps> {
@@ -24,17 +25,20 @@ class ServersComponent extends React.Component<IProps> {
     }
 
     public renderServers(){
+        const servers = []
 
-        const servers = this.props.Pservers.map((server) => {
-            return (
-                <Button className="server-name" key={server.url}>
-                   <span>{server.url}</span>
-                </Button>
-            )
-        })
+        for (const key in this.props.Pservers) {
+            if (this.props.Pservers.hasOwnProperty(key)) {
+                if (this.props.Pservers[key] !== "" || this.props.Pservers !== null ){     
+                    servers.push(
+                        <ServerComponent server={this.props.Pservers[key]} key={key} PsetCurrentServer={this.props.PsetCurrentServer}/>
+                    )
+                } 
+            }
+        }
 
         return (
-            <div>
+            <div className="servers-list">
                 {servers}
             </div>
         )
@@ -45,13 +49,12 @@ class ServersComponent extends React.Component<IProps> {
         return (
             <div className="ServersComponent" >
                 <h3>Servers</h3>
-                <button className="add-che-server" onClick={this.props.PtoggleIDELogin}><Icon name="plus"/>&nbsp;&nbsp;Add Server</button>
-                <div className="servers-list">
-                    {this.renderServers()}
-                </div>
+                {this.renderServers()}
+                <button className="add-che-server" onClick={this.props.PtoggleIDELogin}>
+                    <Icon name="plus" /> &nbsp;&nbsp;Add Server
+                </button>
             </div>
-        )
-        
+        )  
     }
 }
 

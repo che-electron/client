@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import DashboardComponent from "../components/DashboardComponent";
 
-import { populateServers, toggleIDELogin, toggleSidebar } from '../actions/Dashboard';
-import { getIDELoginIsActive,  getServers, getSidebarIsActive,} from '../selectors/Dashboard';
+import { populateServers, setCurrentServer, toggleIDELogin, toggleSidebar, updateWorkspacesList } from '../actions/Dashboard';
+import { getCurrentServer, getIDELoginIsActive,  getServers, getSidebarIsActive,} from '../selectors/Dashboard';
 
 
 const mapStateToProps = (state: IState) => ({
@@ -14,7 +14,9 @@ const mapStateToProps = (state: IState) => ({
 
     // Servers
     Pservers : getServers(state),
-   
+
+    PcurrentServer : getCurrentServer(state),
+
     // Sidebar
     PsidebarIsActive : getSidebarIsActive(state),
 
@@ -24,6 +26,10 @@ const mapStateToProps = (state: IState) => ({
 const mapDispatchToProps = {
     // Servers
     PpopulateServers : populateServers,
+    PsetCurrentServer : setCurrentServer,
+
+    // Workspaces
+    PupdateWorkspacesList : updateWorkspacesList,
 
     // Sidebar
     PtoggleSidebar : toggleSidebar,

@@ -4,17 +4,25 @@ import ServersComponent from "./ServersComponent";
 import "./SidebarComponent.css";
 import WorkspacesComponent from "./WorkspacesComponent";
 
-import Server from '../models/Server'
+// import Server from '../models/Server'
 
 interface IProps {
-    PpopulateServers : () => void,
-    Pservers : Server[]
-    // PfetchWorkspaces : () => void,
+
+    // Sidebar
     PsidebarIsActive : boolean,
     PtoggleSidebar : () => void,
-    // Pworkspaces : IWorkspace[],
+
+    // Servers
+    PpopulateServers : () => void,
+    Pservers : {}
+    PsetCurrentServer : (server : string) => void
+    PcurrentServer : string
+
+    // Workspaces
+    PupdateWorkspacesList : (server : string) => void
+
+    // Toggle IDE -> Login -> IDE -> Login ...
     PtoggleIDELogin : () => void
-    
  
 }
 
@@ -65,10 +73,15 @@ class SidebarComponent extends React.Component<IProps,IState> {
                             PtoggleIDELogin={this.props.PtoggleIDELogin}
                             PpopulateServers = {this.props.PpopulateServers}
                             Pservers={this.props.Pservers}
+                            PsetCurrentServer = {this.props.PsetCurrentServer}
                         />
                     </div>
                     <div className="flexItem" id="2">
-                        <WorkspacesComponent PsidebarIsActive={this.props.PsidebarIsActive} /* Pworkspaces={this.props.Pworkspaces}*/ />
+                        <WorkspacesComponent 
+                            PsidebarIsActive={this.props.PsidebarIsActive} 
+                            PcurrentServer = {this.props.PcurrentServer}
+                            PupdateWorkspacesList = {this.props.PupdateWorkspacesList}
+                        />
                     </div>
                 </div>
             )
@@ -81,8 +94,7 @@ class SidebarComponent extends React.Component<IProps,IState> {
         let button;
         if(!this.props.PsidebarIsActive)
             {
-                button=<span className="double-right-pointing-angle">&#187;</span>
-             
+                button=<span className="double-right-pointing-angle">&#187;</span>      
             }
             else{
                 button=<span className="double-left-pointing-angle">&#171;</span>
@@ -96,12 +108,10 @@ class SidebarComponent extends React.Component<IProps,IState> {
         
         return (
             <div className="SidebarComponent" style={containerstyle}>
-            <button className="toggle-sidebar" onClick={this.props.PtoggleSidebar}>
-            {this.isOpen()}
-            </button>   
-                    
-            {this.renderContent()}
-                          
+                <button className="toggle-sidebar" onClick={this.props.PtoggleSidebar}>
+                    {this.isOpen()}
+                </button>   
+                {this.renderContent()}         
             </div>
         )
     }

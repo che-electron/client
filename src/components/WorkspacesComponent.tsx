@@ -8,12 +8,38 @@ import "./WorkspacesComponent.css";
 interface IProps {
     // Pworkspaces : IWorkspace[],
     PsidebarIsActive : boolean,
+    PcurrentServer : string,
+    PupdateWorkspacesList : (server : string) => void,
 }
 
-class WorkspacesComponent extends React.Component<IProps> {
+interface IState {
+    workspacesPerServers : {}
+}
+
+class WorkspacesComponent extends React.Component<IProps,IState> {
 
     constructor(props : any){
         super(props);
+        this.state = {
+            workspacesPerServers : {}
+        }
+        this.handleUpdateWorkspacesList = this.handleUpdateWorkspacesList.bind(this)
+    }
+
+    public componentDidMount(){
+        this.props.PupdateWorkspacesList(this.props.PcurrentServer)
+    }
+
+    public handleUpdateWorkspacesList(){
+        this.props.PupdateWorkspacesList(this.props.PcurrentServer)
+    }
+
+    public checkServer() {
+        if (this.props.PcurrentServer === ""){
+            return <h5> Please choose a Server </h5>
+        }else{
+            return <div />
+        }
     }
 
     // public displayWorkspaces(wksp : IWorkspace){
@@ -48,7 +74,7 @@ class WorkspacesComponent extends React.Component<IProps> {
     // }
 
     public render(){
-        
+        global.console.log(this.props.PcurrentServer)
         return (
             /* <div className="workspaces-list" >
                 <h2>Workspaces</h2>
@@ -57,7 +83,9 @@ class WorkspacesComponent extends React.Component<IProps> {
             </div>*/
             <div className="workspaces-list" >
                 <h3>Workspaces</h3>
-<button className="create-workspace"><Icon name="plus"/>&nbsp;&nbsp;Create Workspace</button>
+                {this.checkServer()}
+                <button className="create-workspace"><Icon name="plus"/>&nbsp;&nbsp;Create Workspace</button>
+                <button className="update-workspaces-list" onClick={this.handleUpdateWorkspacesList}><Icon name="spinner"/>&nbsp;&nbsp;Update</button>
             </div>
         )
     }

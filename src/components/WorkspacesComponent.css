@@ -18,6 +18,21 @@
     cursor: pointer;
   }
 
+ 
+.update-workspaces-list:hover {
+    background-color: #3b629c;
+    color: white;
+  }
+  
+.update-workspaces-list{
+    background-color: #282e44;
+    font-size: 14px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+   
+
 .workspace-status-running {
     height: 8px;
     width: 8px;

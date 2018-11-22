@@ -51,7 +51,7 @@ class LoginComponent extends React.Component<IProps, IState> {
 
 
     public handleSubmit(event : any) {
-        this.props.PrequestCheLogin("che-eclipse-che.192.168.42.88.nip.io","admin","admin")
+        this.props.PrequestCheLogin("che-eclipse-che.192.168.42.205.nip.io","admin","admin")
         // this.props.PrequestCheLogin(this.state.cheServerURL, this.state.cheUserName, this.state.chePassword)
         event.preventDefault()
     }
@@ -71,11 +71,7 @@ class LoginComponent extends React.Component<IProps, IState> {
                         <button onClick={this.handleSubmit} className="login">Login</button>
                         <button onClick={this.props.PrequestOSIOLogin} className="osio-login"> OSIO Login </button>
                         
-                        {JSON.stringify(this.props.Pauthenticated)}
-                       
-                        
-                       
-                    
+                        {JSON.stringify(this.props.Pauthenticated)}                 
                     
                 </div> 
             </div>
