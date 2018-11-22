@@ -29,7 +29,7 @@ class ServersComponent extends React.Component<IProps> {
 
         for (const key in this.props.Pservers) {
             if (this.props.Pservers.hasOwnProperty(key)) {
-                if (this.props.Pservers[key] !== "" || this.props.Pservers !== null ){     
+                if (this.props.Pservers[key] !== "" && this.props.Pservers !== null ){     
                     servers.push(
                         <ServerComponent server={this.props.Pservers[key]} key={key} PsetCurrentServer={this.props.PsetCurrentServer}/>
                     )

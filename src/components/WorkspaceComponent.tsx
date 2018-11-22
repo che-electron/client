@@ -7,8 +7,8 @@ import * as React from "react";
 import "./WorkspaceComponent.css";
 
 interface IProps {
-    PworkspaceId : string,
-    PworkspaceStatus : string,
+    PworkspaceInfo : any
+    PcurrentServer : string
 }
 
 class WorkspaceComponent extends React.Component<IProps> {
@@ -24,7 +24,9 @@ class WorkspaceComponent extends React.Component<IProps> {
 
     public render(){       
         return (
-            <div className="WorkspaceButton" />
+            <div className="WorkspaceComponent">
+                {JSON.stringify(this.props.PworkspaceInfo.id)}
+            </div>
         )
     }
 

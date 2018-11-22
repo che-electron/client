@@ -57,32 +57,32 @@ export function dashboardReducer(state: IStateDashboard = initialState, action: 
         }
 
         case ActionTypes.REQUEST_WORKSPACES :{
-            const serversState = state.servers
+            const serversState = {...state.servers}
             serversState[action.payload.server].fetchingWorkspaces = action.payload.fetchingWorkspaces
 
             return Object.assign({}, state, {
-                servers : serversState
+                servers : {...serversState}
             })
         }
 
         case ActionTypes.RECEIVE_WORKSPACES : {
 
-            const serversState = state.servers
+            const serversState = {...state.servers}
             serversState[action.payload.server].fetchingWorkspaces = action.payload.fetchingWorkspaces
             serversState[action.payload.server].workspaces = action.payload.workspaces
 
             return Object.assign({}, state, {
-                servers : serversState
+                servers : {...serversState}
             })
         }
 
         case ActionTypes.REQUEST_WORKSPACES_FAILED : {
-            const serversState = state.servers
+            const serversState = {...state.servers}
             serversState[action.payload.server].fetchingWorkspaces = action.payload.fetchingWorkspaces
             serversState[action.payload.server].fetchError = action.payload.error
 
             return Object.assign({}, state, {
-                servers : serversState
+                servers : {...serversState}
             })
         }
 
