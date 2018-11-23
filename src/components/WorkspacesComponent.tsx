@@ -3,17 +3,74 @@ import * as React from "react";
 import {Icon} from "react-fa"; 
 // import IWorkspace from "../models/Workspace";
 import "./WorkspacesComponent.css";
-// import WorkspaceStatusComponent from "./WorkspaceStatusComponent";
+
+import WorkspaceComponent from "./WorkspaceComponent";
 
 interface IProps {
     // Pworkspaces : IWorkspace[],
     PsidebarIsActive : boolean,
+    PcurrentServer : string,
+    PupdateWorkspacesList : (server : string) => void,
+    Pservers : {}
 }
 
-class WorkspacesComponent extends React.Component<IProps> {
+interface IState {
+    workspacesPerServers : {}
+}
+
+class WorkspacesComponent extends React.Component<IProps,IState> {
 
     constructor(props : any){
         super(props);
+        this.state = {
+            workspacesPerServers : {}
+        }
+        this.handleUpdateWorkspacesList = this.handleUpdateWorkspacesList.bind(this)
+    }
+
+    public componentDidMount(){
+        this.props.PupdateWorkspacesList(this.props.PcurrentServer)
+    }
+
+    public handleUpdateWorkspacesList(){
+        this.props.PupdateWorkspacesList(this.props.PcurrentServer)
+    }
+
+    public checkServer() {
+        if (this.props.PcurrentServer === ""){
+            return <h5> Please choose a Server </h5>
+        }else{
+            return <div />
+        }
+    }
+
+
+    public renderWorkspaces(){
+        const workpsaceComponentsPerServer = {}
+
+        for (const key in this.props.Pservers) {
+            if (this.props.Pservers.hasOwnProperty(key)) {
+                const workspaceComponents = []
+                if (this.props.Pservers[this.props.PcurrentServer] !== undefined && this.props.Pservers[this.props.PcurrentServer] !== undefined){
+                    for (const workspace in this.props.Pservers[this.props.PcurrentServer].workspaces){    
+                        if(workspace !== null){
+                            workspaceComponents.push(
+                                <WorkspaceComponent PcurrentServer={this.props.PcurrentServer} PworkspaceInfo={this.props.Pservers[this.props.PcurrentServer].workspaces[workspace]} key=""/>
+                            )
+                        }
+                    }
+                }
+                workpsaceComponentsPerServer[key] = workspaceComponents
+                // if (this.props.Pservers[key] !== "" && this.props.Pservers !== null ){
+                         
+                //     workpsaceComponentsPerServer.push( 
+                //        
+                //     )
+                // } 
+            }
+        }
+
+        return workpsaceComponentsPerServer
     }
 
     // public displayWorkspaces(wksp : IWorkspace){
@@ -48,16 +105,16 @@ class WorkspacesComponent extends React.Component<IProps> {
     // }
 
     public render(){
-        
         return (
-            /* <div className="workspaces-list" >
-                <h2>Workspaces</h2>
-                <button className="create-workspace"><Icon name="plus"/>&nbsp;&nbsp;Create Workspace</button>
-                {this.props.Pworkspaces.map(this.displayWorkspaces)}
-            </div>*/
+
             <div className="workspaces-list" >
                 <h3>Workspaces</h3>
-<button className="create-workspace"><Icon name="plus"/>&nbsp;&nbsp;Create Workspace</button>
+                {this.checkServer()}
+
+                {this.renderWorkspaces()[this.props.PcurrentServer]}
+
+                <button className="create-workspace"><Icon name="plus"/>&nbsp;&nbsp;Create Workspace</button>
+                <button className="update-workspaces-list" onClick={this.handleUpdateWorkspacesList}><Icon name="spinner"/>&nbsp;&nbsp;Update</button>
             </div>
         )
     }

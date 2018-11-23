@@ -1,18 +1,15 @@
 import { Action, ActionTypes } from '../actions/Dashboard';
-import Workspace from "../models/Workspace";
-
-import Server from "../models/Server";
+// import Server from "../models/Server";
 
 
 export interface IStateDashboard {
     // IDE State
     currentServer : string,
-    currentWorkspace : string,
+    currentWorkspacePerServer : {},
     IDELoginIsActive : boolean
     // Servers
-    servers : Server[],
-    // Workspaces
-    workspaces : Workspace[],
+    servers : {},
+
     // Sidebar
     sidebarIsActive : boolean,
 
@@ -21,10 +18,9 @@ export interface IStateDashboard {
 export const initialState : IStateDashboard = {
     IDELoginIsActive : false,
     currentServer : "",
-    currentWorkspace : "",    
-    servers : [],
+    currentWorkspacePerServer : {},    
+    servers : {},
     sidebarIsActive : true,    
-    workspaces : [],
 }
 
 
@@ -48,6 +44,47 @@ export function dashboardReducer(state: IStateDashboard = initialState, action: 
             })
         }
 
+        case ActionTypes.SET_CURRENT_SERVER: {
+            return Object.assign({}, state, {
+                currentServer : action.payload.currentServer
+            })
+        }
+
+        case ActionTypes.SET_CURRENT_WORKSPACEPERSERVER: {
+            return Object.assign({}, state, {
+                
+            })
+        }
+
+        case ActionTypes.REQUEST_WORKSPACES :{
+            const serversState = {...state.servers}
+            serversState[action.payload.server].fetchingWorkspaces = action.payload.fetchingWorkspaces
+
+            return Object.assign({}, state, {
+                servers : {...serversState}
+            })
+        }
+
+        case ActionTypes.RECEIVE_WORKSPACES : {
+
+            const serversState = {...state.servers}
+            serversState[action.payload.server].fetchingWorkspaces = action.payload.fetchingWorkspaces
+            serversState[action.payload.server].workspaces = action.payload.workspaces
+
+            return Object.assign({}, state, {
+                servers : {...serversState}
+            })
+        }
+
+        case ActionTypes.REQUEST_WORKSPACES_FAILED : {
+            const serversState = {...state.servers}
+            serversState[action.payload.server].fetchingWorkspaces = action.payload.fetchingWorkspaces
+            serversState[action.payload.server].fetchError = action.payload.error
+
+            return Object.assign({}, state, {
+                servers : {...serversState}
+            })
+        }
 
         default : {
             return state

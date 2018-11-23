@@ -1,0 +1,23 @@
+.start-workspace-button:hover {
+    background-color: #758aaa;
+    color: white;
+}
+
+.stop-workspace-button:hover {
+    background-color: #758aaa;
+    color: white;
+ }
+
+ .WorkspaceComponent:hover {
+    background-color: #3b629c;
+    color: white;
+  }
+  
+  .WorkpsaceComponent{
+      background-color: #282e44;
+      font-size: 14px;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  
