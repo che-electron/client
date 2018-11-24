@@ -1,12 +1,33 @@
 import * as React from "react";
 import "./IDEComponent.css";
 
+interface IProps {
+    PcurrentServer : string
+    PcurrentWorkspacePerServer : {} 
+    Pservers : {}
+}
 
-class IDEComponent extends React.Component {
+// interface IState {
+
+// }
+
+class IDEComponent extends React.Component<IProps> {
+
+    constructor(props : IProps){
+        super(props)
+        this.state = {}
+        // this.getIDELink = this.getIDELink.bind(this)
+    }
+
+    // public getIDELink(){
+        
+    // }
+
     public render(){       
+        // this.getIDELink()
         return (
-            <div className="IDE-flex-1">
-                <div className="IDE-flex-2" />
+            <div className="IDEComponent">
+                IDE
             </div>
         )
     }

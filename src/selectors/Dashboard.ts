@@ -7,3 +7,4 @@ export const getSidebarIsActive = createSelector([getDashboardState], (s:any) =>
 export const getIDELoginIsActive = createSelector([getDashboardState], (s:any) => s.IDELoginIsActive)
 export const getServers = createSelector([getDashboardState], (s:any) => s.servers)
 export const getCurrentServer = createSelector([getDashboardState], (s:any) => s.currentServer)
+export const getCurrentWorkspacePerServer = createSelector([getDashboardState], (s:any)=> s.currentWorkspacePerServer)

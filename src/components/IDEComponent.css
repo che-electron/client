@@ -1,11 +1,7 @@
-.IDE-flex-1{
+.IDEComponent{
     position : relative;
     flex : 1;
-}
-
-.IDE-flex-2{
     height: 960px;
     width: 100%;
     background-color: #333;
-
 }
