@@ -2,7 +2,7 @@ import * as React from "react";
 // import IWorkspace from "../models/Workspace";
 import ServersComponent from "./ServersComponent";
 import "./SidebarComponent.css";
-import WorkspacesComponent from "./WorkspacesComponent";
+// import WorkspacesComponent from "./WorkspacesComponent";
 
 // import Server from '../models/Server'
 
@@ -47,10 +47,10 @@ class SidebarComponent extends React.Component<IProps,IState> {
         const style = {
             "display" : "flex",
             "height" : "960px",
-            "width" : "18%",
+            "width" : "10%",
         }
         if (this.props.PsidebarIsActive){
-            style.width = "18%"
+            style.width = "10%"
         } else {
             style.width = "3%"
         }
@@ -62,7 +62,7 @@ class SidebarComponent extends React.Component<IProps,IState> {
             const componentstyle = {
                 "display" : "flex",
                 "height" : "960px",
-                "width" : "18%",
+                "width" : "10%",
             }
   
             return(     
@@ -76,14 +76,7 @@ class SidebarComponent extends React.Component<IProps,IState> {
                             PsetCurrentServer = {this.props.PsetCurrentServer}
                         />
                     </div>
-                    <div className="flexItem" id="2">
-                        <WorkspacesComponent 
-                            PsidebarIsActive={this.props.PsidebarIsActive} 
-                            PcurrentServer = {this.props.PcurrentServer}
-                            PupdateWorkspacesList = {this.props.PupdateWorkspacesList}
-                            Pservers = {this.props.Pservers}
-                        />
-                    </div>
+                    
                 </div>
             )
         } else {

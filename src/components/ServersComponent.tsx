@@ -48,7 +48,7 @@ class ServersComponent extends React.Component<IProps> {
     public render(){
 
         return (
-            <div className="ServersComponent" >
+            <div className="servers-component" >
                 <h3>Servers</h3>
                 <button className="add-che-server" onClick={this.props.PtoggleIDELogin}>
                     <Icon name="plus" /> &nbsp;&nbsp;Add Server

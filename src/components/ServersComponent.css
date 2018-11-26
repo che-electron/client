@@ -1,7 +1,7 @@
-.ServersComponent{
+.servers-component{
     color : white;
     width: 130px;
-    padding : 3px;
+    padding : 4px;
 }
 
 .add-che-server{
@@ -10,6 +10,7 @@
     color: white;
     border: none;
     cursor: pointer;
+    padding: 1px;
   }
   
   .add-che-server:hover {
