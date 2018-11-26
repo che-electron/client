@@ -52,7 +52,7 @@ class SidebarComponent extends React.Component<IProps,IState> {
         if (this.props.PsidebarIsActive){
             style.width = "18%"
         } else {
-            style.width = "5%"
+            style.width = "3%"
         }
         return style
     }
