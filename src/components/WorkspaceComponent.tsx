@@ -4,11 +4,14 @@ import * as React from "react";
 
 // import {Icon} from 'react-fa';
 
+import { Button } from 'reactstrap'
+
 import "./WorkspaceComponent.css";
 
 interface IProps {
     PworkspaceInfo : any
     PcurrentServer : string
+    PsetCurrentWorkspace : (workspaceID : string) => void
 }
 
 class WorkspaceComponent extends React.Component<IProps> {
@@ -19,14 +22,18 @@ class WorkspaceComponent extends React.Component<IProps> {
         // this.reloadWorkspace=this.reloadWorkspace.bind(this);
         // this.startWorkspace=this.startWorkspace.bind(this);
         // this.stopWorkspace=this.stopWorkspace.bind(this);
+        this.handleButton=this.handleButton.bind(this);
     }
 
+    public handleButton(){
+        this.props.PsetCurrentWorkspace(this.props.PworkspaceInfo.id)
+    }
 
     public render(){ 
         return (
-            <div className="WorkspaceComponent">
+            <Button className="WorkspaceComponent" onClick={this.handleButton}>
                 {this.props.PworkspaceInfo.id}
-            </div>
+            </Button>
         )
     }
 

@@ -71,10 +71,10 @@ class SidebarComponent extends React.Component<IProps,IState> {
                             PsidebarIsActive={this.props.PsidebarIsActive} 
                             PtoggleIDELogin={this.props.PtoggleIDELogin}
                             PpopulateServers = {this.props.PpopulateServers}
+                            PsetCurrentServer = {this.props.PsetCurrentServer}
                             Pservers={this.props.Pservers}
                             PcurrentServer = {this.props.PcurrentServer}
                             PupdateWorkspacesList = {this.props.PupdateWorkspacesList}
-                            PsetCurrentServer = {this.props.PsetCurrentServer}
                         />
                     </div>
                     

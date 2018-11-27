@@ -72,7 +72,6 @@ class ServerComponent extends React.Component<IProps,IState> {
             showWorkspaceSidebar: !this.state.showWorkspaceSidebar
           }
         );
-        global.console.log("show workspace sidebar");
       }
 }
 

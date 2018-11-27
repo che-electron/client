@@ -4,23 +4,22 @@ import { connect } from 'react-redux';
 
 import DashboardComponent from "../components/DashboardComponent";
 
-import { populateServers, setCurrentServer, toggleIDELogin, toggleSidebar, updateWorkspacesList } from '../actions/Dashboard';
-import { getCurrentServer, getIDELoginIsActive,  getServers, getSidebarIsActive,} from '../selectors/Dashboard';
+import { populateServers, setCurrentServer, setCurrentWorkspacePerServer, toggleIDELogin, toggleSidebar, updateWorkspacesList } from '../actions/Dashboard';
+import { getCurrentServer, getCurrentWorkspacePerServer, getIDELoginIsActive,  getServers, getSidebarIsActive,} from '../selectors/Dashboard';
 
 
 const mapStateToProps = (state: IState) => ({
     // IDE
     PIDELoginIsActive : getIDELoginIsActive(state),
-
     // Servers
+    PcurrentServer : getCurrentServer(state),
     Pservers : getServers(state),
 
-    PcurrentServer : getCurrentServer(state),
+    // Workspaces
+    PcurrentWorkspacePerServer : getCurrentWorkspacePerServer(state),
 
     // Sidebar
     PsidebarIsActive : getSidebarIsActive(state),
-
-    
 })
 
 const mapDispatchToProps = {
@@ -29,6 +28,7 @@ const mapDispatchToProps = {
     PsetCurrentServer : setCurrentServer,
 
     // Workspaces
+    PsetCurrentWorkspace : setCurrentWorkspacePerServer,
     PupdateWorkspacesList : updateWorkspacesList,
 
     // Sidebar

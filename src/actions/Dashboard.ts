@@ -56,10 +56,9 @@ export interface ISetCurrentServerAction {
 export interface ISetCurrentWorkspacePerServerAction {
     type : ActionTypes.SET_CURRENT_WORKSPACEPERSERVER,
     payload : {
-        currentWorkspacePerServer :{} // Will container key:value pairs equivalent to server:workspace
+        workspace : string // Will container key:value pairs equivalent to server:workspace
     }
 }
-
 
 export interface IFetchWorkpsacesAction {
     type : ActionTypes.FETCH_WORKSPACES,
@@ -96,6 +95,7 @@ export interface IRequestWorkpsacesFailureAction {
         error : string
     }
 }
+
 
 /*
     Actions as funcitons
@@ -196,6 +196,15 @@ export function updateWorkspacesList(){
     }
 }
 
+export function setCurrentWorkspacePerServer(wksp : string){
+    return {
+        payload : {
+            workspace : wksp
+        },
+        type : ActionTypes.SET_CURRENT_WORKSPACEPERSERVER
+    }
+}
+
 export function workspaceStart(state : {}, id : string){
     /*
     checks state : 
@@ -214,4 +223,4 @@ export function workspaceStart(state : {}, id : string){
 
 export type Action = IToggleSidebarAction | IPopulateServersAction | IToggleIDELoginAction | 
     ISetCurrentServerAction | ISetCurrentWorkspacePerServerAction | IRequestWorkpsacesAction | 
-    IReceiveWorkpsacesAction | IRequestWorkpsacesFailureAction
+    IReceiveWorkpsacesAction | IRequestWorkpsacesFailureAction 
