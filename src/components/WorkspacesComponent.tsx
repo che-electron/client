@@ -11,7 +11,8 @@ interface IProps {
     PsidebarIsActive : boolean,
     PcurrentServer : string,
     PupdateWorkspacesList : (server : string) => void,
-    Pservers : {}
+    Pservers : {},
+    PsetCurrentWorkspace : (workspaceID : string) => void
 }
 
 interface IState {
@@ -55,7 +56,11 @@ class WorkspacesComponent extends React.Component<IProps,IState> {
                     for (const workspace in this.props.Pservers[this.props.PcurrentServer].workspaces){    
                         if(workspace !== null){
                             workspaceComponents.push(
-                                <WorkspaceComponent PcurrentServer={this.props.PcurrentServer} PworkspaceInfo={this.props.Pservers[this.props.PcurrentServer].workspaces[workspace]} key=""/>
+                                <WorkspaceComponent PcurrentServer={this.props.PcurrentServer} 
+                                PworkspaceInfo={this.props.Pservers[this.props.PcurrentServer].workspaces[workspace]} 
+                                PsetCurrentWorkspace = {this.props.PsetCurrentWorkspace}
+                                key=""
+                                />
                             )
                         }
                     }

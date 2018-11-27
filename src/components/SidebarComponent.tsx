@@ -20,6 +20,7 @@ interface IProps {
 
     // Workspaces
     PupdateWorkspacesList : (server : string) => void
+    PsetCurrentWorkspace : (workspace : string) => void
 
     // Toggle IDE -> Login -> IDE -> Login ...
     PtoggleIDELogin : () => void
@@ -82,6 +83,7 @@ class SidebarComponent extends React.Component<IProps,IState> {
                             PcurrentServer = {this.props.PcurrentServer}
                             PupdateWorkspacesList = {this.props.PupdateWorkspacesList}
                             Pservers = {this.props.Pservers}
+                            PsetCurrentWorkspace = {this.props.PsetCurrentWorkspace}
                         />
                     </div>
                 </div>

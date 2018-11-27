@@ -50,11 +50,18 @@ export function dashboardReducer(state: IStateDashboard = initialState, action: 
             })
         }
 
-        case ActionTypes.SET_CURRENT_WORKSPACEPERSERVER: {
+        case ActionTypes.SET_CURRENT_WORKSPACEPERSERVER : {
+
+            const obj = {...state.currentWorkspacePerServer}
+            obj[state.currentServer] = action.payload.workspace
+
+            global.console.log(obj)
+
             return Object.assign({}, state, {
-                
+                currentWorkspacePerServer : {...obj}
             })
         }
+
 
         case ActionTypes.REQUEST_WORKSPACES :{
             const serversState = {...state.servers}
