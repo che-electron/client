@@ -2,11 +2,16 @@ import * as React from "react";
 import { Button } from 'reactstrap'
 import Server from '../models/Server';
 import "./ServersComponent.css";
+import WorkspacesComponent from "./WorkspacesComponent";
 
 interface IProps {
+    Pservers : {},
     server : Server,
     PsetCurrentServer : (server : string) => void,
     key : string
+    PcurrentServer : string,
+    PupdateWorkspacesList : (server : string) => void,
+    PsetCurrentWorkspace : (workspace : string) => void,
 }
 
 interface IState {
@@ -24,53 +29,51 @@ class ServerComponent extends React.Component<IProps,IState> {
         this.toggleWorkspaceSidebar=this.toggleWorkspaceSidebar.bind(this);
     }
 
-    
-
     public render(){
 
-        return (
-            <Button className="server-name" key={this.props.server.url} onClick={this.handleClick}>
-                   <span>{this.props.server.url}</span>
-            </Button>
-        )  
+        let showWorkspaces;
+        const componentstyle = {            
+            "width" : "20px",
+        }
+        if (this.state.showWorkspaceSidebar === true){
+        showWorkspaces = <WorkspacesComponent 
+            PcurrentServer = {this.props.PcurrentServer}
+            PupdateWorkspacesList = {this.props.PupdateWorkspacesList}
+            Pservers = {this.props.Pservers}
+            PsetCurrentWorkspace = {this.props.PsetCurrentWorkspace}
+            />
+        }
+
+        else{
+          showWorkspaces=  <div/>
+        }
+
+    return(
+        <div className="flex-item">
+        <div>
+            <span className="server-name">{this.props.server.url}</span>&nbsp;<Button className="fa fa-angle-down" key={this.props.server.url} onClick={this.handleClick}/>             
+        </div>
+        <div style={componentstyle} >
+            {showWorkspaces}
+        </div>
+        </div>
+    )
     }
     
     private handleClick(){
-        // this.props.PsetCurrentServer(this.props.server.url)
+        this.props.PsetCurrentServer(this.props.server.url)
         this.toggleWorkspaceSidebar();
 
-        const containerstyle = this.checkWorkspaceSidebar(); 
-        
-            return(
-                <div className="workspace-sidebar" style={containerstyle}/>
-                 
-            )
-        
- 
-        global.console.log("show workspace sidebar");
     }
-    
+
     private toggleWorkspaceSidebar() {
         this.setState(
           {
             showWorkspaceSidebar: !this.state.showWorkspaceSidebar
           }
         );
+        global.console.log("show workspace sidebar");
       }
-
-    private checkWorkspaceSidebar(){
-
-       const style = {
-            "display" : "flex",
-            "height" : "960px",
-            "width" : "0%",
-        }
-        if (this.state.showWorkspaceSidebar){
-            style.width = "10%"
-        }
-        return style
-        
-    }
 }
 
 export default ServerComponent;

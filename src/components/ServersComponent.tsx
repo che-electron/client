@@ -7,10 +7,13 @@ import ServerComponent from './ServerComponent';
 
 interface IProps {
     PpopulateServers : () => void,
-    Pservers : {}
+    Pservers : {},
     PsidebarIsActive : boolean,
     PsetCurrentServer : (server : string) => void,
     PtoggleIDELogin : () => void,
+    PcurrentServer : string,
+    PupdateWorkspacesList : (server : string) => void,
+    PsetCurrentWorkspace : (workspace : string) => void,
 
 }
 
@@ -31,11 +34,11 @@ class ServersComponent extends React.Component<IProps> {
             for (const key in this.props.Pservers) {
             if (this.props.Pservers.hasOwnProperty(key) && this.props.Pservers[key] !== "") {
                 servers.push(
-                    <ServerComponent server={this.props.Pservers[key]} key={key} PsetCurrentServer={this.props.PsetCurrentServer}/>
-                )
-                
+                    <ServerComponent PsetCurrentWorkspace ={ this.props.PsetCurrentWorkspace} Pservers={this.props.Pservers} server={this.props.Pservers[key]} key={key} PsetCurrentServer={this.props.PsetCurrentServer} PcurrentServer = {this.props.PcurrentServer}
+                    PupdateWorkspacesList = {this.props.PupdateWorkspacesList}/>
+                    )                
+                }
             }
-        }
         }
 
         return (
@@ -51,7 +54,7 @@ class ServersComponent extends React.Component<IProps> {
             <div className="servers-component" >
                 <h3>Servers</h3>
                 <button className="add-che-server" onClick={this.props.PtoggleIDELogin}>
-                    <Icon name="plus" /> &nbsp;&nbsp;Add Server
+                    <Icon name="plus" />&nbsp;&nbsp;Add Server
                 </button>
                 {this.renderServers()}
             </div>

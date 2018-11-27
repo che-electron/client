@@ -20,6 +20,7 @@ interface IProps {
 
     // Workspaces
     PupdateWorkspacesList : (server : string) => void
+    PsetCurrentWorkspace : (workspace : string) => void
 
     // Toggle IDE -> Login -> IDE -> Login ...
     PtoggleIDELogin : () => void
@@ -49,9 +50,7 @@ class SidebarComponent extends React.Component<IProps,IState> {
             "height" : "960px",
             "width" : "10%",
         }
-        if (this.props.PsidebarIsActive){
-            style.width = "10%"
-        } else {
+        if (!this.props.PsidebarIsActive){
             style.width = "3%"
         }
         return style
@@ -59,20 +58,22 @@ class SidebarComponent extends React.Component<IProps,IState> {
 
     public renderContent() { 
         if (this.props.PsidebarIsActive){    
-            const componentstyle = {
-                "display" : "flex",
+            const componentstyle = {    
                 "height" : "960px",
                 "width" : "10%",
             }
   
             return(     
-                <div style={componentstyle} className="Sidebar">
-                    <div className="flexItem" id="1">    
+                <div style={componentstyle} className="server-sidebar">
+                    <div>    
                         <ServersComponent 
+                            PsetCurrentWorkspace ={this.props.PsetCurrentWorkspace}
                             PsidebarIsActive={this.props.PsidebarIsActive} 
                             PtoggleIDELogin={this.props.PtoggleIDELogin}
                             PpopulateServers = {this.props.PpopulateServers}
                             Pservers={this.props.Pservers}
+                            PcurrentServer = {this.props.PcurrentServer}
+                            PupdateWorkspacesList = {this.props.PupdateWorkspacesList}
                             PsetCurrentServer = {this.props.PsetCurrentServer}
                         />
                     </div>
@@ -98,10 +99,10 @@ class SidebarComponent extends React.Component<IProps,IState> {
     
     public render(){
    
-         const containerstyle = this.checkSidebar();    
+         const componentstyle = this.checkSidebar();    
         
         return (
-            <div className="SidebarComponent" style={containerstyle}>
+            <div className="sidebar-component" style={componentstyle}>
                 <button className="toggle-sidebar" onClick={this.props.PtoggleSidebar}>
                     {this.isOpen()}
                 </button>   

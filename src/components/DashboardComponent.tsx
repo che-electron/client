@@ -15,14 +15,15 @@ interface IProps {
     // Servers
     PpopulateServers : () => void
     Pservers : {}
-    PsetCurrentServer : (server : string) => void
     PcurrentServer : string
+    PsetCurrentServer : (server : string) => void
+    PcurrentWorkspacePerserver : {}
     // Workspaces
     PupdateWorkspacesList : (server : string) => void
+    PsetCurrentWorkspace : (workspaceID : string) => void
     // IDE|Login Toggle
     PIDELoginIsActive : boolean
     PtoggleIDELogin : () => void
-    // Current
 } 
 
 class DashboardComponent extends React.Component<IProps> {
@@ -38,7 +39,11 @@ class DashboardComponent extends React.Component<IProps> {
             )
         }else{
             return (
-                <IDEComponent/>
+                <IDEComponent 
+                    Pservers = {this.props.Pservers}
+                    PcurrentServer={this.props.PcurrentServer}
+                    PcurrentWorkspacePerServer={this.props.PcurrentWorkspacePerserver}
+                />
             )
         }
     }
@@ -59,6 +64,7 @@ class DashboardComponent extends React.Component<IProps> {
 
                     // Workspaces
                     PupdateWorkspacesList = {this.props.PupdateWorkspacesList}
+                    PsetCurrentWorkspace = {this.props.PsetCurrentWorkspace}
 
                     // Toggle IDE -> Login -> IDE -> Login -> ...
                     PtoggleIDELogin={this.props.PtoggleIDELogin}
