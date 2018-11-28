@@ -1,9 +1,18 @@
 import { Dispatch } from 'redux';
 
 import { populateServers } from '../actions/Dashboard';
+import MockLocalStorage from '../mocks/MockLocalStorage';
 
 // import * as Keycloak from 'keycloak-js'
-const osioCheURL = "che.openshift.io"
+const osioCheURL = "che.openshift.io";
+
+ let localStorage : any;
+localStorage =  localStorage;
+
+if(!localStorage)
+{
+  localStorage =new MockLocalStorage;
+} 
 
 export enum ActionTypes {
     CHECK_OSIO_LOGIN = '[login] CHECK_OSIO_LOGIN',
@@ -73,6 +82,7 @@ export interface ICheLoginReceiveAction {
 /*
     Actions as funcitons
 */
+
 
 export function checkOSIOLogin(){
     // let existsInURL : boolean
@@ -264,7 +274,7 @@ function cheLoginRequest(cheServerURL : string, cheUserName : string, chePasswor
                     } 
                 });*/
                
-            }
+            }   
         })
     }
 
