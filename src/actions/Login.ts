@@ -9,11 +9,13 @@ const osioCheURL = "che.openshift.io";
  let localStorage : any;
 localStorage =  localStorage;
 
-if(!localStorage)
+if(!window.localStorage)
 {
-  localStorage =new MockLocalStorage;
-} 
-
+    global.console.log("Local storage doesnt exist");
+    localStorage =new MockLocalStorage;
+} else{
+    localStorage=window.localStorage;
+}
 export enum ActionTypes {
     CHECK_OSIO_LOGIN = '[login] CHECK_OSIO_LOGIN',
     CHECK_CHE_LOGIN = '[login] CHECK_CHE_LOGIN',
