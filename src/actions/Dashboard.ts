@@ -1,10 +1,21 @@
-// import { Dispatch } from "redux";
 import Workspace from '../models/Workspace';
 
 import Server from '../models/Server';
 
 import { Dispatch } from 'redux';
 
+import MockLocalStorage from '../mocks/MockLocalStorage';
+
+let localStorage : any;
+localStorage =  localStorage;
+
+if(!window.localStorage)
+{
+    global.console.log("Local storage doesnt exist");
+    localStorage =new MockLocalStorage;
+} else{
+    localStorage=window.localStorage;
+}
 
 export enum ActionTypes {
 
@@ -203,22 +214,6 @@ export function setCurrentWorkspacePerServer(wksp : string){
         },
         type : ActionTypes.SET_CURRENT_WORKSPACEPERSERVER
     }
-}
-
-export function workspaceStart(state : {}, id : string){
-    /*
-    checks state : 
-        if state.workspaces[id : id] == started :{
-            stop
-        } else if starting {
-            return workspace is starting
-        } else if stopping {
-            return workspace is stopping
-        } else { // stopped
-            start
-        }
-    
-    */
 }
 
 export type Action = IToggleSidebarAction | IPopulateServersAction | IToggleIDELoginAction | 
