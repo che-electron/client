@@ -1,7 +1,7 @@
-.ServersComponent{
+.servers-component{
     color : white;
     width: 130px;
-    padding : 3px;
+    padding : 4px;
 }
 
 .add-che-server{
@@ -10,25 +10,40 @@
     color: white;
     border: none;
     cursor: pointer;
+    padding: 1px;
   }
   
-  .add-che-server:hover {
-    background-color: #3b629c;
-    color: "white";
-  }
+.add-che-server:hover {
+  background-color: #3b629c;
+  color: "white";
+}
 
-  .server-name{
-    background-color: #282e44;
-    color: white;
-    border: none;
-    font-size: 14px;
-    margin : 5px 0; 
-    text-align : left;
-    width : 100%;
-    cursor: pointer;
-  }
+.server-name{
+  background-color: #282e44;
+  color: white;
+  border: none;
+  font-size: 17px;
+  margin : 5px 0; 
+  text-align : left;
+  width : 100%;
+  cursor: pointer;
+}
 
-  .server-name:hover {
-    background-color: #3b629c;
-    color: "white";
+.workspace-sidebar{
+  background-color : #282e44;
+  width: 150px;
+  transition: .3s ease;
+}
+
+.fa-angle-down{
+  background: #282e44;
+  border: none;
+  color: white;
+  cursor : pointer;
+  padding: 1px;
+  font-size: 1.3em;
+}
+
+.fa-angle-down:focus{
+  outline: none;
 }

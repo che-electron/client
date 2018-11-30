@@ -2,7 +2,7 @@ import * as React from "react";
 // import IWorkspace from "../models/Workspace";
 import ServersComponent from "./ServersComponent";
 import "./SidebarComponent.css";
-import WorkspacesComponent from "./WorkspacesComponent";
+// import WorkspacesComponent from "./WorkspacesComponent";
 
 // import Server from '../models/Server'
 
@@ -48,44 +48,36 @@ class SidebarComponent extends React.Component<IProps,IState> {
         const style = {
             "display" : "flex",
             "height" : "960px",
-            "width" : "18%",
+            "width" : "10%",
         }
-        if (this.props.PsidebarIsActive){
-            style.width = "18%"
-        } else {
-            style.width = "5%"
+        if (!this.props.PsidebarIsActive){
+            style.width = "3%"
         }
         return style
     }
 
     public renderContent() { 
         if (this.props.PsidebarIsActive){    
-            const componentstyle = {
-                "display" : "flex",
+            const componentstyle = {    
                 "height" : "960px",
-                "width" : "18%",
+                "width" : "10%",
             }
   
             return(     
-                <div style={componentstyle} className="Sidebar">
-                    <div className="flexItem" id="1">    
+                <div style={componentstyle} className="server-sidebar">
+                    <div>    
                         <ServersComponent 
+                            PsetCurrentWorkspace ={this.props.PsetCurrentWorkspace}
                             PsidebarIsActive={this.props.PsidebarIsActive} 
                             PtoggleIDELogin={this.props.PtoggleIDELogin}
                             PpopulateServers = {this.props.PpopulateServers}
-                            Pservers={this.props.Pservers}
                             PsetCurrentServer = {this.props.PsetCurrentServer}
-                        />
-                    </div>
-                    <div className="flexItem" id="2">
-                        <WorkspacesComponent 
-                            PsidebarIsActive={this.props.PsidebarIsActive} 
+                            Pservers={this.props.Pservers}
                             PcurrentServer = {this.props.PcurrentServer}
                             PupdateWorkspacesList = {this.props.PupdateWorkspacesList}
-                            Pservers = {this.props.Pservers}
-                            PsetCurrentWorkspace = {this.props.PsetCurrentWorkspace}
                         />
                     </div>
+                    
                 </div>
             )
         } else {
@@ -107,10 +99,10 @@ class SidebarComponent extends React.Component<IProps,IState> {
     
     public render(){
    
-         const containerstyle = this.checkSidebar();    
+         const componentstyle = this.checkSidebar();    
         
         return (
-            <div className="SidebarComponent" style={containerstyle}>
+            <div className="sidebar-component" style={componentstyle}>
                 <button className="toggle-sidebar" onClick={this.props.PtoggleSidebar}>
                     {this.isOpen()}
                 </button>   

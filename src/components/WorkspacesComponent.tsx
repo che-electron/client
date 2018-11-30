@@ -8,11 +8,10 @@ import WorkspaceComponent from "./WorkspaceComponent";
 
 interface IProps {
     // Pworkspaces : IWorkspace[],
-    PsidebarIsActive : boolean,
     PcurrentServer : string,
     PupdateWorkspacesList : (server : string) => void,
     Pservers : {},
-    PsetCurrentWorkspace : (workspaceID : string) => void
+    PsetCurrentWorkspace : (workspaceID : string) => void,
 }
 
 interface IState {
@@ -37,13 +36,13 @@ class WorkspacesComponent extends React.Component<IProps,IState> {
         this.props.PupdateWorkspacesList(this.props.PcurrentServer)
     }
 
-    public checkServer() {
+    /* public checkServer() {
         if (this.props.PcurrentServer === ""){
             return <h5> Please choose a Server </h5>
         }else{
             return <div />
         }
-    }
+    } */
 
 
     public renderWorkspaces(){
@@ -113,13 +112,10 @@ class WorkspacesComponent extends React.Component<IProps,IState> {
         return (
 
             <div className="workspaces-list" >
-                <h3>Workspaces</h3>
-                {this.checkServer()}
-
+                <h4>Workspaces</h4>
                 {this.renderWorkspaces()[this.props.PcurrentServer]}
 
                 <button className="create-workspace"><Icon name="plus"/>&nbsp;&nbsp;Create Workspace</button>
-                <button className="update-workspaces-list" onClick={this.handleUpdateWorkspacesList}><Icon name="spinner"/>&nbsp;&nbsp;Update</button>
             </div>
         )
     }

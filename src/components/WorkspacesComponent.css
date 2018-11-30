@@ -1,8 +1,6 @@
 .workspaces-list{
     color : white;
-    margin-right: 20x;
     width:150px;
-    padding : 3px;
 }
 
 .create-workspace:hover {
