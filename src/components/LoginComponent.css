@@ -10,8 +10,8 @@
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
     font-family: arial;
-    height: 400px;
-    width: 500px;
+    height: 300px;
+    width: 450px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -19,8 +19,8 @@
 }
 
 .text-box {
-    width: 375px;
-    height: 46px;
+    width: 345px;
+    height: 35px;
     margin: 0 0 10px 0;
     border-radius: 5px;
     padding-left: 21px;
@@ -34,6 +34,7 @@
 
 .text-box:focus{
     background: #3f55ae;
+    top: 30px;
 }
 
 .che-logo{
@@ -47,15 +48,40 @@
     color : white;
     font-size: 32px;
     font-weight: bold;
-    top: 26px;
-    right: 45px;
+    top: 30px;
+    right: 50px;
+}
+
+.title-connect{
+    position: relative;
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+    top: 40px;
+    right: 100px;
+
 }
 
 .login{
-    width: 185px;
-    height: 40px;
+    width: 120px;
+    height: 35px;
     border-radius: 5px;
     font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: #44a73b;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    border:none;
+}
+
+.connect{
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 18px;
     font-weight: bold;
     color: #fff;
     background: #44a73b;

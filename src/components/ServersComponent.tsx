@@ -32,7 +32,7 @@ class ServersComponent extends React.Component<IProps> {
         if(this.props.Pservers !== null)
         {
             for (const key in this.props.Pservers) {
-            if (this.props.Pservers.hasOwnProperty(key) && this.props.Pservers[key] !== "") {
+            if ((this.props.Pservers[key] !== "") && this.props.Pservers.hasOwnProperty(key)) {
                 servers.push(
                     <ServerComponent PsetCurrentWorkspace ={ this.props.PsetCurrentWorkspace} Pservers={this.props.Pservers} server={this.props.Pservers[key]} key={key} PsetCurrentServer={this.props.PsetCurrentServer} PcurrentServer = {this.props.PcurrentServer}
                     PupdateWorkspacesList = {this.props.PupdateWorkspacesList}/>
