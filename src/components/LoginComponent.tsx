@@ -78,7 +78,7 @@ class LoginComponent extends React.Component<IProps, IState> {
         else if(this.state.cheServerURL !== "che.openshift.io" && this.state.cheServerURL !== "che.prod-preview.openshift.io" )
         {
             loginCredentials=<div><h3 className="title-connect">Authenticate Yourself</h3>
-            <br/><br/><input type="text" onChange={this.handleUsernameChange} className="text-box" placeholder="Username or email"/>
+            <br/><br/><input type="text" onChange={this.handleCheServerURLChange} className="text-box" placeholder="Che Server URL"/><input type="text" onChange={this.handleUsernameChange} className="text-box" placeholder="Username or email"/>
             <input type="password" onChange={this.handlePasswordChange} className="text-box" placeholder="Password"/>
             <button onClick={this.handleLogin} className="login">Login</button>
             </div>
