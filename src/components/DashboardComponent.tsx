@@ -7,8 +7,7 @@ import LoginContainer from '../containers/LoginContainer';
 
 // import Server from '../models/Server';
 
-
-interface IProps { 
+interface IProps {
     // Sidebar
     PsidebarIsActive : boolean
     PtoggleSidebar : () => void
@@ -24,7 +23,7 @@ interface IProps {
     // IDE|Login Toggle
     PIDELoginIsActive : boolean
     PtoggleIDELogin : () => void
-} 
+}
 
 class DashboardComponent extends React.Component<IProps> {
 
@@ -33,25 +32,24 @@ class DashboardComponent extends React.Component<IProps> {
     }
 
     public renderIDEorLogin(){
-        if (this.props.PIDELoginIsActive){
+        if (this.props.PIDELoginIsActive)
             return (
                 <LoginContainer />
             )
-        }else{
+        else
             return (
-                <IDEComponent 
+                <IDEComponent
                     Pservers = {this.props.Pservers}
                     PcurrentServer={this.props.PcurrentServer}
                     PcurrentWorkspacePerServer={this.props.PcurrentWorkspacePerserver}
                 />
             )
-        }
     }
 
     public render(){
         return (
             <div className="Dashboard">
-                <SidebarComponent 
+                <SidebarComponent
                     // Sidebar
                     PsidebarIsActive={this.props.PsidebarIsActive}
                     PtoggleSidebar={this.props.PtoggleSidebar}

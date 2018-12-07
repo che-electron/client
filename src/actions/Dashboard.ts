@@ -7,15 +7,13 @@ import { Dispatch } from 'redux';
 import MockLocalStorage from '../mocks/MockLocalStorage';
 
 let localStorage : any;
-localStorage =  localStorage;
+localStorage = localStorage;
 
-if(!window.localStorage)
-{
+if(!window.localStorage){
     global.console.log("Local storage doesnt exist");
     localStorage =new MockLocalStorage;
-} else{
+}else
     localStorage=window.localStorage;
-}
 
 export enum ActionTypes {
 
@@ -44,7 +42,6 @@ export enum ActionTypes {
 export interface IToggleSidebarAction {
     type : ActionTypes.TOGGLE_SIDEBAR,
 }
-
 
 export interface IToggleIDELoginAction {
     type : ActionTypes.TOGGLE_IDE_LOGIN,
@@ -97,7 +94,6 @@ export interface IReceiveWorkpsacesAction {
     }
 }
 
-
 export interface IRequestWorkpsacesFailureAction {
     type : ActionTypes.REQUEST_WORKSPACES_FAILED,
     payload : {
@@ -106,7 +102,6 @@ export interface IRequestWorkpsacesFailureAction {
         error : string
     }
 }
-
 
 /*
     Actions as funcitons
@@ -129,17 +124,13 @@ export function populateServers(){
     const localStorageServersAuth = JSON.parse(localStorage.getItem("Servers") || "{}")
     const mapLocalStoragetoModel : {} = {}
 
-    for (const key in localStorageServersAuth) {
-        if (localStorageServersAuth.hasOwnProperty(key)) {
-            if (localStorageServersAuth[key] !== "" || localStorageServersAuth[key] !== null ){     
+    for (const key in localStorageServersAuth)
+        if (localStorageServersAuth.hasOwnProperty(key))
+            if (localStorageServersAuth[key] !== "" || localStorageServersAuth[key] !== null)
                     mapLocalStoragetoModel[key] = {
                     authToken : localStorageServersAuth[key],
                     url : key
-                } 
-            }
-        }
-    }
-
+                }
     return {
         payload : {
             servers : mapLocalStoragetoModel
@@ -193,7 +184,7 @@ export function updateWorkspacesList(){
     return (dispatch : Dispatch<any>, getState : any) => {
         const state = getState()
 
-        if (state.dashboard.currentServer !== "" && state.dashboard.currentServer !== null && state.dashboard.currentServer !== ""){    
+        if (state.dashboard.currentServer !== "" && state.dashboard.currentServer !== null && state.dashboard.currentServer !== ""){
             global.console.log("Update Workspaces List for Server "+state.dashboard.currentServer)
             dispatch(requestWorkspaces(state.dashboard.currentServer))
             fetch("http://"+state.dashboard.currentServer+"/api/workspace?token="+state.dashboard.servers[state.dashboard.currentServer].authToken).then((resp : any)=>{
@@ -216,6 +207,4 @@ export function setCurrentWorkspacePerServer(wksp : string){
     }
 }
 
-export type Action = IToggleSidebarAction | IPopulateServersAction | IToggleIDELoginAction | 
-    ISetCurrentServerAction | ISetCurrentWorkspacePerServerAction | IRequestWorkpsacesAction | 
-    IReceiveWorkpsacesAction | IRequestWorkpsacesFailureAction 
+export type Action = IToggleSidebarAction | IPopulateServersAction | IToggleIDELoginAction | ISetCurrentServerAction | ISetCurrentWorkspacePerServerAction | IRequestWorkpsacesAction | IReceiveWorkpsacesAction | IRequestWorkpsacesFailureAction

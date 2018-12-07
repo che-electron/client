@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:latest", "tslint-react", "tslint-eslint-rules", "tslint-config-prettier"],
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
@@ -7,5 +7,26 @@
       "coverage/lcov-report/*.js"
     ]
   },
-  "ordered-imports": false
+  "rules" : {
+    "prettier" : true,
+    "no-duplicate-imports": false,
+    "jsx-boolean-value" : true,
+    "jsx-wrap-multiline" : true,
+    "jsx-alignment" : true,
+    "jsx-curly-spacing" : true,
+    "jsx-equals-spacing" : true,
+    "trailing-comma": true,
+    "no-extra-semi": true,
+    "array-bracket-spacing": [true, "never"],
+    "block-spacing": [true, "always"],
+    "no-multi-spaces": [true,{
+        "exceptions": { "PropertyAssignment": false, "OtherException": "true|false" }
+      }
+    ],
+    "object-curly-spacing": [true, "always", {"arraysInObjects": false, "objectsInObjects": false}],
+    "ter-no-irregular-whitespace": [true],
+    "curly": [true, "as-needed"],
+    "no-consecutive-blank-lines": true,
+    "no-trailing-whitespace": true
+  }
 }

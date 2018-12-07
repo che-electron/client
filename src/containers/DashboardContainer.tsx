@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import DashboardComponent from "../components/DashboardComponent";
 
 import { populateServers, setCurrentServer, setCurrentWorkspacePerServer, toggleIDELogin, toggleSidebar, updateWorkspacesList } from '../actions/Dashboard';
-import { getCurrentServer, getCurrentWorkspacePerServer, getIDELoginIsActive,  getServers, getSidebarIsActive,} from '../selectors/Dashboard';
-
+import { getCurrentServer, getCurrentWorkspacePerServer, getIDELoginIsActive, getServers, getSidebarIsActive } from '../selectors/Dashboard';
 
 const mapStateToProps = (state: IState) => ({
     // IDE
@@ -34,8 +33,8 @@ const mapDispatchToProps = {
     // Sidebar
     PtoggleSidebar : toggleSidebar,
 
-    // toggle IDE -> Login 
+    // toggle IDE -> Login
     PtoggleIDELogin : toggleIDELogin,
-} 
+}
 
 export default connect<any,any,any>(mapStateToProps, mapDispatchToProps)(DashboardComponent)

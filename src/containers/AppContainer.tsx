@@ -1,13 +1,12 @@
-import {  checkCheLogin, checkOSIOLogin } from '../actions/Login'
+import { checkCheLogin, checkOSIOLogin } from '../actions/Login'
 
-import { getCheAuthenticatedOnce, getOSIOAuthenticated, } from '../selectors/Login';
+import { getCheAuthenticatedOnce, getOSIOAuthenticated } from '../selectors/Login';
 
 import { IState } from '../reducers'
 
 import { connect } from 'react-redux'
 
 import AppComponent from "../components/AppComponent"
-
 
 const mapStateToProps = (state: IState) => ({
   PCheAuthenticatedOnce : getCheAuthenticatedOnce(state),

@@ -29,7 +29,7 @@ class WorkspaceComponent extends React.Component<IProps> {
         this.props.PsetCurrentWorkspace(this.props.PworkspaceInfo.id)
     }
 
-    public render(){ 
+    public render(){
         return (
             <Button className="WorkspaceComponent" onClick={this.handleButton}>
                 {this.props.PworkspaceInfo.id}
@@ -43,11 +43,9 @@ class WorkspaceComponent extends React.Component<IProps> {
 //                 'Content-Type': 'application/json',
 //        }),
 //        method: 'POST'
-          
 //         }).then((response) => response.json())
 //         .then((data) => {
 //             this.setState({status:data.status});
-         
 //     });
 // }
 
@@ -57,9 +55,7 @@ class WorkspaceComponent extends React.Component<IProps> {
 //                     'Content-Type': 'application/json',
 //         }),
 //         method: 'DELETE'
-            
 //             }).then(() =>
-       
 //             this.setState({status:'STOPPING'})
 //       );
 //     }
@@ -70,12 +66,12 @@ class WorkspaceComponent extends React.Component<IProps> {
 //                 'Content-Type': 'application/json',
 //        }),
 //        method: 'GET'
-          
 //         }).then((response) => response.json())
-//         .then((data) => 
+//         .then((data) =>
 //               this.setState(
 //                   {status:data.status})
-//             );  
+//             );
 //     };
 }
+
 export default WorkspaceComponent;

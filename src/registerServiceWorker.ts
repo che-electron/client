@@ -26,12 +26,11 @@ export default function register() {
       process.env.PUBLIC_URL!,
       window.location.toString()
     );
-    if (publicUrl.origin !== window.location.origin) {
+    if (publicUrl.origin !== window.location.origin)
       // Our service worker won't work if PUBLIC_URL is on a different origin
       // from what our page is served on. This might happen if a CDN is used to
       // serve assets; see https://github.com/facebookincubator/create-react-app/issues/2374
       return;
-    }
 
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
@@ -48,10 +47,9 @@ export default function register() {
               'worker. To learn more, visit https://goo.gl/SC7cgQ'
           );
         });
-      } else {
+      } else
         // Is not local host. Just register service worker
         registerValidSW(swUrl);
-      }
     });
   }
 }
@@ -62,24 +60,21 @@ function registerValidSW(swUrl: string) {
     .then(registration => {
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
-        if (installingWorker) {
+        if (installingWorker)
           installingWorker.onstatechange = () => {
-            if (installingWorker.state === 'installed') {
-              if (navigator.serviceWorker.controller) {
+            if (installingWorker.state === 'installed')
+              if (navigator.serviceWorker.controller)
                 // At this point, the old content will have been purged and
                 // the fresh content will have been added to the cache.
                 // It's the perfect time to display a 'New content is
                 // available; please refresh.' message in your web app.
                 console.log('New content is available; please refresh.');
-              } else {
+              else
                 // At this point, everything has been precached.
                 // It's the perfect time to display a
                 // 'Content is cached for offline use.' message.
                 console.log('Content is cached for offline use.');
-              }
-            }
           };
-        }
       };
     })
     .catch(error => {
@@ -95,17 +90,16 @@ function checkValidServiceWorker(swUrl: string) {
       if (
         response.status === 404 ||
         response.headers.get('content-type')!.indexOf('javascript') === -1
-      ) {
+      )
         // No service worker found. Probably a different app. Reload the page.
         navigator.serviceWorker.ready.then(registration => {
           registration.unregister().then(() => {
             window.location.reload();
           });
         });
-      } else {
+      else
         // Service worker found. Proceed as normal.
         registerValidSW(swUrl);
-      }
     })
     .catch(() => {
       console.log(
@@ -115,9 +109,8 @@ function checkValidServiceWorker(swUrl: string) {
 }
 
 export function unregister() {
-  if ('serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator)
     navigator.serviceWorker.ready.then(registration => {
       registration.unregister();
     });
-  }
 }

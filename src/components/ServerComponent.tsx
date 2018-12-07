@@ -32,26 +32,25 @@ class ServerComponent extends React.Component<IProps,IState> {
     public render(){
 
         let showWorkspaces;
-        const componentstyle = {            
+        const componentstyle = {
             "width" : "20px",
         }
-        if (this.state.showWorkspaceSidebar === true){
-        showWorkspaces = <WorkspacesComponent 
+        if (this.state.showWorkspaceSidebar === true)
+        showWorkspaces = (
+        <WorkspacesComponent
             PcurrentServer = {this.props.PcurrentServer}
             PupdateWorkspacesList = {this.props.PupdateWorkspacesList}
             Pservers = {this.props.Pservers}
             PsetCurrentWorkspace = {this.props.PsetCurrentWorkspace}
-            />
-        }
-
-        else{
-          showWorkspaces=  <div/>
-        }
+        />
+        )
+        else
+          showWorkspaces= <div/>
 
     return(
         <div className="flex-item">
         <div>
-            <span className="server-name">{this.props.server.url}</span>&nbsp;<Button className="fa fa-angle-down" key={this.props.server.url} onClick={this.handleClick}/>             
+            <span className="server-name">{this.props.server.url}</span>&nbsp;<Button className="fa fa-angle-down" key={this.props.server.url} onClick={this.handleClick}/>
         </div>
         <div style={componentstyle} >
             {showWorkspaces}
@@ -59,7 +58,7 @@ class ServerComponent extends React.Component<IProps,IState> {
         </div>
     )
     }
-    
+
     private handleClick(){
         this.props.PsetCurrentServer(this.props.server.url)
         this.toggleWorkspaceSidebar();

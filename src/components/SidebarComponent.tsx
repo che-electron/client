@@ -24,7 +24,6 @@ interface IProps {
 
     // Toggle IDE -> Login -> IDE -> Login ...
     PtoggleIDELogin : () => void
- 
 }
 
 interface IState{
@@ -38,7 +37,7 @@ class SidebarComponent extends React.Component<IProps,IState> {
         this.isOpen= this.isOpen.bind(this);
     }
 
-    // public componentWillMount(){    
+    // public componentWillMount(){
     //     if (this.props.Pworkspaces.length < 1){
     //         this.props.PfetchWorkspaces()
     //     }
@@ -50,25 +49,24 @@ class SidebarComponent extends React.Component<IProps,IState> {
             "height" : "960px",
             "width" : "11%",
         }
-        if (!this.props.PsidebarIsActive){
+        if (!this.props.PsidebarIsActive)
             style.width = "3%"
-        }
+
         return style
     }
 
-    public renderContent() { 
-        if (this.props.PsidebarIsActive){    
-            const componentstyle = {    
+    public renderContent(){
+        if (this.props.PsidebarIsActive){
+            const componentstyle = {
                 "height" : "960px",
                 "width" : "11%",
             }
-  
-            return(     
+            return(
                 <div style={componentstyle} className="server-sidebar">
-                    <div>    
-                        <ServersComponent 
+                    <div>
+                        <ServersComponent
                             PsetCurrentWorkspace ={this.props.PsetCurrentWorkspace}
-                            PsidebarIsActive={this.props.PsidebarIsActive} 
+                            PsidebarIsActive={this.props.PsidebarIsActive}
                             PtoggleIDELogin={this.props.PtoggleIDELogin}
                             PpopulateServers = {this.props.PpopulateServers}
                             PsetCurrentServer = {this.props.PsetCurrentServer}
@@ -77,36 +75,27 @@ class SidebarComponent extends React.Component<IProps,IState> {
                             PupdateWorkspacesList = {this.props.PupdateWorkspacesList}
                         />
                     </div>
-                    
                 </div>
             )
-        } else {
+        } else
             return <div />
-        }
     }
 
     public isOpen(){
-        let button;
-        if(!this.props.PsidebarIsActive)
-            {
-                button=<span className="double-right-pointing-angle">&#187;</span>      
-            }
-            else{
-                button=<span className="double-left-pointing-angle">&#171;</span>
-            }
-            return button;
+        const button = (!this.props.PsidebarIsActive)?(<span className="double-right-pointing-angle">&#187;</span>):(<span className="double-left-pointing-angle">&#171;</span>);
+        return button;
     }
-    
+
     public render(){
-   
-         const componentstyle = this.checkSidebar();    
-        
+
+         const componentstyle = this.checkSidebar();
+
         return (
             <div className="sidebar-component" style={componentstyle}>
                 <button className="toggle-sidebar" onClick={this.props.PtoggleSidebar}>
                     {this.isOpen()}
-                </button>   
-                {this.renderContent()}         
+                </button>
+                {this.renderContent()}
             </div>
         )
     }

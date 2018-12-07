@@ -3,7 +3,7 @@ import "./IDEComponent.css";
 
 interface IProps {
     PcurrentServer : string
-    PcurrentWorkspacePerServer : {} 
+    PcurrentWorkspacePerServer : {}
     Pservers : {}
 }
 
@@ -20,10 +20,9 @@ class IDEComponent extends React.Component<IProps> {
     }
 
     // public getIDELink(){
-        
     // }
 
-    public render(){       
+    public render(){
         // this.getIDELink()
         return (
             <div className="IDEComponent">

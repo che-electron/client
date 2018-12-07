@@ -18,5 +18,3 @@ const mapDispatchToProps = {
 }
 
 export default connect<any,any,any>(mapStateToProps, mapDispatchToProps)(LoginComponent)
-
- 
