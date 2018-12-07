@@ -28,18 +28,11 @@ class LoginComponent extends React.Component<IProps, IState> {
         this.handlePasswordChange = this.handlePasswordChange.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
         this.handleOSIO = this.handleOSIO.bind(this)
-        this.handleURLChange=this.handleURLChange.bind(this)
         this.url="";
     }
 
     public handleCheServerURLChange(event : any){
         this.url = event.target.value;
-    }
-
-    public handleURLChange(event : any){
-        this.setState({
-            cheServerURL : event.target.value
-        })
     }
 
     public handleUsernameChange(event : any){
@@ -73,7 +66,7 @@ class LoginComponent extends React.Component<IProps, IState> {
     public render(){
 
         let loginCredentials;
-        if(this.state.cheServerURL === "" || this.state.cheServerURL === "che.openshift.io" || this.url === "che.prod-preview.openshift.io" )
+        if(this.state.cheServerURL === "")
            loginCredentials= (
            <div><h3 className="title-connect">Connect to a Che Server </h3>
             <br/><br/><input type="text" onChange={this.handleCheServerURLChange} className="text-box" placeholder="Che Server URL"/>
@@ -81,7 +74,7 @@ class LoginComponent extends React.Component<IProps, IState> {
         else if(this.state.cheServerURL !== "che.openshift.io" && this.state.cheServerURL !== "che.prod-preview.openshift.io" )
             loginCredentials=(
             <div><h3 className="title-connect">Authenticate Yourself</h3>
-            <br/><br/><input type="text" onChange={this.handleURLChange} className="text-box" placeholder="Che Server URL"/><input type="text" onChange={this.handleUsernameChange} className="text-box" placeholder="Username or email"/>
+            <br/><br/><input type="text" onChange={this.handleCheServerURLChange} className="text-box" placeholder="Che Server URL"/><input type="text" onChange={this.handleUsernameChange} className="text-box" placeholder="Username or email"/>
             <input type="password" onChange={this.handlePasswordChange} className="text-box" placeholder="Password"/>
             <button onClick={this.handleLogin} className="login">Login</button>
             </div>)
