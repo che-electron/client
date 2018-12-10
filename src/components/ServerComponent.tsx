@@ -1,8 +1,8 @@
-import * as React from "react";
+import * as React from 'react';
 import { Button } from 'reactstrap'
 import Server from '../models/Server';
-import "./ServersComponent.css";
-import WorkspacesComponent from "./WorkspacesComponent";
+import './ServersComponent.css';
+import WorkspacesComponent from './WorkspacesComponent';
 
 interface IProps {
     Pservers : {},
@@ -18,22 +18,22 @@ interface IState {
     showWorkspaceSidebar : boolean,
 }
 
-class ServerComponent extends React.Component<IProps,IState> {
+class ServerComponent extends React.Component<IProps, IState> {
 
-    constructor(props : IProps){
+    constructor(props : IProps) {
         super(props)
         this.state = {
             showWorkspaceSidebar: false
           };
         this.handleClick = this.handleClick.bind(this);
-        this.toggleWorkspaceSidebar=this.toggleWorkspaceSidebar.bind(this);
+        this.toggleWorkspaceSidebar = this.toggleWorkspaceSidebar.bind(this);
     }
 
-    public render(){
+    public render() {
 
         let showWorkspaces;
         const componentstyle = {
-            "width" : "20px",
+            'width' : '20px',
         }
         if (this.state.showWorkspaceSidebar === true)
         showWorkspaces = (
@@ -45,12 +45,13 @@ class ServerComponent extends React.Component<IProps,IState> {
         />
         )
         else
-          showWorkspaces= <div/>
+          showWorkspaces = <div />
 
     return(
         <div className="flex-item">
         <div>
-            <span className="server-name">{this.props.server.url}</span>&nbsp;<Button className="fa fa-angle-down" key={this.props.server.url} onClick={this.handleClick}/>
+            <span className="server-name">{this.props.server.url}</span>&nbsp;
+            <Button className="fa fa-angle-down" key={this.props.server.url} onClick={this.handleClick} />
         </div>
         <div style={componentstyle} >
             {showWorkspaces}
@@ -59,7 +60,7 @@ class ServerComponent extends React.Component<IProps,IState> {
     )
     }
 
-    private handleClick(){
+    private handleClick() {
         this.props.PsetCurrentServer(this.props.server.url)
         this.toggleWorkspaceSidebar();
 
@@ -68,7 +69,7 @@ class ServerComponent extends React.Component<IProps,IState> {
     private toggleWorkspaceSidebar() {
         this.setState(
           {
-            showWorkspaceSidebar: !this.state.showWorkspaceSidebar
+            showWorkspaceSidebar : !this.state.showWorkspaceSidebar
           }
         );
       }

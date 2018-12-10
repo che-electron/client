@@ -35,6 +35,6 @@ it('sets the selected server as the current server', () => {
     const expectedAction = {
     type: ActionTypes.SET_CURRENT_SERVER,
     }
-    expect(Action.setCurrentServer("che.openshift.io").type).toEqual(expectedAction.type)
+    expect(Action.setCurrentServer('che.openshift.io').type).toEqual(expectedAction.type)
 })
 })

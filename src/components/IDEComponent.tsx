@@ -1,5 +1,5 @@
-import * as React from "react";
-import "./IDEComponent.css";
+import * as React from 'react';
+import './IDEComponent.css';
 
 interface IProps {
     PcurrentServer : string
@@ -13,7 +13,7 @@ interface IProps {
 
 class IDEComponent extends React.Component<IProps> {
 
-    constructor(props : IProps){
+    constructor(props : IProps) {
         super(props)
         this.state = {}
         // this.getIDELink = this.getIDELink.bind(this)
@@ -22,7 +22,7 @@ class IDEComponent extends React.Component<IProps> {
     // public getIDELink(){
     // }
 
-    public render(){
+    public render() {
         // this.getIDELink()
         return (
             <div className="IDEComponent">

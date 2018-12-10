@@ -13,13 +13,13 @@ export interface IStateLogin {
 export const initialState : IStateLogin = {
     CheAuthenticatedOnce : false,
     CheServersLogin : {},
-    OSIOAuthError : "",
+    OSIOAuthError : '',
     OSIOAuthenticated : false,
     OSIOFetching : false,
 }
 
-export function loginReducer(state: IStateLogin = initialState, action: Action){
-    switch(action.type){
+export function loginReducer(state : IStateLogin = initialState, action : Action) {
+    switch (action.type) {
         // OSIO : check -> request -> check
         // OSIO ACTIONS
 
@@ -41,7 +41,7 @@ export function loginReducer(state: IStateLogin = initialState, action: Action){
             }
         }
 
-        case ActionTypes.CHE_LOGIN_VALIDATE :{
+        case ActionTypes.CHE_LOGIN_VALIDATE : {
 
             const cheServersAuthenticated = { ...state.CheServersLogin }
             cheServersAuthenticated[action.payload.CheURL] = {}
@@ -51,7 +51,7 @@ export function loginReducer(state: IStateLogin = initialState, action: Action){
             }
         }
 
-        default:{
+        default : {
             return state
         }
     }

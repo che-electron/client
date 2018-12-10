@@ -13,22 +13,22 @@ interface IProps {
 
 class Appcomponent extends React.Component<IProps> {
 
-    constructor(props: IProps){
+    constructor(props: IProps) {
         super(props)
     }
 
-    public componentWillMount(){
+    public componentWillMount() {
         this.props.PcheckOSIOLogin()
         this.props.PcheckCheLogin()
     }
 
-    public renderLogin(){
+    public renderLogin() {
         return (
             <LoginContainer />
         )
     }
 
-    public renderDashboard(){
+    public renderDashboard() {
         return (
             <DashboardContainer />
         )

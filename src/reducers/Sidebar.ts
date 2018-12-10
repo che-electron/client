@@ -11,7 +11,7 @@
 export const initialState= {
     sidebarIsActive : true,
     wkspsFetchError : false,
-    wkspsIsFetching :false,
+    wkspsIsFetching : false,
     workspaces : [],
 }
 

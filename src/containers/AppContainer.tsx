@@ -6,7 +6,7 @@ import { IState } from '../reducers'
 
 import { connect } from 'react-redux'
 
-import AppComponent from "../components/AppComponent"
+import AppComponent from '../components/AppComponent'
 
 const mapStateToProps = (state: IState) => ({
   PCheAuthenticatedOnce : getCheAuthenticatedOnce(state),
@@ -18,4 +18,4 @@ const mapDispatchToProps = {
   PcheckOSIOLogin : checkOSIOLogin,
 }
 
-export default connect<any,any,any>(mapStateToProps, mapDispatchToProps)(AppComponent)
+export default connect<any, any, any>(mapStateToProps, mapDispatchToProps)(AppComponent)

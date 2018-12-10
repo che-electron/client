@@ -27,6 +27,20 @@
     "ter-no-irregular-whitespace": [true],
     "curly": [true, "as-needed"],
     "no-consecutive-blank-lines": true,
-    "no-trailing-whitespace": true
+    "no-trailing-whitespace": true,
+    "jsx-space-before-trailing-slash": true,
+    "whitespace":[true, "check-branch", "check-operator", "check-typecast", "check-separator", "check-type", "check-preblock"],
+    "max-line-length": [true, 130],
+    "quotemark": [true, "single", "jsx-double"],
+    "eofline": true,
+    "indent": [true, "spaces", 2],
+    "space-before-function-paren": [true, {
+      "anonymous": "never",
+      "asyncArrow": "always",
+      "constructor": "never",
+      "method": "never",
+      "named": "never"
+    }],
+    "space-within-parens": [true, 0]
   }
 }

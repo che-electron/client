@@ -1,9 +1,8 @@
-import * as React from "react";
-import "./DashboardComponent.css";
-import IDEComponent from "./IDEComponent";
-import SidebarComponent from "./SidebarComponent";
-
+import * as React from 'react';
 import LoginContainer from '../containers/LoginContainer';
+import './DashboardComponent.css';
+import IDEComponent from './IDEComponent';
+import SidebarComponent from './SidebarComponent';
 
 // import Server from '../models/Server';
 
@@ -27,11 +26,11 @@ interface IProps {
 
 class DashboardComponent extends React.Component<IProps> {
 
-    constructor(props : any ){
+    constructor(props : any) {
         super(props)
     }
 
-    public renderIDEorLogin(){
+    public renderIDEorLogin() {
         if (this.props.PIDELoginIsActive)
             return (
                 <LoginContainer />
@@ -46,7 +45,7 @@ class DashboardComponent extends React.Component<IProps> {
             )
     }
 
-    public render(){
+    public render() {
         return (
             <div className="Dashboard">
                 <SidebarComponent

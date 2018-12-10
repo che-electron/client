@@ -2,10 +2,13 @@ import { IState } from '../reducers';
 
 import { connect } from 'react-redux';
 
-import DashboardComponent from "../components/DashboardComponent";
+import DashboardComponent from '../components/DashboardComponent';
 
-import { populateServers, setCurrentServer, setCurrentWorkspacePerServer, toggleIDELogin, toggleSidebar, updateWorkspacesList } from '../actions/Dashboard';
-import { getCurrentServer, getCurrentWorkspacePerServer, getIDELoginIsActive, getServers, getSidebarIsActive } from '../selectors/Dashboard';
+import { populateServers, setCurrentServer, setCurrentWorkspacePerServer,
+    toggleIDELogin, toggleSidebar, updateWorkspacesList } from '../actions/Dashboard';
+
+import { getCurrentServer, getCurrentWorkspacePerServer, getIDELoginIsActive,
+    getServers, getSidebarIsActive } from '../selectors/Dashboard';
 
 const mapStateToProps = (state: IState) => ({
     // IDE
@@ -37,4 +40,4 @@ const mapDispatchToProps = {
     PtoggleIDELogin : toggleIDELogin,
 }
 
-export default connect<any,any,any>(mapStateToProps, mapDispatchToProps)(DashboardComponent)
+export default connect<any, any, any>(mapStateToProps, mapDispatchToProps)(DashboardComponent)

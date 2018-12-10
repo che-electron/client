@@ -16,14 +16,14 @@ export interface IStateDashboard {
 
 export const initialState : IStateDashboard = {
     IDELoginIsActive : false,
-    currentServer : "",
+    currentServer : '',
     currentWorkspacePerServer : {},
     servers : {},
     sidebarIsActive : true,
 }
 
-export function dashboardReducer(state: IStateDashboard = initialState, action: Action){
-    switch(action.type){
+export function dashboardReducer(state: IStateDashboard = initialState, action: Action) {
+    switch (action.type) {
         case ActionTypes.TOGGLE_SIDEBAR: {
             return {...state, sidebarIsActive : !state.sidebarIsActive
             }
@@ -55,7 +55,7 @@ export function dashboardReducer(state: IStateDashboard = initialState, action: 
             }
         }
 
-        case ActionTypes.REQUEST_WORKSPACES :{
+        case ActionTypes.REQUEST_WORKSPACES : {
             const serversState = { ...state.servers }
             serversState[action.payload.server].fetchingWorkspaces = action.payload.fetchingWorkspaces
 

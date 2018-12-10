@@ -1,4 +1,4 @@
-import { combineReducers } from "redux"
+import { combineReducers } from 'redux'
 
 import * as Dashboard from './Dashboard'
 import * as Login from './Login';

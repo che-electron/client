@@ -2,7 +2,7 @@ import { IState } from '../reducers'
 
 import { connect } from 'react-redux'
 
-import LoginComponent from "../components/LoginComponent"
+import LoginComponent from '../components/LoginComponent'
 
 import { requestCheLogin, requestOSIOLogin, } from '../actions/Login'
 
@@ -17,4 +17,4 @@ const mapDispatchToProps = {
     PrequestOSIOLogin : requestOSIOLogin,
 }
 
-export default connect<any,any,any>(mapStateToProps, mapDispatchToProps)(LoginComponent)
+export default connect<any, any, any>(mapStateToProps, mapDispatchToProps)(LoginComponent)
