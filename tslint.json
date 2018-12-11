@@ -25,7 +25,7 @@
     ],
     "object-curly-spacing": [true, "always", {"arraysInObjects": false, "objectsInObjects": false}],
     "ter-no-irregular-whitespace": [true],
-    "curly": [true, "as-needed"],
+    "curly": true,
     "no-consecutive-blank-lines": true,
     "no-trailing-whitespace": true,
     "jsx-space-before-trailing-slash": true,
@@ -41,6 +41,7 @@
       "method": "never",
       "named": "never"
     }],
+    "one-line": [true, "check-catch", "check-finally", "check-else"],
     "space-within-parens": [true, 0]
   }
 }

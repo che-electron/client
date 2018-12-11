@@ -12,8 +12,9 @@ localStorage = localStorage;
 if (!window.localStorage) {
     global.console.log('Local storage doesnt exist');
     localStorage = new MockLocalStorage;
-} else
+} else {
     localStorage = window.localStorage;
+}
 
 export enum ActionTypes {
 
@@ -124,13 +125,16 @@ export function populateServers() {
     const localStorageServersAuth = JSON.parse(localStorage.getItem('Servers') || '{}')
     const mapLocalStoragetoModel : {} = {}
 
-    for (const key in localStorageServersAuth)
-        if (localStorageServersAuth.hasOwnProperty(key))
-            if (localStorageServersAuth[key] !== '' || localStorageServersAuth[key] !== null)
+    for (const key in localStorageServersAuth) {
+        if (localStorageServersAuth.hasOwnProperty(key)) {
+            if (localStorageServersAuth[key] !== '' || localStorageServersAuth[key] !== null) {
                     mapLocalStoragetoModel[key] = {
                     authToken : localStorageServersAuth[key],
                     url : key
                 }
+            }
+        }
+    }
     return {
         payload : {
             servers : mapLocalStoragetoModel

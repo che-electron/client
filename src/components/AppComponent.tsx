@@ -35,10 +35,11 @@ class Appcomponent extends React.Component<IProps> {
     }
 
     public render() {
-        if (this.props.POSIOAuthenticated || this.props.PCheAuthenticatedOnce)
+        if (this.props.POSIOAuthenticated || this.props.PCheAuthenticatedOnce) {
             return this.renderDashboard()
-        else
+        } else {
             return this.renderLogin()
+        }
     }
 }
 

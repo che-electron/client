@@ -49,9 +49,9 @@ class SidebarComponent extends React.Component<IProps, IState> {
             'height' : '960px',
             'width' : '11%',
         }
-        if (!this.props.PsidebarIsActive)
+        if (!this.props.PsidebarIsActive) {
             style.width = '3%'
-
+        }
         return style
     }
 
@@ -77,8 +77,9 @@ class SidebarComponent extends React.Component<IProps, IState> {
                     </div>
                 </div>
             )
-        } else
+        } else {
             return <div />
+        }
     }
 
     public isOpen() {

@@ -35,7 +35,7 @@ class ServerComponent extends React.Component<IProps, IState> {
         const componentstyle = {
             'width' : '20px',
         }
-        if (this.state.showWorkspaceSidebar === true)
+        if (this.state.showWorkspaceSidebar === true) {
         showWorkspaces = (
         <WorkspacesComponent
             PcurrentServer = {this.props.PcurrentServer}
@@ -44,8 +44,9 @@ class ServerComponent extends React.Component<IProps, IState> {
             PsetCurrentWorkspace = {this.props.PsetCurrentWorkspace}
         />
         )
-        else
+        } else {
           showWorkspaces = <div />
+        }
 
     return(
         <div className="flex-item">

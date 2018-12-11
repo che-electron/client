@@ -57,16 +57,16 @@ class LoginComponent extends React.Component<IProps, IState> {
 
     public handleOSIO() {
 
-        if (this.url === '' && this.state.cheServerURL === '')
+        if (this.url === '' && this.state.cheServerURL === '') {
             alert('Enter Che Server URL to connect');
-
-        if (this.url !== 'che.openshift.io')
+        }
+        if (this.url !== 'che.openshift.io') {
             this.setState({
             cheServerURL : this.url
             })
-
-        else
+        } else {
             this.props.PrequestOSIOLogin();
+        }
 }
 
     public handleLogin(event : any) {
@@ -78,7 +78,7 @@ class LoginComponent extends React.Component<IProps, IState> {
     public render() {
 
         let loginCredentials;
-        if (this.state.cheServerURL === '' || this.state.cheServerURL === 'che.openshift.io')
+        if (this.state.cheServerURL === '' || this.state.cheServerURL === 'che.openshift.io') {
            loginCredentials = (
            <div><h3 className="title-connect">Connect to a Che Server </h3>
             <br /><br /><input
@@ -88,7 +88,7 @@ class LoginComponent extends React.Component<IProps, IState> {
                 placeholder="Che Server URL"
             />
             <button onClick={this.handleOSIO} className="connect">Connect</button></div>)
-        else if (this.state.cheServerURL !== 'che.openshift.io')
+        } else if (this.state.cheServerURL !== 'che.openshift.io') {
             loginCredentials = (
             <div><h3 className="title-connect">Authenticate Yourself</h3>
             <br /><br /><input
@@ -111,6 +111,7 @@ class LoginComponent extends React.Component<IProps, IState> {
             />
             <button onClick={this.handleLogin} className="login">Login</button>
             </div>)
+        }
         return (
                 <div className="container">
                     <div className="card">
