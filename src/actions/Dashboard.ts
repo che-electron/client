@@ -126,7 +126,7 @@ export function populateServers() {
 
     for (const key in localStorageServersAuth)
         if (localStorageServersAuth.hasOwnProperty(key))
-            if (localStorageServersAuth[key] !== '' || localStorageServersAuth[key] !== null)
+            if (localStorageServersAuth[key])
                     mapLocalStoragetoModel[key] = {
                     authToken : localStorageServersAuth[key],
                     url : key

@@ -5,7 +5,7 @@ import './LoginComponent.css';
 interface IProps {
     Pauthenticated : boolean,
     PrequestCheLogin : (cheServerURL : string, cheUserName : string, chePassword : string) => void,
-    PrequestOSIOLogin : () => void
+    PrequestOSIOLogin : (cheServerURL : string) => void
 }
 
 interface IState {
@@ -28,34 +28,43 @@ class LoginComponent extends React.Component<IProps, IState> {
         this.handlePasswordChange = this.handlePasswordChange.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
         this.handleOSIO = this.handleOSIO.bind(this)
+        this.handleURLChange = this.handleURLChange.bind(this)
         this.url = '';
     }
 
     public handleCheServerURLChange(event : any) {
-        this.url = event.target.value;
+        this.url = (event.target.value).trim();
+    }
+
+    public handleURLChange(event : any) {
+        this.setState({
+            cheServerURL : (event.target.value).trim()
+        })
     }
 
     public handleUsernameChange(event : any) {
         this.setState({
-            cheUserName : event.target.value
+            cheUserName : (event.target.value).trim()
         })
     }
 
     public handlePasswordChange(event : any) {
         this.setState({
-            chePassword : event.target.value
+            chePassword : (event.target.value).trim()
         })
     }
 
     public handleOSIO() {
 
-        if (this.url === 'che.openshift.io' || this.url === 'che.prod-preview.openshift.io')
-            this.props.PrequestOSIOLogin();
+        if (this.url === 'che.openshift.io' || this.state.cheServerURL === 'che.openshift.io')
+            this.props.PrequestOSIOLogin('che.openshift.io');
+        else if (this.url === 'che.prod-preview.openshift.io' || this.state.cheServerURL === 'che.prod-preview.openshift.io')
+            this.props.PrequestOSIOLogin('che.prod-preview.openshift.io');
         else
             this.setState({
                 cheServerURL : this.url
             })
-}
+    }
 
     public handleLogin(event : any) {
         // this.props.PrequestCheLogin("che-eclipse-che.192.168.42.205.nip.io","admin","admin")
@@ -83,7 +92,7 @@ class LoginComponent extends React.Component<IProps, IState> {
             <div><h3 className="title-connect">Authenticate Yourself</h3>
             <br /><br /><input
                 type="text"
-                onChange={this.handleCheServerURLChange}
+                onChange={this.handleURLChange}
                 className="text-box"
                 placeholder="Che Server URL"
             />

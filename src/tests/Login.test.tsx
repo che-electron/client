@@ -9,7 +9,7 @@ describe('Login Actions', () => {
        const expectedAction = {
            type: ActionTypes.OSIO_LOGIN_REQUEST,
          }
-        expect(Action.requestOSIOLogin().type).toEqual(expectedAction.type)
+        expect(Action.requestOSIOLogin('che.openshift.io').type).toEqual(expectedAction.type)
      })
 
     it('Checks if user is logged in through OSIO', () => {

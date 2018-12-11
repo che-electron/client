@@ -1,10 +1,11 @@
+import * as jwtDecode from 'jwt-decode';
 import { Dispatch } from 'redux';
-
 import { populateServers } from '../actions/Dashboard';
 import MockLocalStorage from '../mocks/MockLocalStorage';
 
 // import * as Keycloak from 'keycloak-js'
 const osioCheURL = 'che.openshift.io';
+const osioPPCheURL = 'che.prod-preview.openshift.io';
 
  let localStorage : any
 localStorage = localStorage;
@@ -88,7 +89,7 @@ export function checkOSIOLogin() {
     // let existsInURL : boolean
     const localStorageCheServers = JSON.parse(localStorage.getItem('Servers') || '{}')
     global.console.log(localStorageCheServers)
-    if (localStorageCheServers[osioCheURL] !== '' && localStorageCheServers[osioCheURL])
+    if (localStorageCheServers[osioCheURL] && localStorageCheServers[osioPPCheURL])
         return {
             payload : {
                 OSIOAuthenticated : true
@@ -107,9 +108,12 @@ export function checkOSIOLogin() {
         }
 
         let key = 'access_token'
-        if (result[key] !== '' && result[key]) {
+        if (result[key]) {
             // existsInURL = true
-            localStorageCheServers[osioCheURL] = result[key]
+            const authURL = jwtDecode(result[key])['allowed-origins'][0];
+            global.console.log('auth ' + authURL);
+            const cheURL = (authURL === 'https://auth.openshift.io') ? 'che.openshift.io' : 'che.prod-preview.openshift.io'
+            localStorageCheServers[cheURL] = result[key]
             localStorage.setItem('Servers', JSON.stringify(localStorageCheServers))
             return {
                 payload : {
@@ -119,6 +123,7 @@ export function checkOSIOLogin() {
             }
         }else {
             localStorageCheServers[osioCheURL] = ''
+            localStorageCheServers[osioPPCheURL] = ''
             localStorage.setItem('Servers', JSON.stringify(localStorageCheServers))
         }
         key = 'error'
@@ -144,7 +149,7 @@ export function checkCheLogin() {
     const localStorageCheServers : {} = JSON.parse(localStorage.getItem('Servers') || '{}')
     let auths : number = 0
     for (const key in localStorageCheServers)
-        if (key !== osioCheURL && Object.keys(localStorageCheServers).length > 1
+        if (key !== osioCheURL && key !== osioPPCheURL && Object.keys(localStorageCheServers).length > 1
         && JSON.stringify(localStorageCheServers[key]) !== '{}')
             auths++
     if (auths > 0)
@@ -169,10 +174,11 @@ export function checkCheLogin() {
     * If the check is done 3 times then dispatch LOGIN_FAILURE_ACTION else dispatch the LOGIN_SUCCESS_ACTION
 */
 
-export function requestOSIOLogin() {
+export function requestOSIOLogin(cheServerURL : string) {
     const redirectUrl = encodeURIComponent(window.location.href);
     // setLocalStorageForCheServer(cheServerURL,body.access_token)
-    const authApiUrl = `https://auth.openshift.io/api/`
+    const authApiUrl = (cheServerURL === 'che.openshift.io') ?
+    (`https://auth.openshift.io/api/`) : ('https://auth.prod-preview.openshift.io/api/')
     const loginUrl = `${authApiUrl}login?redirect=${redirectUrl}`
     window.location.href = loginUrl
     return {
@@ -206,12 +212,12 @@ function cheLoginRequest(cheServerURL : string, cheUserName : string, chePasswor
     // const cheAuthEndpoint= "che.keycloak.auth_server_url"
     const cheTokenEndpoint = 'che.keycloak.token.endpoint'
     // const cheRealm = "che.keycloak.realm"
-    if (cheServerURL !== ' ' || !cheServerURL)
+    if (cheServerURL)
         fetch('http://' + cheServerURL + '/api/keycloak/settings').then((response) => {
             return response.json()
         }).then((data) => {
             keycloakSettings = data
-            if (keycloakSettings !== {} || keycloakSettings != null)
+            if (keycloakSettings)
                 fetch(keycloakSettings[cheTokenEndpoint], {
                     body : 'grant_type=password&client_id=' + keycloakSettings[cheClientId] +
                     '&username=' + cheUserName + '&password=' + chePassword + '',
