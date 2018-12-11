@@ -25,42 +25,35 @@ export const initialState : IStateDashboard = {
 export function dashboardReducer(state: IStateDashboard = initialState, action: Action) {
     switch (action.type) {
         case ActionTypes.TOGGLE_SIDEBAR: {
-            return {...state, sidebarIsActive : !state.sidebarIsActive
-            }
+            return { ...state, sidebarIsActive : !state.sidebarIsActive }
         }
 
         case ActionTypes.TOGGLE_IDE_LOGIN: {
-            return {...state, IDELoginIsActive : !state.IDELoginIsActive
-            }
+            return { ...state, IDELoginIsActive : !state.IDELoginIsActive }
         }
 
         case ActionTypes.POPULATE_SERVERS: {
-            return {...state, servers : action.payload.servers
-            }
+            return { ...state, servers : action.payload.servers }
         }
 
         case ActionTypes.SET_CURRENT_SERVER: {
-            return {...state, currentServer : action.payload.currentServer
-            }
+            return { ...state, currentServer : action.payload.currentServer }
         }
 
         case ActionTypes.SET_CURRENT_WORKSPACEPERSERVER : {
 
             const obj = { ...state.currentWorkspacePerServer }
             obj[state.currentServer] = action.payload.workspace
-
             global.console.log(obj)
 
-            return { ...state, currentWorkspacePerServer : { ...obj }
-            }
+            return { ...state, currentWorkspacePerServer : { ...obj }}
         }
 
         case ActionTypes.REQUEST_WORKSPACES : {
             const serversState = { ...state.servers }
             serversState[action.payload.server].fetchingWorkspaces = action.payload.fetchingWorkspaces
 
-            return { ...state, servers : { ...serversState }
-            }
+            return { ...state, servers : { ...serversState }}
         }
 
         case ActionTypes.RECEIVE_WORKSPACES : {
@@ -69,8 +62,7 @@ export function dashboardReducer(state: IStateDashboard = initialState, action: 
             serversState[action.payload.server].fetchingWorkspaces = action.payload.fetchingWorkspaces
             serversState[action.payload.server].workspaces = action.payload.workspaces
 
-            return { ...state, servers : { ...serversState }
-            }
+            return { ...state, servers : { ...serversState }}
         }
 
         case ActionTypes.REQUEST_WORKSPACES_FAILED : {
@@ -78,8 +70,7 @@ export function dashboardReducer(state: IStateDashboard = initialState, action: 
             serversState[action.payload.server].fetchingWorkspaces = action.payload.fetchingWorkspaces
             serversState[action.payload.server].fetchError = action.payload.error
 
-            return { ...state, servers : { ...serversState }
-            }
+            return { ...state, servers : { ...serversState }}
         }
 
         default : {

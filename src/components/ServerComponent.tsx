@@ -35,7 +35,7 @@ class ServerComponent extends React.Component<IProps, IState> {
         const componentstyle = {
             'width' : '20px',
         }
-        if (this.state.showWorkspaceSidebar === true) {
+        if (this.state.showWorkspaceSidebar) {
         showWorkspaces = (
         <WorkspacesComponent
             PcurrentServer = {this.props.PcurrentServer}

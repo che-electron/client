@@ -28,44 +28,33 @@ class LoginComponent extends React.Component<IProps, IState> {
         this.handlePasswordChange = this.handlePasswordChange.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
         this.handleOSIO = this.handleOSIO.bind(this)
-        this.handleURLChange = this.handleURLChange.bind(this)
         this.url = '';
     }
 
     public handleCheServerURLChange(event : any) {
-        this.url = (event.target.value).trim();
-    }
-
-    public handleURLChange(event : any) {
-        this.url = (event.target.value).trim();
-        this.setState({
-            cheServerURL : this.url
-        })
+        this.url = event.target.value;
     }
 
     public handleUsernameChange(event : any) {
         this.setState({
-            cheUserName : (event.target.value).trim()
+            cheUserName : event.target.value
         })
     }
 
     public handlePasswordChange(event : any) {
         this.setState({
-            chePassword : (event.target.value).trim()
+            chePassword : event.target.value
         })
     }
 
     public handleOSIO() {
 
-        if (this.url === '' && this.state.cheServerURL === '') {
-            alert('Enter Che Server URL to connect');
-        }
-        if (this.url !== 'che.openshift.io') {
-            this.setState({
-            cheServerURL : this.url
-            })
-        } else {
+        if (this.url === 'che.openshift.io') {
             this.props.PrequestOSIOLogin();
+        } else {
+            this.setState({
+                cheServerURL : this.url
+            })
         }
 }
 
@@ -93,7 +82,7 @@ class LoginComponent extends React.Component<IProps, IState> {
             <div><h3 className="title-connect">Authenticate Yourself</h3>
             <br /><br /><input
                 type="text"
-                onChange={this.handleURLChange}
+                onChange={this.handleCheServerURLChange}
                 className="text-box"
                 placeholder="Che Server URL"
             />

@@ -29,9 +29,9 @@ class ServersComponent extends React.Component<IProps> {
 
     public renderServers() {
         const servers = []
-        if (this.props.Pservers !== null) {
+        if (this.props.Pservers) {
             for (const key in this.props.Pservers) {
-            if ((this.props.Pservers[key] !== '') && this.props.Pservers.hasOwnProperty(key)) {
+            if (this.props.Pservers.hasOwnProperty(key) && this.props.Pservers[key]) {
                 servers.push(
                 <ServerComponent
                     PsetCurrentWorkspace ={ this.props.PsetCurrentWorkspace}
