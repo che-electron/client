@@ -48,12 +48,11 @@ class WorkspacesComponent extends React.Component<IProps, IState> {
         const workpsaceComponentsPerServer = {}
 
         for (const key in this.props.Pservers) {
-            if (this.props.Pservers.hasOwnProperty(key)) {
+            if (this.props.Pservers.hasOwnProperty(key) && this.props.Pservers[key]) {
                 const workspaceComponents = []
-                if (this.props.Pservers[this.props.PcurrentServer] !== undefined &&
-                    this.props.Pservers[this.props.PcurrentServer] !== undefined) {
+                if (this.props.Pservers[this.props.PcurrentServer] && this.props.Pservers[this.props.PcurrentServer]) {
                     for (const workspace in this.props.Pservers[this.props.PcurrentServer].workspaces) {
-                        if (workspace !== null) {
+                        if (workspace) {
                             workspaceComponents.push(
                                 <WorkspaceComponent
                                     PcurrentServer={this.props.PcurrentServer}

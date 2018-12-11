@@ -7,7 +7,6 @@ import { Dispatch } from 'redux';
 import MockLocalStorage from '../mocks/MockLocalStorage';
 
 let localStorage : any;
-localStorage = localStorage;
 
 if (!window.localStorage) {
     global.console.log('Local storage doesnt exist');
@@ -126,15 +125,13 @@ export function populateServers() {
     const mapLocalStoragetoModel : {} = {}
 
     for (const key in localStorageServersAuth) {
-        if (localStorageServersAuth.hasOwnProperty(key)) {
-            if (localStorageServersAuth[key] !== '' || localStorageServersAuth[key] !== null) {
+        if (localStorageServersAuth.hasOwnProperty(key) && localStorageServersAuth[key]) {
                     mapLocalStoragetoModel[key] = {
                     authToken : localStorageServersAuth[key],
                     url : key
                 }
             }
         }
-    }
     return {
         payload : {
             servers : mapLocalStoragetoModel

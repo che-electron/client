@@ -24,21 +24,18 @@ export function loginReducer(state : IStateLogin = initialState, action : Action
         // OSIO ACTIONS
 
         case ActionTypes.CHECK_OSIO_LOGIN: {
-            return {...state, OSIOAuthenticated : action.payload.OSIOAuthenticated,
-            }
+            return { ...state, OSIOAuthenticated : action.payload.OSIOAuthenticated }
         }
 
         case ActionTypes.OSIO_LOGIN_REQUEST: {
-            return {...state, OSIOFetching : action.payload.OSIOFetching,
-            }
+            return { ...state, OSIOFetching : action.payload.OSIOFetching }
         }
 
         // CHE : check -> request(validate) -> check
         // CHE ACTIONS
 
         case ActionTypes.CHECK_CHE_LOGIN : {
-            return {...state, CheAuthenticatedOnce : action.payload.CheAuthenticatedOnce,
-            }
+            return { ...state, CheAuthenticatedOnce : action.payload.CheAuthenticatedOnce }
         }
 
         case ActionTypes.CHE_LOGIN_VALIDATE : {
@@ -47,8 +44,7 @@ export function loginReducer(state : IStateLogin = initialState, action : Action
             cheServersAuthenticated[action.payload.CheURL] = {}
             cheServersAuthenticated[action.payload.CheURL].authenticated = action.payload.CheAuthenticated
 
-            return { ...state, CheServersLogin : { ...cheServersAuthenticated }
-            }
+            return { ...state, CheServersLogin : { ...cheServersAuthenticated }}
         }
 
         default : {

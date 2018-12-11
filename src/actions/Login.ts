@@ -1,5 +1,4 @@
 import { Dispatch } from 'redux';
-
 import { populateServers } from '../actions/Dashboard';
 import MockLocalStorage from '../mocks/MockLocalStorage';
 
@@ -88,7 +87,7 @@ export function checkOSIOLogin() {
     // let existsInURL : boolean
     const localStorageCheServers = JSON.parse(localStorage.getItem('Servers') || '{}')
     global.console.log(localStorageCheServers)
-    if (localStorageCheServers[osioCheURL] !== '' && localStorageCheServers[osioCheURL]) {
+    if (localStorageCheServers.hasOwnProperty(osioCheURL) && localStorageCheServers[osioCheURL]) {
         return {
             payload : {
                 OSIOAuthenticated : true
@@ -107,7 +106,7 @@ export function checkOSIOLogin() {
         }
 
         let key = 'access_token'
-        if (result[key] !== '' && result[key]) {
+        if (result.hasOwnProperty(key) && result[key]) {
             // existsInURL = true
             localStorageCheServers[osioCheURL] = result[key]
             localStorage.setItem('Servers', JSON.stringify(localStorageCheServers))
@@ -150,6 +149,7 @@ export function checkCheLogin() {
             auths++
         }
     }
+
     if (auths > 0) {
         return {
             payload : {
@@ -210,12 +210,12 @@ function cheLoginRequest(cheServerURL : string, cheUserName : string, chePasswor
     // const cheAuthEndpoint= "che.keycloak.auth_server_url"
     const cheTokenEndpoint = 'che.keycloak.token.endpoint'
     // const cheRealm = "che.keycloak.realm"
-    if (cheServerURL !== ' ' || !cheServerURL) {
+    if (cheServerURL) {
         fetch('http://' + cheServerURL + '/api/keycloak/settings').then((response) => {
             return response.json()
         }).then((data) => {
             keycloakSettings = data
-            if (keycloakSettings !== {} || keycloakSettings != null) {
+            if (keycloakSettings) {
                 fetch(keycloakSettings[cheTokenEndpoint], {
                     body : 'grant_type=password&client_id=' + keycloakSettings[cheClientId] +
                     '&username=' + cheUserName + '&password=' + chePassword + '',
