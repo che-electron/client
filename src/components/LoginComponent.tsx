@@ -28,33 +28,45 @@ class LoginComponent extends React.Component<IProps, IState> {
         this.handlePasswordChange = this.handlePasswordChange.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
         this.handleOSIO = this.handleOSIO.bind(this)
+        this.handleURLChange = this.handleURLChange.bind(this)
         this.url = '';
     }
 
     public handleCheServerURLChange(event : any) {
-        this.url = event.target.value;
+        this.url = (event.target.value).trim();
+    }
+
+    public handleURLChange(event : any) {
+        this.url = (event.target.value).trim();
+        this.setState({
+            cheServerURL : this.url
+        })
     }
 
     public handleUsernameChange(event : any) {
         this.setState({
-            cheUserName : event.target.value
+            cheUserName : (event.target.value).trim()
         })
     }
 
     public handlePasswordChange(event : any) {
         this.setState({
-            chePassword : event.target.value
+            chePassword : (event.target.value).trim()
         })
     }
 
     public handleOSIO() {
 
-        if (this.url === 'che.openshift.io' || this.url === 'che.prod-preview.openshift.io')
-            this.props.PrequestOSIOLogin();
-        else
+        if (this.url === '' && this.state.cheServerURL === '')
+            alert('Enter Che Server URL to connect');
+
+        if (this.url !== 'che.openshift.io')
             this.setState({
-                cheServerURL : this.url
+            cheServerURL : this.url
             })
+
+        else
+            this.props.PrequestOSIOLogin();
 }
 
     public handleLogin(event : any) {
@@ -66,8 +78,7 @@ class LoginComponent extends React.Component<IProps, IState> {
     public render() {
 
         let loginCredentials;
-        if (this.state.cheServerURL === '' || this.state.cheServerURL === 'che.openshift.io'
-        || this.state.cheServerURL === 'che.prod-preview.openshift.io')
+        if (this.state.cheServerURL === '' || this.state.cheServerURL === 'che.openshift.io')
            loginCredentials = (
            <div><h3 className="title-connect">Connect to a Che Server </h3>
             <br /><br /><input
@@ -77,13 +88,12 @@ class LoginComponent extends React.Component<IProps, IState> {
                 placeholder="Che Server URL"
             />
             <button onClick={this.handleOSIO} className="connect">Connect</button></div>)
-        else if (this.state.cheServerURL !== 'che.openshift.io' &&
-        this.state.cheServerURL !== 'che.prod-preview.openshift.io')
+        else if (this.state.cheServerURL !== 'che.openshift.io')
             loginCredentials = (
             <div><h3 className="title-connect">Authenticate Yourself</h3>
             <br /><br /><input
                 type="text"
-                onChange={this.handleCheServerURLChange}
+                onChange={this.handleURLChange}
                 className="text-box"
                 placeholder="Che Server URL"
             />
