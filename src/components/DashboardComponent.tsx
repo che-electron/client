@@ -1,14 +1,12 @@
-import * as React from "react";
-import "./DashboardComponent.css";
-import IDEComponent from "./IDEComponent";
-import SidebarComponent from "./SidebarComponent";
-
+import * as React from 'react';
 import LoginContainer from '../containers/LoginContainer';
+import './DashboardComponent.css';
+import IDEComponent from './IDEComponent';
+import SidebarComponent from './SidebarComponent';
 
 // import Server from '../models/Server';
 
-
-interface IProps { 
+interface IProps {
     // Sidebar
     PsidebarIsActive : boolean
     PtoggleSidebar : () => void
@@ -24,22 +22,22 @@ interface IProps {
     // IDE|Login Toggle
     PIDELoginIsActive : boolean
     PtoggleIDELogin : () => void
-} 
+}
 
 class DashboardComponent extends React.Component<IProps> {
 
-    constructor(props : any ){
+    constructor(props : any) {
         super(props)
     }
 
-    public renderIDEorLogin(){
-        if (this.props.PIDELoginIsActive){
+    public renderIDEorLogin() {
+        if (this.props.PIDELoginIsActive) {
             return (
                 <LoginContainer />
             )
-        }else{
+        } else {
             return (
-                <IDEComponent 
+                <IDEComponent
                     Pservers = {this.props.Pservers}
                     PcurrentServer={this.props.PcurrentServer}
                     PcurrentWorkspacePerServer={this.props.PcurrentWorkspacePerserver}
@@ -48,10 +46,10 @@ class DashboardComponent extends React.Component<IProps> {
         }
     }
 
-    public render(){
+    public render() {
         return (
             <div className="Dashboard">
-                <SidebarComponent 
+                <SidebarComponent
                     // Sidebar
                     PsidebarIsActive={this.props.PsidebarIsActive}
                     PtoggleSidebar={this.props.PtoggleSidebar}

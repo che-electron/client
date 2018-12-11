@@ -7,14 +7,13 @@ import { Dispatch } from 'redux';
 import MockLocalStorage from '../mocks/MockLocalStorage';
 
 let localStorage : any;
-localStorage =  localStorage;
+localStorage = localStorage;
 
-if(!window.localStorage)
-{
-    global.console.log("Local storage doesnt exist");
-    localStorage =new MockLocalStorage;
-} else{
-    localStorage=window.localStorage;
+if (!window.localStorage) {
+    global.console.log('Local storage doesnt exist');
+    localStorage = new MockLocalStorage;
+} else {
+    localStorage = window.localStorage;
 }
 
 export enum ActionTypes {
@@ -44,7 +43,6 @@ export enum ActionTypes {
 export interface IToggleSidebarAction {
     type : ActionTypes.TOGGLE_SIDEBAR,
 }
-
 
 export interface IToggleIDELoginAction {
     type : ActionTypes.TOGGLE_IDE_LOGIN,
@@ -97,7 +95,6 @@ export interface IReceiveWorkpsacesAction {
     }
 }
 
-
 export interface IRequestWorkpsacesFailureAction {
     type : ActionTypes.REQUEST_WORKSPACES_FAILED,
     payload : {
@@ -107,39 +104,37 @@ export interface IRequestWorkpsacesFailureAction {
     }
 }
 
-
 /*
     Actions as funcitons
 */
 
-export function toggleSidebar(){
+export function toggleSidebar() {
     return {
         type : ActionTypes.TOGGLE_SIDEBAR,
     }
 }
 
-export function toggleIDELogin(){
+export function toggleIDELogin() {
     return {
         type : ActionTypes.TOGGLE_IDE_LOGIN,
     }
 }
 
-export function populateServers(){
+export function populateServers() {
 
-    const localStorageServersAuth = JSON.parse(localStorage.getItem("Servers") || "{}")
+    const localStorageServersAuth = JSON.parse(localStorage.getItem('Servers') || '{}')
     const mapLocalStoragetoModel : {} = {}
 
     for (const key in localStorageServersAuth) {
         if (localStorageServersAuth.hasOwnProperty(key)) {
-            if (localStorageServersAuth[key] !== "" || localStorageServersAuth[key] !== null ){     
+            if (localStorageServersAuth[key] !== '' || localStorageServersAuth[key] !== null) {
                     mapLocalStoragetoModel[key] = {
                     authToken : localStorageServersAuth[key],
                     url : key
-                } 
+                }
             }
         }
     }
-
     return {
         payload : {
             servers : mapLocalStoragetoModel
@@ -157,7 +152,7 @@ export function setCurrentServer(server : string) {
     }
 }
 
-export function requestWorkspaces(currentServer : string){
+export function requestWorkspaces(currentServer : string) {
     return {
         payload : {
             fetchingWorkspaces : true,
@@ -167,7 +162,7 @@ export function requestWorkspaces(currentServer : string){
     }
 }
 
-export function receiveWorkspaces(currentServer : string, fetchedWorkspaces :[]){
+export function receiveWorkspaces(currentServer : string, fetchedWorkspaces : []) {
     return {
         payload : {
             fetchingWorkspaces : false,
@@ -178,7 +173,7 @@ export function receiveWorkspaces(currentServer : string, fetchedWorkspaces :[])
     }
 }
 
-export function requestWorkspacesFailed(currentServer : string, errorCaught : any){
+export function requestWorkspacesFailed(currentServer : string, errorCaught : any) {
     return {
         payload : {
             error : errorCaught,
@@ -189,25 +184,26 @@ export function requestWorkspacesFailed(currentServer : string, errorCaught : an
     }
 }
 
-export function updateWorkspacesList(){
+export function updateWorkspacesList() {
     return (dispatch : Dispatch<any>, getState : any) => {
         const state = getState()
 
-        if (state.dashboard.currentServer !== "" && state.dashboard.currentServer !== null && state.dashboard.currentServer !== ""){    
-            global.console.log("Update Workspaces List for Server "+state.dashboard.currentServer)
+        if (state.dashboard.currentServer) {
+            global.console.log('Update Workspaces List for Server ' + state.dashboard.currentServer)
             dispatch(requestWorkspaces(state.dashboard.currentServer))
-            fetch("http://"+state.dashboard.currentServer+"/api/workspace?token="+state.dashboard.servers[state.dashboard.currentServer].authToken).then((resp : any)=>{
+            fetch('http://' + state.dashboard.currentServer + '/api/workspace?token=' +
+            state.dashboard.servers[ state.dashboard.currentServer ].authToken).then((resp : any) => {
                 return resp.json()
             }).then((body : any) => {
-                dispatch(receiveWorkspaces(state.dashboard.currentServer,body))
+                dispatch(receiveWorkspaces(state.dashboard.currentServer, body))
             }).catch((error : any) => {
-                dispatch(requestWorkspacesFailed(state.dashboard.currentServer,error))
+                dispatch(requestWorkspacesFailed(state.dashboard.currentServer, error))
             })
         }
     }
 }
 
-export function setCurrentWorkspacePerServer(wksp : string){
+export function setCurrentWorkspacePerServer(wksp : string) {
     return {
         payload : {
             workspace : wksp
@@ -216,6 +212,6 @@ export function setCurrentWorkspacePerServer(wksp : string){
     }
 }
 
-export type Action = IToggleSidebarAction | IPopulateServersAction | IToggleIDELoginAction | 
-    ISetCurrentServerAction | ISetCurrentWorkspacePerServerAction | IRequestWorkpsacesAction | 
-    IReceiveWorkpsacesAction | IRequestWorkpsacesFailureAction 
+export type Action = IToggleSidebarAction | IPopulateServersAction | IToggleIDELoginAction | ISetCurrentServerAction
+                    | ISetCurrentWorkspacePerServerAction | IRequestWorkpsacesAction | IReceiveWorkpsacesAction
+                    | IRequestWorkpsacesFailureAction

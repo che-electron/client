@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 // import { MenuItem} from "react-contextmenu";
 
@@ -6,7 +6,7 @@ import * as React from "react";
 
 import { Button } from 'reactstrap'
 
-import "./WorkspaceComponent.css";
+import './WorkspaceComponent.css';
 
 interface IProps {
     PworkspaceInfo : any
@@ -16,20 +16,20 @@ interface IProps {
 
 class WorkspaceComponent extends React.Component<IProps> {
 
-    constructor(props : IProps){
+    constructor(props : IProps) {
         super(props);
         // }
         // this.reloadWorkspace=this.reloadWorkspace.bind(this);
         // this.startWorkspace=this.startWorkspace.bind(this);
         // this.stopWorkspace=this.stopWorkspace.bind(this);
-        this.handleButton=this.handleButton.bind(this);
+        this.handleButton = this.handleButton.bind(this);
     }
 
-    public handleButton(){
+    public handleButton() {
         this.props.PsetCurrentWorkspace(this.props.PworkspaceInfo.id)
     }
 
-    public render(){ 
+    public render() {
         return (
             <Button className="WorkspaceComponent" onClick={this.handleButton}>
                 {this.props.PworkspaceInfo.id}
@@ -43,11 +43,9 @@ class WorkspaceComponent extends React.Component<IProps> {
 //                 'Content-Type': 'application/json',
 //        }),
 //        method: 'POST'
-          
 //         }).then((response) => response.json())
 //         .then((data) => {
 //             this.setState({status:data.status});
-         
 //     });
 // }
 
@@ -57,9 +55,7 @@ class WorkspaceComponent extends React.Component<IProps> {
 //                     'Content-Type': 'application/json',
 //         }),
 //         method: 'DELETE'
-            
 //             }).then(() =>
-       
 //             this.setState({status:'STOPPING'})
 //       );
 //     }
@@ -70,12 +66,12 @@ class WorkspaceComponent extends React.Component<IProps> {
 //                 'Content-Type': 'application/json',
 //        }),
 //        method: 'GET'
-          
 //         }).then((response) => response.json())
-//         .then((data) => 
+//         .then((data) =>
 //               this.setState(
 //                   {status:data.status})
-//             );  
+//             );
 //     };
 }
+
 export default WorkspaceComponent;

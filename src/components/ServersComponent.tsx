@@ -1,6 +1,6 @@
-import * as React from "react";
-import {Icon} from "react-fa"; 
-import "./ServersComponent.css";
+import * as React from 'react';
+import { Icon } from 'react-fa';
+import './ServersComponent.css';
 
 // import Server from '../models/Server'
 import ServerComponent from './ServerComponent';
@@ -19,28 +19,32 @@ interface IProps {
 
 class ServersComponent extends React.Component<IProps> {
 
-    constructor(props : IProps){
+    constructor(props : IProps) {
         super(props)
     }
 
-    public componentWillMount(){
+    public componentWillMount() {
         this.props.PpopulateServers()
     }
 
-    public renderServers(){
+    public renderServers() {
         const servers = []
-        if(this.props.Pservers !== null)
-        {
+        if (this.props.Pservers !== null) {
             for (const key in this.props.Pservers) {
-            if ((this.props.Pservers[key] !== "") && this.props.Pservers.hasOwnProperty(key)) {
+            if ((this.props.Pservers[key] !== '') && this.props.Pservers.hasOwnProperty(key)) {
                 servers.push(
-                    <ServerComponent PsetCurrentWorkspace ={ this.props.PsetCurrentWorkspace} Pservers={this.props.Pservers} server={this.props.Pservers[key]} key={key} PsetCurrentServer={this.props.PsetCurrentServer} PcurrentServer = {this.props.PcurrentServer}
-                    PupdateWorkspacesList = {this.props.PupdateWorkspacesList}/>
-                    )                
-                }
+                <ServerComponent
+                    PsetCurrentWorkspace ={ this.props.PsetCurrentWorkspace}
+                    Pservers={this.props.Pservers}
+                    server={this.props.Pservers[key]}
+                    key={key}
+                    PsetCurrentServer={this.props.PsetCurrentServer}
+                    PcurrentServer = {this.props.PcurrentServer}
+                    PupdateWorkspacesList = {this.props.PupdateWorkspacesList}
+                />)
             }
         }
-
+    }
         return (
             <div className="servers-list">
                 {servers}
@@ -48,7 +52,7 @@ class ServersComponent extends React.Component<IProps> {
         )
     }
 
-    public render(){
+    public render() {
 
         return (
             <div className="servers-component" >
@@ -58,7 +62,7 @@ class ServersComponent extends React.Component<IProps> {
                 </button>
                 {this.renderServers()}
             </div>
-        )  
+        )
     }
 }
 

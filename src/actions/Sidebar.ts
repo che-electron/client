@@ -1,13 +1,12 @@
 // import Workspace from '../models/Workspace';
 
-// // import { Dispatch } from "redux";
+// import { Dispatch } from "redux";
 
-// // import { IStateSidebar } from '../reducers/Sidebar';
+// import { IStateSidebar } from '../reducers/Sidebar';
 
-// // import IWorkspace from '../models/Workspace';
+// import IWorkspace from '../models/Workspace';
 
-// // import { workspaceApi, workspacesApi} from '../apicalls/GetApi';
-
+// import { workspaceApi, workspacesApi} from '../apicalls/GetApi';
 
 export enum ActionTypes {
     TOGGLE_SIDEBAR = '[sidebar] TOGGLE_SIDEBAR',
@@ -29,7 +28,6 @@ export enum ActionTypes {
 // /*
 //     Actions as funcitons
 // */
-
 
 // export function toggleSidebar(){
 //     return {
@@ -73,25 +71,20 @@ export enum ActionTypes {
 //         dispatch(requestWorkspaces())
 //         fetch(workspacesApi()).then((response) => {
 //             return response.json()
-//         }).then(data => {     
+//         }).then(data => {
 //             const workspaces : Workspace[] = []
-            
 //             data.map((workspace:any,index:number)=>{
-            
 //                 fetch(workspaceApi(workspace.id)).then((response) => {
 //                     return response.json()
-//                 }).then(wdata => {     
-                     
-//             dispatch(receiveIde(wdata.links.ide));    
+//                 }).then(wdata => {
+//             dispatch(receiveIde(wdata.links.ide));
 //             const wksp : Workspace = {
 //                     id : workspace.id,
 //                     name : workspace.config.name,
 //                     status : workspace.status,
 //                     url : wdata.links.ide,
-                                
 //                 }
 //                 workspaces[index] = wksp
-                
 //             })
 //             })
 //             return workspaces
@@ -106,12 +99,11 @@ export enum ActionTypes {
 //         if (shouldFetchWorkspaces(getState())){
 //             return dispatch(makeRequestWorkspaces())
 //         } else {
-//             return 
+//             return
 //         }
 
 //     }
 // }
 
-
-// export type Action = IToggleSidebarAction | IFetchWorkpsacesAction // | IRequestWorkpsacesAction | IReceiveWorkpsacesAction
-
+// export type Action = IToggleSidebarAction | IFetchWorkpsacesAction
+// | IRequestWorkpsacesAction | IReceiveWorkpsacesAction

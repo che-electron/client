@@ -1,4 +1,4 @@
-import {ActionTypes}  from '../actions/Dashboard';
+import { ActionTypes } from '../actions/Dashboard';
 
 import * as Action from '../actions/Dashboard';
 
@@ -7,7 +7,7 @@ describe('Dashboard Actions', () => {
 // Dashboard Actions
 
 it('Collapses or Expands the Sidebar', () => {
-    
+
     const expectedAction = {
     type: ActionTypes.TOGGLE_SIDEBAR,
     }
@@ -15,7 +15,7 @@ it('Collapses or Expands the Sidebar', () => {
 })
 
 it('User is trying to add a che server', () => {
-    
+
     const expectedAction = {
     type: ActionTypes.TOGGLE_IDE_LOGIN,
     }
@@ -23,7 +23,7 @@ it('User is trying to add a che server', () => {
 })
 
 it('lists down all the authenticated servers on the Sidebar', () => {
-    
+
     const expectedAction = {
     type: ActionTypes.POPULATE_SERVERS,
     }
@@ -31,12 +31,10 @@ it('lists down all the authenticated servers on the Sidebar', () => {
 })
 
 it('sets the selected server as the current server', () => {
-    
+
     const expectedAction = {
     type: ActionTypes.SET_CURRENT_SERVER,
     }
-    expect(Action.setCurrentServer("che.openshift.io").type).toEqual(expectedAction.type)
+    expect(Action.setCurrentServer('che.openshift.io').type).toEqual(expectedAction.type)
 })
-
 })
-

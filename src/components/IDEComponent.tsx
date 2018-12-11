@@ -1,9 +1,9 @@
-import * as React from "react";
-import "./IDEComponent.css";
+import * as React from 'react';
+import './IDEComponent.css';
 
 interface IProps {
     PcurrentServer : string
-    PcurrentWorkspacePerServer : {} 
+    PcurrentWorkspacePerServer : {}
     Pservers : {}
 }
 
@@ -13,17 +13,16 @@ interface IProps {
 
 class IDEComponent extends React.Component<IProps> {
 
-    constructor(props : IProps){
+    constructor(props : IProps) {
         super(props)
         this.state = {}
         // this.getIDELink = this.getIDELink.bind(this)
     }
 
     // public getIDELink(){
-        
     // }
 
-    public render(){       
+    public render() {
         // this.getIDELink()
         return (
             <div className="IDEComponent">

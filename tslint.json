@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:latest", "tslint-react", "tslint-eslint-rules", "tslint-config-prettier"],
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
@@ -7,5 +7,41 @@
       "coverage/lcov-report/*.js"
     ]
   },
-  "ordered-imports": false
+  "rules" : {
+    "prettier" : true,
+    "no-duplicate-imports": false,
+    "jsx-boolean-value" : true,
+    "jsx-wrap-multiline" : true,
+    "jsx-alignment" : true,
+    "jsx-curly-spacing" : true,
+    "jsx-equals-spacing" : true,
+    "trailing-comma": true,
+    "no-extra-semi": true,
+    "array-bracket-spacing": [true, "never"],
+    "block-spacing": [true, "always"],
+    "no-multi-spaces": [true,{
+        "exceptions": { "PropertyAssignment": false, "OtherException": "true|false" }
+      }
+    ],
+    "object-curly-spacing": [true, "always", {"arraysInObjects": false, "objectsInObjects": false}],
+    "ter-no-irregular-whitespace": [true],
+    "curly": true,
+    "no-consecutive-blank-lines": true,
+    "no-trailing-whitespace": true,
+    "jsx-space-before-trailing-slash": true,
+    "whitespace":[true, "check-branch", "check-operator", "check-typecast", "check-separator", "check-type", "check-preblock"],
+    "max-line-length": [true, 130],
+    "quotemark": [true, "single", "jsx-double"],
+    "eofline": true,
+    "indent": [true, "spaces", 2],
+    "space-before-function-paren": [true, {
+      "anonymous": "never",
+      "asyncArrow": "always",
+      "constructor": "never",
+      "method": "never",
+      "named": "never"
+    }],
+    "one-line": [true, "check-catch", "check-finally", "check-else"],
+    "space-within-parens": [true, 0]
+  }
 }
