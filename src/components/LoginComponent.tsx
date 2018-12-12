@@ -32,18 +32,18 @@ class LoginComponent extends React.Component<IProps, IState> {
     }
 
     public handleCheServerURLChange(event : any) {
-        this.url = event.target.value;
+        this.url = (event.target.value).trim();
     }
 
     public handleUsernameChange(event : any) {
         this.setState({
-            cheUserName : event.target.value
+            cheUserName : (event.target.value).trim()
         })
     }
 
     public handlePasswordChange(event : any) {
         this.setState({
-            chePassword : event.target.value
+            chePassword : (event.target.value).trim()
         })
     }
 

@@ -9,7 +9,6 @@ import WorkspaceComponent from './WorkspaceComponent';
 interface IProps {
     // Pworkspaces : IWorkspace[],
     PcurrentServer : string,
-    PupdateWorkspacesList : (server : string) => void,
     Pservers : {},
     PsetCurrentWorkspace : (workspaceID : string) => void,
 }
@@ -89,9 +88,8 @@ class WorkspacesComponent extends React.Component<IProps, IState> {
     public render() {
         return (
             <div className="workspaces-list" >
-                <h4>Workspaces</h4>
-                {this.renderWorkspaces()[this.props.PcurrentServer]}
                 <button className="create-workspace"><Icon name="plus" />&nbsp;&nbsp;Create Workspace</button>
+                {this.renderWorkspaces()[this.props.PcurrentServer]}
             </div>
         )
     }
