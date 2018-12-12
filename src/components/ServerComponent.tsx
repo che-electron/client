@@ -10,7 +10,7 @@ interface IProps {
     key : string
     PcurrentServer : string,
     PupdateWorkspacesList : (server : string) => void,
-    // PsetCurrentWorkspace : (workspace : string) => void,
+    PsetCurrentWorkspace : (workspace : string) => void,
 }
 
 interface IState {
