@@ -9,7 +9,7 @@ import { Button } from 'reactstrap'
 import './WorkspaceComponent.css';
 
 interface IProps {
-    PworkspaceInfo : any
+    PworkspaceId : string
     PcurrentServer : string
     PsetCurrentWorkspace : (workspaceID : string) => void
 }
@@ -26,13 +26,13 @@ class WorkspaceComponent extends React.Component<IProps> {
     }
 
     public handleButton() {
-        this.props.PsetCurrentWorkspace(this.props.PworkspaceInfo.id)
+        this.props.PsetCurrentWorkspace(this.props.PworkspaceId)
     }
 
     public render() {
         return (
-            <Button className="WorkspaceComponent" onClick={this.handleButton} key={this.props.PworkspaceInfo.id}>
-                {this.props.PworkspaceInfo.id}
+            <Button className="WorkspaceComponent" onClick={this.handleButton} key={this.props.PworkspaceId}>
+                {this.props.PworkspaceId}
             </Button>
         )
     }

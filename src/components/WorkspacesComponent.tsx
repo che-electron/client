@@ -39,7 +39,7 @@ class WorkspacesComponent extends React.Component<IProps, IState> {
                             workspaceComponents.push(
                                 <WorkspaceComponent
                                     PcurrentServer={this.props.PcurrentServer}
-                                    PworkspaceInfo={this.props.Pservers[this.props.PcurrentServer].workspaces[workspace]}
+                                    PworkspaceId={this.props.Pservers[this.props.PcurrentServer].workspaces[workspace].id}
                                     PsetCurrentWorkspace = {this.props.PsetCurrentWorkspace}
                                     key=""
                                 />)
@@ -90,8 +90,8 @@ class WorkspacesComponent extends React.Component<IProps, IState> {
         return (
             <div className="workspaces-list" >
                 <h4>Workspaces</h4>
-                {this.renderWorkspaces()[this.props.PcurrentServer]}
                 <button className="create-workspace"><Icon name="plus" />&nbsp;&nbsp;Create Workspace</button>
+                {this.renderWorkspaces()[this.props.PcurrentServer]}
             </div>
         )
     }
