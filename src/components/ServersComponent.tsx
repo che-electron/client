@@ -33,7 +33,7 @@ class ServersComponent extends React.Component<IProps> {
                 if (this.props.Pservers.hasOwnProperty(key) && this.props.Pservers[key]) {
                     servers.push(
                     <ServerComponent
-                        PsetCurrentWorkspace ={ this.props.PsetCurrentWorkspace}
+                        // PsetCurrentWorkspace ={ this.props.PsetCurrentWorkspace}
                         Pservers={this.props.Pservers}
                         server={this.props.Pservers[key]}
                         key={key}

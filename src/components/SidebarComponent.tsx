@@ -47,7 +47,7 @@ class SidebarComponent extends React.Component<IProps, IState> {
         const style = {
             'display' : 'flex',
             'height' : '960px',
-            'width' : '13%',
+            'width' : '15%',
         }
         if (!this.props.PsidebarIsActive) {
             style.width = '3%'
@@ -59,7 +59,7 @@ class SidebarComponent extends React.Component<IProps, IState> {
         if (this.props.PsidebarIsActive) {
             const componentstyle = {
                 'height' : '960px',
-                'width' : '13%',
+                'width' : '15%',
             }
             return(
                 <div style={componentstyle} className="server-sidebar">

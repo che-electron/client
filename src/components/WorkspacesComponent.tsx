@@ -2,7 +2,7 @@ import * as React from 'react';
 // import { ContextMenu, ContextMenuTrigger} from "react-contextmenu";
 import { Icon } from 'react-fa';
 // import IWorkspace from "../models/Workspace";
-import './WorkspacesComponent.css';
+import './WorkspaceComponent.css';
 
 import WorkspaceComponent from './WorkspaceComponent';
 
@@ -32,7 +32,8 @@ class WorkspacesComponent extends React.Component<IProps, IState> {
         for (const key in this.props.Pservers) {
             if (this.props.Pservers.hasOwnProperty(key) && this.props.Pservers[key]) {
                 const workspaceComponents = []
-                if (this.props.Pservers[this.props.PcurrentServer] && this.props.Pservers[this.props.PcurrentServer]) {
+                if (this.props.Pservers.hasOwnProperty(this.props.PcurrentServer) &&
+                this.props.Pservers[this.props.PcurrentServer]) {
                     for (const workspace in this.props.Pservers[this.props.PcurrentServer].workspaces) {
                         if (workspace) {
                             workspaceComponents.push(
