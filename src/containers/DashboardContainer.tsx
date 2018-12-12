@@ -13,6 +13,7 @@ import { getCurrentServer, getCurrentWorkspacePerServer, getIDELoginIsActive,
 const mapStateToProps = (state: IState) => ({
     // IDE
     PIDELoginIsActive : getIDELoginIsActive(state),
+
     // Servers
     PcurrentServer : getCurrentServer(state),
     Pservers : getServers(state),

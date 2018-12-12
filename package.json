@@ -38,7 +38,6 @@
     "eject": "react-scripts-ts eject",
     "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\""
   },
-
   "devDependencies": {
     "@types/jest": "^23.3.5",
     "@types/node": "^10.11.7",

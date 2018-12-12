@@ -31,7 +31,7 @@ class WorkspaceComponent extends React.Component<IProps> {
 
     public render() {
         return (
-            <Button className="WorkspaceComponent" onClick={this.handleButton}>
+            <Button className="WorkspaceComponent" onClick={this.handleButton} key={this.props.PworkspaceInfo.id}>
                 {this.props.PworkspaceInfo.id}
             </Button>
         )

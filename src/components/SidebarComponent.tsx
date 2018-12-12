@@ -2,7 +2,7 @@ import * as React from 'react';
 // import IWorkspace from "../models/Workspace";
 import ServersComponent from './ServersComponent';
 import './SidebarComponent.css';
-// import WorkspacesComponent from "./WorkspacesComponent";
+import WorkspacesComponent from './WorkspacesComponent';
 
 // import Server from '../models/Server'
 
@@ -73,6 +73,12 @@ class SidebarComponent extends React.Component<IProps, IState> {
                             Pservers={this.props.Pservers}
                             PcurrentServer = {this.props.PcurrentServer}
                             PupdateWorkspacesList = {this.props.PupdateWorkspacesList}
+                        />
+                        <WorkspacesComponent
+                            PcurrentServer = {this.props.PcurrentServer}
+                            PupdateWorkspacesList = {this.props.PupdateWorkspacesList}
+                            Pservers = {this.props.Pservers}
+                            PsetCurrentWorkspace = {this.props.PsetCurrentWorkspace}
                         />
                     </div>
                 </div>

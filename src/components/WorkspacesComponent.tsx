@@ -25,24 +25,7 @@ class WorkspacesComponent extends React.Component<IProps, IState> {
         this.state = {
             workspacesPerServers : {}
         }
-        this.handleUpdateWorkspacesList = this.handleUpdateWorkspacesList.bind(this)
     }
-
-    public componentDidMount() {
-        this.props.PupdateWorkspacesList(this.props.PcurrentServer)
-    }
-
-    public handleUpdateWorkspacesList() {
-        this.props.PupdateWorkspacesList(this.props.PcurrentServer)
-    }
-
-    /* public checkServer() {
-        if (this.props.PcurrentServer === ""){
-            return <h5> Please choose a Server </h5>
-        }else{
-            return <div />
-        }
-    } */
 
     public renderWorkspaces() {
         const workpsaceComponentsPerServer = {}

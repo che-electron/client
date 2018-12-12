@@ -16,17 +16,12 @@ class IDEComponent extends React.Component<IProps> {
     constructor(props : IProps) {
         super(props)
         this.state = {}
-        // this.getIDELink = this.getIDELink.bind(this)
     }
 
-    // public getIDELink(){
-    // }
-
     public render() {
-        // this.getIDELink()
         return (
             <div className="IDEComponent">
-                IDE
+                IDE {JSON.stringify(this.props.PcurrentServer)} {JSON.stringify(this.props.PcurrentWorkspacePerServer)}
             </div>
         )
     }
