@@ -29,7 +29,6 @@ export enum ActionTypes {
     // Current Server and Workspace selected
     SET_CURRENT_SERVER = '[dashboard_server] SET_CURRENT_SERVER',
     SET_CURRENT_WORKSPACEPERSERVER = '[dashboard_workspace] SET_CURRENT_WORKSPACEPERSERVER',
-    // Workspace Agent
 
     // IDE Actions
     TOGGLE_IDE_LOGIN = '[dashboard_IDE_login] SERVER_LOGIN'
@@ -102,7 +101,6 @@ export interface IRequestWorkpsacesFailureAction {
         error : string
     }
 }
-
 /*
     Actions as funcitons
 */
@@ -159,7 +157,7 @@ export function requestWorkspaces(currentServer : string) {
     }
 }
 
-export function receiveWorkspaces(currentServer : string, fetchedWorkspaces : []) {
+export function receiveWorkspaces(currentServer : string, fetchedWorkspaces : {}) {
     return {
         payload : {
             fetchingWorkspaces : false,
@@ -191,7 +189,17 @@ export function updateWorkspacesList() {
             fetch('http://' + state.dashboard.currentServer + '/api/workspace?token=' +
             state.dashboard.servers[ state.dashboard.currentServer ].authToken).then((resp : any) => {
                 return resp.json()
-            }).then((body : any) => {
+            }).then(async (body : any) => {
+                for (const i in body) {
+                    if (i) {
+                        fetch('http://' + state.dashboard.currentServer + '/api/workspace/' + body[i].id + '?token=' +
+                        state.dashboard.servers[ state.dashboard.currentServer ].authToken).then((resp : any) => {
+                            return resp.json()
+                        }).then((linkBody) => {
+                            body[i].ideLink = linkBody.links.ide
+                        })
+                    }
+                }
                 dispatch(receiveWorkspaces(state.dashboard.currentServer, body))
             }).catch((error : any) => {
                 dispatch(requestWorkspacesFailed(state.dashboard.currentServer, error))

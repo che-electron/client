@@ -38,18 +38,15 @@ class WorkspacesComponent extends React.Component<IProps, IState> {
                         if (workspace) {
                             workspaceComponents.push(
                                 <WorkspaceComponent
+                                    key={this.props.Pservers[this.props.PcurrentServer].workspaces[workspace].id}
                                     PcurrentServer={this.props.PcurrentServer}
                                     PworkspaceInfo={this.props.Pservers[this.props.PcurrentServer].workspaces[workspace]}
                                     PsetCurrentWorkspace = {this.props.PsetCurrentWorkspace}
-                                    key=""
+                                    Pservers = {this.props.Pservers }
                                 />)
                             }
                         }
                 workpsaceComponentsPerServer[key] = workspaceComponents
-                // if (this.props.Pservers[key] !== "" && this.props.Pservers !== null ){
-                //     workpsaceComponentsPerServer.push(
-                //     )
-                // }
             }
         }
     }
@@ -89,6 +86,7 @@ class WorkspacesComponent extends React.Component<IProps, IState> {
     public render() {
         return (
             <div className="workspaces-list" >
+                <h4>Workspaces</h4>
                 <button className="create-workspace"><Icon name="plus" />&nbsp;&nbsp;Create Workspace</button>
                 {this.renderWorkspaces()[this.props.PcurrentServer]}
             </div>

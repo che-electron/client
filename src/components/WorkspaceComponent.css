@@ -20,17 +20,6 @@
       border: none;
       cursor: pointer;
     }
-  
-.workspace-name{
-    background-color: #282e44;
-    color: white;
-    border: none;
-    font-size: 15px;
-    margin : 5px 0; 
-    text-align : left;
-    width : 100%;
-    cursor: pointer;
-    }
 
 .workspaces-list{
     color : white;
@@ -51,20 +40,28 @@
     }
 
 
-    .WorkspaceComponent:hover {
-    background-color: #3b629c;
-    color: white;
-    }
-    
-    .WorkspaceComponent{
-        background-color: #282e44;
-        font-size: 14px;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-    
+.WorkspaceComponent:hover {
+background-color: #3b629c;
+color: white;
+}
 
+.WorkspaceComponent{
+    background-color: #282e44;
+    font-size: 14px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.start-workspace-button:hover {
+    background-color: #758aaa;
+    color: white;
+}
+
+.stop-workspace-button:hover {
+    background-color: #758aaa;
+    color: white;
+}
     
 .update-workspaces-list:hover {
     background-color: #3b629c;
@@ -77,8 +74,7 @@
     color: white;
     border: none;
     cursor: pointer;
-}
-    
+}    
 
 .workspace-status-running {
     height: 8px;
@@ -91,7 +87,7 @@
 .workspace-status-stopped {
     height: 8px;
     width: 8px;
-    border: 1px solid white;
+    border: 0.5px solid white;
     background-color: #282e44;
     border-radius: 50%;
     display: inline-block;
@@ -124,6 +120,7 @@
 .bm-item:hover {
     background-color: #3b629c;
     color: "white";
+    cursor: pointer;
 }
 
 .bm-item{

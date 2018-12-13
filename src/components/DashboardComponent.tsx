@@ -15,7 +15,7 @@ interface IProps {
     Pservers : {}
     PcurrentServer : string
     PsetCurrentServer : (server : string) => void
-    PcurrentWorkspacePerserver : {}
+    PcurrentWorkspacePerServer : {}
     // Workspaces
     PupdateWorkspacesList : (server : string) => void
     PsetCurrentWorkspace : (workspaceID : string) => void
@@ -40,7 +40,7 @@ class DashboardComponent extends React.Component<IProps> {
                 <IDEComponent
                     Pservers = {this.props.Pservers}
                     PcurrentServer={this.props.PcurrentServer}
-                    PcurrentWorkspacePerServer={this.props.PcurrentWorkspacePerserver}
+                    PcurrentWorkspacePerServer={this.props.PcurrentWorkspacePerServer}
                 />
             )
         }
