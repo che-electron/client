@@ -31,6 +31,7 @@ class DashboardComponent extends React.Component<IProps> {
     }
 
     public renderIDEorLogin() {
+
         if (this.props.PIDELoginIsActive) {
             return (
                 <LoginContainer />
@@ -42,6 +43,7 @@ class DashboardComponent extends React.Component<IProps> {
                     PcurrentServer={this.props.PcurrentServer}
                     PcurrentWorkspacePerServer={this.props.PcurrentWorkspacePerServer}
                 />
+
             )
         }
     }

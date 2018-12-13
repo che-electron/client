@@ -27,6 +27,9 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
         this.startWorkspace = this.startWorkspace.bind(this);
         this.stopWorkspace = this.stopWorkspace.bind(this);
         this.handleButton = this.handleButton.bind(this);
+        this.state = {
+            WorkspaceStatus : this.props.PworkspaceInfo.status
+  };
     }
 
     public handleButton() {
@@ -36,21 +39,21 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
     public render() {
 
         let showIcon;
-        if (this.props.PworkspaceInfo.status === 'STOPPED') {
+        if (this.state.WorkspaceStatus === 'STOPPED') {
             showIcon = <i className="workspace-status-stopped" />;
-        }else if (this.props.PworkspaceInfo.status === 'RUNNING') {
+        }else if (this.state.WorkspaceStatus === 'RUNNING') {
             showIcon = <i className="workspace-status-running" />
-        }else if (this.props.PworkspaceInfo.status === 'ERROR') {
+        }else if (this.state.WorkspaceStatus === 'ERROR') {
             showIcon = <i className="workspace-status-error" />
-        }else if (this.props.PworkspaceInfo.status === 'STOPPING' ||
-        this.props.PworkspaceInfo.status === 'STARTING') {
+        }else if (this.state.WorkspaceStatus === 'STOPPING' ||
+        this.state.WorkspaceStatus === 'STARTING') {
             showIcon = (
                 <span><Icon spin ={true} name="refresh" />
                 { this.reloadWorkspace() }
                 </span>)
 }
-            const workspaceStatus = (this.props.PworkspaceInfo.status === 'STOPPED' ||
-            this.props.PworkspaceInfo.status === 'STOPPING') ?
+            const workspaceStatus = (this.state.WorkspaceStatus === 'STOPPED' ||
+            this.state.WorkspaceStatus === 'STOPPING') ?
             (
             <MenuItem>
             <button className="start-workspace-button" onClick={this.startWorkspace}>
@@ -87,7 +90,7 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
     }
 
      private startWorkspace() {
-         fetch('http://' + this.props.PcurrentServer + '/api/workspace' + this.props.PworkspaceInfo.id + '/runtime?token=' +
+         /* fetch('http://' + this.props.PcurrentServer + '/api/workspace' + this.props.PworkspaceInfo.id + '/runtime?token=' +
          this.props.Pservers[ this.props.PcurrentServer ].authToken, {
              headers: new Headers({
                  'Content-Type' : 'application/json',
@@ -97,7 +100,8 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
          .then((data) => {
              global.console.log('Start Workspace')
              this.setState({ WorkspaceStatus : data.status });
-     });
+     }); */
+     global.console.log('Start workspace');
 
  }
 

@@ -7,10 +7,6 @@ interface IProps {
     Pservers : {}
 }
 
-// interface IState {
-
-// }
-
 class IDEComponent extends React.Component<IProps> {
 
     constructor(props : IProps) {
@@ -18,41 +14,23 @@ class IDEComponent extends React.Component<IProps> {
         this.state = {}
     }
 
-    public getIDELink() {
-
-        let ideLink = ''
-
-        if (this.props.Pservers) {
-            if (this.props.PcurrentServer) {
-                if (this.props.PcurrentWorkspacePerServer) {
-                    if (this.props.Pservers[this.props.PcurrentServer] &&
-                        this.props.PcurrentWorkspacePerServer[this.props.PcurrentServer]) {
+    public render() {
+        let url = '';
+        if (this.props.PcurrentServer && this.props.Pservers[this.props.PcurrentServer] &&
+            this.props.PcurrentWorkspacePerServer[this.props.PcurrentServer]) {
                         const workspaceInUse = this.props.PcurrentWorkspacePerServer[this.props.PcurrentServer]
-                        global.console.log(workspaceInUse + '" using "')
-                        let workspace : any
-                        for (workspace in this.props.Pservers[this.props.PcurrentServer].workspaces) {
-                            if (workspaceInUse === this.props.Pservers[this.props.PcurrentServer].workspaces[workspace].id) {
-                                ideLink = this.props.Pservers[this.props.PcurrentServer].workspaces[workspace].ideLink
-                            }
+                        if (workspaceInUse) {
+                            url = workspaceInUse.ideLink
                         }
                     }
-                }
-            }
-        }
-
-        return ideLink
-    }
-
-    public render() {
-
         const style = {
             height : '100%',
             width : '100%',
         }
-
+        global.console.log(url);
         return (
             <div className="IDEComponent">
-                <iframe style={style} src={this.getIDELink()} />
+                <iframe style={style} src={url} />
             </div>
         )
     }
