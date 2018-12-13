@@ -28,22 +28,30 @@ class LoginComponent extends React.Component<IProps, IState> {
         this.handlePasswordChange = this.handlePasswordChange.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
         this.handleOSIO = this.handleOSIO.bind(this)
+        this.handleURLChange = this.handleURLChange.bind(this)
         this.url = '';
     }
 
     public handleCheServerURLChange(event : any) {
-        this.url = event.target.value;
+        this.url = (event.target.value).trim();
     }
 
     public handleUsernameChange(event : any) {
         this.setState({
-            cheUserName : event.target.value
+            cheUserName : (event.target.value).trim()
         })
     }
 
     public handlePasswordChange(event : any) {
         this.setState({
-            chePassword : event.target.value
+            chePassword : (event.target.value).trim()
+        })
+    }
+
+    public handleURLChange(event : any) {
+        this.url = (event.target.value).trim();
+        this.setState({
+            cheServerURL : this.url
         })
     }
 
@@ -82,7 +90,7 @@ class LoginComponent extends React.Component<IProps, IState> {
             <div><h3 className="title-connect">Authenticate Yourself</h3>
             <br /><br /><input
                 type="text"
-                onChange={this.handleCheServerURLChange}
+                onChange={this.handleURLChange}
                 className="text-box"
                 placeholder="Che Server URL"
             />
