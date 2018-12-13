@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ContextMenu, ContextMenuTrigger, MenuItem } from 'react-contextmenu';
+import { ContextMenu, ContextMenuTrigger } from 'react-contextmenu';
 
 import { Icon } from 'react-fa';
 
@@ -52,21 +52,17 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
                 { this.reloadWorkspace() }
                 </span>)
 }
-            const workspaceStatus = (this.state.WorkspaceStatus === 'STOPPED' ||
+            const onRightClickButton = (this.state.WorkspaceStatus === 'STOPPED' ||
             this.state.WorkspaceStatus === 'STOPPING') ?
             (
-            <MenuItem>
-            <button className="start-workspace-button" onClick={this.startWorkspace}>
+                <Button className="start-workspace-button" onClick={this.startWorkspace}>
                 <Icon name="play" />&nbsp;Run
-            </button >
-            </MenuItem>) :
+                </Button>) :
             (
-            <MenuItem>
-            <button className="stop-workspace-button" onClick={this.stopWorkspace}>
+                <Button className="stop-workspace-button" onClick={this.stopWorkspace}>
                 <Icon name="stop" />&nbsp;Stop
-            </button >
-            </MenuItem>)
-
+                </Button >
+            )
             return (
                 <div className="workspace-bm-menu" >
                     <nav className="bm-item-list" >
@@ -82,7 +78,7 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
                             </Button>
                         </ContextMenuTrigger>
                         <ContextMenu id="my_menu">
-                            {workspaceStatus}
+                            {onRightClickButton}
                         </ContextMenu>
                     </nav>
                 </div>
@@ -90,7 +86,7 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
     }
 
      private startWorkspace() {
-         /* fetch('http://' + this.props.PcurrentServer + '/api/workspace' + this.props.PworkspaceInfo.id + '/runtime?token=' +
+         fetch('http://' + this.props.PcurrentServer + '/api/workspace' + this.props.PworkspaceInfo.id + '/runtime?token=' +
          this.props.Pservers[ this.props.PcurrentServer ].authToken, {
              headers: new Headers({
                  'Content-Type' : 'application/json',
@@ -100,9 +96,7 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
          .then((data) => {
              global.console.log('Start Workspace')
              this.setState({ WorkspaceStatus : data.status });
-     }); */
-     global.console.log('Start workspace');
-
+     });
  }
 
      private stopWorkspace() {
