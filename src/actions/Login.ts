@@ -179,6 +179,7 @@ export function requestOSIOLogin() {
     const authApiUrl = `https://auth.openshift.io/api/`
     const loginUrl = `${authApiUrl}login?redirect=${redirectUrl}`
     window.location.href = loginUrl
+    global.console.log(window.location.href)
     return {
         payload : {
             OSIOFetching : true
@@ -219,10 +220,8 @@ function cheLoginRequest(cheServerURL : string, cheUserName : string, chePasswor
                 fetch(keycloakSettings[cheTokenEndpoint], {
                     body : 'grant_type=password&client_id=' + keycloakSettings[cheClientId] +
                     '&username=' + cheUserName + '&password=' + chePassword + '',
-                    headers : {
-                        'Access-Control-Allow-Credentials': 'true',
-                        // 'Access-Control-Allow-Origin': '*',
-                        'Content-Type': 'application/x-www-form-urlencoded',
+                    headers: {
+                        Accept: 'application/json'
                     },
                     method : 'POST',
                 }).then((response: any) => {

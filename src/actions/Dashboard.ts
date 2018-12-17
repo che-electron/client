@@ -186,7 +186,6 @@ export function updateWorkspacesList() {
         const state = getState()
 
         if (state.dashboard.currentServer) {
-            global.console.log('Update Workspaces List for Server ' + state.dashboard.currentServer)
             dispatch(requestWorkspaces(state.dashboard.currentServer))
             fetch('http://' + state.dashboard.currentServer + '/api/workspace?token=' +
             state.dashboard.servers[ state.dashboard.currentServer ].authToken).then((resp : any) => {
