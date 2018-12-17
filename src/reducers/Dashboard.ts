@@ -8,7 +8,6 @@ export interface IStateDashboard {
     IDELoginIsActive : boolean
     // Servers
     servers : {},
-
     // Sidebar
     sidebarIsActive : boolean,
 
@@ -61,7 +60,7 @@ export function dashboardReducer(state: IStateDashboard = initialState, action: 
             const serversState = { ...state.servers }
             serversState[action.payload.server].fetchingWorkspaces = action.payload.fetchingWorkspaces
             serversState[action.payload.server].workspaces = action.payload.workspaces
-
+            global.console.log(serversState)
             return { ...state, servers : { ...serversState }}
         }
 

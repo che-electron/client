@@ -20,6 +20,7 @@
       border: none;
       cursor: pointer;
     }
+<<<<<<< HEAD
   
     .workspaces-list{
         color : white;
@@ -124,5 +125,116 @@
       text-align : left;
       width : 100%;
     }
+
+.workspaces-list{
+    color : white;
+    width:150px;
+}
+
+.create-workspace:hover {
+    background-color: #3b629c;
+    color: white;
+}
+
+.create-workspace{
+    background-color: #282e44;
+    font-size: 14px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    }
+
+
+.WorkspaceComponent:hover {
+background-color: #3b629c;
+color: white;
+}
+
+.WorkspaceComponent{
+    background-color: #282e44;
+    font-size: 14px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.start-workspace-button:hover {
+    background-color: #758aaa;
+    color: white;
+    cursor: pointer;
+}
+
+.stop-workspace-button:hover {
+    background-color: #758aaa;
+    color: white;
+}
     
+.update-workspaces-list:hover {
+    background-color: #3b629c;
+    color: white;
+    }
     
+.update-workspaces-list{
+    background-color: #282e44;
+    font-size: 14px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}    
+
+.workspace-status-running {
+    height: 8px;
+    width: 8px;
+    background-color: #00c183;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.workspace-status-stopped {
+    height: 8px;
+    width: 8px;
+    border: 0.5px solid white;
+    background-color: #282e44;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.workspace-status-spinner{
+    display:inline-block;
+    line-height:inherit;
+    vertical-align:middle;
+}
+
+.workspace-status-spinner .spinner{
+    width:20px;
+    height: 22px;
+    font-size: 8px;
+}
+
+.workspace-status-error{
+    height: 8px;
+    width: 8px;
+    background-color: #FF0000;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.workspace-bm-menu{
+    height: 100%;
+    }
+
+.bm-item:hover {
+    background-color: #3b629c;
+    color: "white";
+    cursor: pointer;
+}
+
+.bm-item{
+    background-color: #282e44;
+    color: white;
+    border: none;
+    height : 100%;
+    margin : 5px 0; 
+    text-align : left;
+    width : 100%;
+}

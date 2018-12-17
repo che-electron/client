@@ -21,38 +21,25 @@ interface IState{
     WorkspaceStatus: string,
 }
 
+interface IState{
+    WorkspaceStatus: string,
+}
+
 class WorkspaceComponent extends React.Component<IProps, IState> {
 
     constructor(props : IProps) {
         super(props);
-        // this.reloadWorkspace=this.reloadWorkspace.bind(this);
+        this.reloadWorkspace = this.reloadWorkspace.bind(this);
         this.startWorkspace = this.startWorkspace.bind(this);
         this.stopWorkspace = this.stopWorkspace.bind(this);
         this.handleButton = this.handleButton.bind(this);
-
         this.state = {
             WorkspaceStatus : this.props.PworkspaceInfo.status
-        };
-    }
+  };
+}
 
     public handleButton() {
-        this.props.PsetCurrentWorkspace(this.props.PworkspaceInfo.id)
-    }
-
-    public renderComponent() {
-        return (
-            (this.props.PworkspaceInfo.status === 'STOPPED' ||
-            this.props.PworkspaceInfo.status === 'STOPPING') ?
-            (
-                <Button className="start-workspace-button" onClick={this.startWorkspace}>
-                <Icon name="play" />&nbsp;Run
-                </Button>) :
-            (
-                <Button className="stop-workspace-button" onClick={this.stopWorkspace}>
-                <Icon name="stop" />&nbsp;Stop
-                </Button >
-            )
-        )
+        this.props.PsetCurrentWorkspace(this.props.PworkspaceInfo)
     }
 
     public render() {
@@ -70,7 +57,19 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
                 <span><Icon spin ={true} name="refresh" />
                 { this.reloadWorkspace() }
                 </span>)
-}
+            }
+
+            const onRightClickButton = (this.state.WorkspaceStatus === 'STOPPED' ||
+            this.state.WorkspaceStatus === 'STOPPING') ?
+            (
+                <Button className="start-workspace-button" onClick={this.startWorkspace}>
+                <Icon name="play" />&nbsp;Run
+                </Button>) :
+            (
+                <Button className="stop-workspace-button" onClick={this.stopWorkspace}>
+                <Icon name="stop" />&nbsp;Stop
+                </Button >
+            )
             return (
                 <div className="workspace-bm-menu" >
                     <nav className="bm-item-list" >
@@ -86,7 +85,7 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
                             </Button>
                         </ContextMenuTrigger>
                         <ContextMenu id="my_menu">
-                        {this.renderComponent()}
+                            {onRightClickButton}
                         </ContextMenu>
                     </nav>
                 </div>
@@ -135,6 +134,7 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
             }
       );
     }
+
 }
 
 export default WorkspaceComponent;

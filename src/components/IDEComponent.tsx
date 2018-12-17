@@ -7,10 +7,6 @@ interface IProps {
     Pservers : {}
 }
 
-// interface IState {
-
-// }
-
 class IDEComponent extends React.Component<IProps> {
 
     constructor(props : IProps) {
@@ -19,9 +15,22 @@ class IDEComponent extends React.Component<IProps> {
     }
 
     public render() {
+        let url = '';
+        if (this.props.PcurrentServer && this.props.Pservers[this.props.PcurrentServer] &&
+            this.props.PcurrentWorkspacePerServer[this.props.PcurrentServer]) {
+                        const workspaceInUse = this.props.PcurrentWorkspacePerServer[this.props.PcurrentServer]
+                        if (workspaceInUse) {
+                            url = workspaceInUse.ideLink
+                        }
+                    }
+        const style = {
+            height : '100%',
+            width : '100%',
+        }
+        global.console.log(url);
         return (
             <div className="IDEComponent">
-                IDE {JSON.stringify(this.props.PcurrentServer)} {JSON.stringify(this.props.PcurrentWorkspacePerServer)}
+                <iframe style={style} src={url} />
             </div>
         )
     }
