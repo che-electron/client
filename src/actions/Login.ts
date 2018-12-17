@@ -221,7 +221,9 @@ function cheLoginRequest(cheServerURL : string, cheUserName : string, chePasswor
                     body : 'grant_type=password&client_id=' + keycloakSettings[cheClientId] +
                     '&username=' + cheUserName + '&password=' + chePassword + '',
                     headers: {
-                        Accept: 'application/json'
+                        'Access-Control-Allow-Credentials': 'true',
+                        // 'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/x-www-form-urlencoded',
                     },
                     method : 'POST',
                 }).then((response: any) => {
