@@ -31,6 +31,9 @@ export function loginReducer(state : IStateLogin = initialState, action : Action
             return { ...state, OSIOFetching : action.payload.OSIOFetching }
         }
 
+        case ActionTypes.OSIO_LOGIN_FAILED: {
+            return { ...state, OSIOAuthenticated : action.payload.OSIOAuthenticated, OSIOAuthError : action.payload.OSIOAuthError }
+        }
         // CHE : check -> request(validate) -> check
         // CHE ACTIONS
 

@@ -4,7 +4,7 @@ import Server from '../models/Server';
 
 import { Dispatch } from 'redux';
 
-import MockLocalStorage from '../mocks/MockLocalStorage';
+import MockLocalStorage from '../__mocks__/MockLocalStorage';
 
 let localStorage : any;
 
