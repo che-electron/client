@@ -8,6 +8,7 @@
     ]
   },
   "rules" : {
+    "no-implicit-dependencies": [true, "dev"],
     "prettier" : true,
     "no-duplicate-imports": false,
     "jsx-boolean-value" : true,
