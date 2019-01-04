@@ -75,13 +75,11 @@ class LoginComponent extends React.Component<IProps, IState> {
 }
 
     public handleLogin(event : any) {
-        // this.props.PrequestCheLogin("che-eclipse-che.192.168.42.205.nip.io","admin","admin")
         this.props.PrequestCheLogin(this.state.cheServerURL, this.state.cheUserName, this.state.chePassword)
         event.preventDefault();
     }
 
     public render() {
-
         let loginCredentials;
         if (this.state.cheServerURL === '' || this.state.cheServerURL === 'che.openshift.io') {
            loginCredentials = (

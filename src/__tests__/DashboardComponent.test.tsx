@@ -2,8 +2,6 @@ import * as Enzyme from 'enzyme';
 
 import * as Adapter from 'enzyme-adapter-react-16';
 
-import { mount, shallow } from 'enzyme';
-
 import * as React from 'react';
 
 import DashboardComponent from '../components/DashboardComponent';
@@ -32,8 +30,7 @@ function shallowSetup() {
     PtoggleIDELogin : jest.fn()
   }
 
-  const enzymeWrapper = shallow(<DashboardComponent {...props} />)
-  // const mountEnzymeWrapper = mount(<DashboardComponent {...props} />)
+  const enzymeWrapper = Enzyme.shallow(<DashboardComponent {...props} />)
 
   return {
     enzymeWrapper,
@@ -52,17 +49,17 @@ function mountSetup() {
     PcurrentWorkspacePerServer : {},
     PpopulateServers : jest.fn(),
     Pservers : {},
-    PsetCurrentServer : jest.fn(),
+    PsetCurrentServer : jest.fn((server : string) => {}),
 
     // Workspaces
-    PsetCurrentWorkspace : jest.fn(),
-    PupdateWorkspacesList : jest.fn(),
+    PsetCurrentWorkspace : jest.fn((workspaceID : string) => {}),
+    PupdateWorkspacesList : jest.fn((server : string) => {}),
 
     // IDE|Login Toggle
     PIDELoginIsActive : false,
     PtoggleIDELogin : jest.fn()
   }
-  const enzymeWrapper = mount(<DashboardComponent {...props} />)
+  const enzymeWrapper = Enzyme.mount(<DashboardComponent {...props} />)
 
   return {
     enzymeWrapper,
@@ -71,21 +68,12 @@ function mountSetup() {
 }
 
 describe('Dashboard Components', () => {
-    it('should render self and subcomponents', () => {
+  it('should render self and subcomponents', () => {
       const { enzymeWrapper } = shallowSetup();
       expect(enzymeWrapper.exists()).toBe(true);
       expect(enzymeWrapper.find('div').hasClass('Dashboard')).toBe(true);
       expect(enzymeWrapper.find('SidebarComponent').prop('PsidebarIsActive')).toBe(true);
       expect(enzymeWrapper.find('SidebarComponent').prop('PcurrentServer')).toEqual('che.openshift.io');
-
-    /* it('should call addTodo if length of text is greater than 0', () => {
-      const { enzymeWrapper, props } = setup()
-      const input = enzymeWrapper.find('TodoTextInput')
-      input.props().onSave('')
-      expect(props.addTodo.mock.calls.length).toBe(0)
-      input.props().onSave('Use Redux')
-      expect(props.addTodo.mock.calls.length).toBe(1)
-    }) */
   })
 
   it('renders Dashboard when sidebar is inactive', () => {
@@ -94,17 +82,14 @@ describe('Dashboard Components', () => {
     enzymeWrapper.setProps({
       PsidebarIsActive: false
     });
-
     expect(enzymeWrapper.find('SidebarComponent').prop('PsidebarIsActive')).toEqual(false);
   });
 
   it('renders Dashboard when current server is changed', () => {
     const { enzymeWrapper } = mountSetup();
-
     enzymeWrapper.setProps({
       PcurrentServer: 'che-eclipse-io-178.90.89.100'
     });
-
     expect(enzymeWrapper.find('SidebarComponent').prop('PcurrentServer')).toEqual('che-eclipse-io-178.90.89.100');
   });
 })

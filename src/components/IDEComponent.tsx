@@ -27,7 +27,6 @@ class IDEComponent extends React.Component<IProps> {
             height : '100%',
             width : '100%',
         }
-        global.console.log(url);
         return (
             <div className="IDEComponent">
                 <iframe style={style} src={url} />
