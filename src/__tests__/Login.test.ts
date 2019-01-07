@@ -2,19 +2,7 @@ import { ActionTypes } from '../actions/Login';
 
 import * as Action from '../actions/Login';
 
-// import configureMockStore from 'redux-mock-store';
-
-// import thunk from 'redux-thunk';
-
 import * as Reducer from '../reducers/Login';
-
-// import fetch from '../__mocks__/MockFetch';
-
-// import { mockDataSuccess } from '../__mocks__/MockData';
-
-// const middlewares = [thunk];
-
-// const mockStore= configureMockStore(middlewares);
 
 describe('Login Actions', () => {
 
