@@ -5,17 +5,14 @@ An extension to the Eclipse Next-Generation IDE, [Eclipse Che](https://github.co
 
 This Application allows users to add remote Che Servers. Users need to authenticate themselves if they want to add a Che Server which is not running on OpenShift. For Che Servers running on OpenShift users are authenticated through their Red Hat Developers Account.
 
-### Get Started
-
-> Make sure your Eclipse Che is running on the Che Server that you are trying to add.
-
-
-> After the app is cloned in your local directory, do
+### Building
 ```sh
 npm install
 ```
 
-> Once all the packages are installed, do
-```sh
-npm run electron-dev
-```
+### npm scripts
+```npm run electron-dev``` - start development server in electron
+
+```npm start``` - start development server in your default browser
+
+```npm test``` - run test scripts
