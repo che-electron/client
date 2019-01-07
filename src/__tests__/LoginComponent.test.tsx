@@ -11,12 +11,11 @@ Enzyme.configure({ adapter: new Adapter() })
 function shallowSetup() {
     const props = {
         Pauthenticated : true,
-        PrequestCheLogin : jest.fn((cheServerURL : 'some.openshift.io', cheUserName : 'admin', chePassword : 'admin')=> {}),
-        PrequestOSIOLogin : jest.fn(() => {})
+        PrequestCheLogin : jest.fn(),
+        PrequestOSIOLogin : jest.fn()
     }
-  
     const enzymeWrapper = Enzyme.shallow(<LoginComponent {...props} />);
-  
+
     return {
       enzymeWrapper,
       props
@@ -26,20 +25,20 @@ function shallowSetup() {
 describe('Login Components', () => {
     describe('Button onClicks', () => {
         it('should invoke the handleOSIO callback', () => {
-            let mockFn = jest.fn();
-            LoginComponent.prototype.handleOSIO = mockFn;            
-            let { enzymeWrapper } = shallowSetup();
+            const mockFn = jest.fn();
+            LoginComponent.prototype.handleOSIO = mockFn;
+            const { enzymeWrapper } = shallowSetup();
             enzymeWrapper.setState({ cheServerURL: 'che.openshift.io' })
-            enzymeWrapper.find('.connect').prop('onClick')();
+            enzymeWrapper.find('.connect').simulate('click');
             expect(mockFn).toHaveBeenCalledTimes(1);
         });
 
         it('should invoke the handleLogin callback', () => {
-            let mockFn = jest.fn();
+            const mockFn = jest.fn();
             LoginComponent.prototype.handleLogin = mockFn;
-            let { enzymeWrapper } = shallowSetup();
+            const { enzymeWrapper } = shallowSetup();
             enzymeWrapper.setState({ cheServerURL: 'something' })
-            enzymeWrapper.find('.login').prop('onClick')();
+            enzymeWrapper.find('.login').simulate('click');
             expect(mockFn).toHaveBeenCalledTimes(1);
         })
     })

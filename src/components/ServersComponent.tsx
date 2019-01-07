@@ -52,7 +52,7 @@ class ServersComponent extends React.Component<IProps> {
     }
 
     public render() {
-
+        global.console.log(this.props.Pservers)
         return (
             <div className="servers-component" >
                 <h3>Servers</h3>

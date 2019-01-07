@@ -63,7 +63,7 @@ export interface ISetCurrentServerAction {
 export interface ISetCurrentWorkspacePerServerAction {
     type : ActionTypes.SET_CURRENT_WORKSPACEPERSERVER,
     payload : {
-        workspace : string // Will container key:value pairs equivalent to server:workspace
+        workspace : string // Will contain key:value pairs equivalent to server:workspace
     }
 }
 

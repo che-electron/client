@@ -49,11 +49,11 @@ function mountSetup() {
     PcurrentWorkspacePerServer : {},
     PpopulateServers : jest.fn(),
     Pservers : {},
-    PsetCurrentServer : jest.fn((server : string) => {}),
+    PsetCurrentServer : jest.fn(),
 
     // Workspaces
-    PsetCurrentWorkspace : jest.fn((workspaceID : string) => {}),
-    PupdateWorkspacesList : jest.fn((server : string) => {}),
+    PsetCurrentWorkspace : jest.fn(),
+    PupdateWorkspacesList : jest.fn(),
 
     // IDE|Login Toggle
     PIDELoginIsActive : false,
