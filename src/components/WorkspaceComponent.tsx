@@ -8,6 +8,8 @@ import { Button } from 'reactstrap'
 
 import './WorkspaceComponent.css';
 
+import { reloadWorkspaceApi, startWorkspaceApi, stopWorkspaceApi } from '../apicalls/GetApi';
+
 // import WorkspaceOnRightClickComponent from './WorkspaceOnRightClickComponent';
 
 interface IProps {
@@ -93,8 +95,8 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
     }
 
      private reloadWorkspace() {
-        fetch('http://' + this.props.PcurrentServer + '/api/workspace' + this.props.PworkspaceInfo.id + '?token=' +
-        this.props.Pservers[ this.props.PcurrentServer ].authToken, {
+        fetch(reloadWorkspaceApi(this.props.PcurrentServer, this.props.PworkspaceInfo.id,
+            this.props.Pservers[ this.props.PcurrentServer ].authToken), {
             headers: new Headers({
                 'Content-Type': 'application/json',
                 }),
@@ -108,8 +110,8 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
     }
 
     private startWorkspace() {
-        fetch('http://' + this.props.PcurrentServer + '/api/workspace' + this.props.PworkspaceInfo.id + '/runtime?token=' +
-        this.props.Pservers[ this.props.PcurrentServer ].authToken, {
+        fetch(startWorkspaceApi(this.props.PcurrentServer, this.props.PworkspaceInfo.id,
+            this.props.Pservers[ this.props.PcurrentServer ].authToken), {
             headers: new Headers({
                 'Content-Type' : 'application/json',
        }),
@@ -122,8 +124,8 @@ class WorkspaceComponent extends React.Component<IProps, IState> {
 }
 
     private stopWorkspace() {
-        fetch('http://' + this.props.PcurrentServer + '/api/workspace' + this.props.PworkspaceInfo.id + '/runtime?token=' +
-        this.props.Pservers[ this.props.PcurrentServer ].authToken, {
+        fetch(stopWorkspaceApi(this.props.PcurrentServer, this.props.PworkspaceInfo.id,
+            this.props.Pservers[ this.props.PcurrentServer ].authToken), {
                 headers: new Headers({
                     'Content-Type' : 'application/json',
         }),
