@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
+import MockLocalStorage from '../__mocks__/MockLocalStorage';
 import { populateServers } from '../actions/Dashboard';
-import MockLocalStorage from '../mocks/MockLocalStorage';
 
 // import * as Keycloak from 'keycloak-js'
 const osioCheURL = 'che.openshift.io';
@@ -17,6 +17,7 @@ if (!window.localStorage)
 
 export enum ActionTypes {
     CHECK_OSIO_LOGIN = '[login] CHECK_OSIO_LOGIN',
+    OSIO_LOGIN_FAILED = '[login] OSIO_LOGIN_FAILED',
     CHECK_CHE_LOGIN = '[login] CHECK_CHE_LOGIN',
     // OSIO Che Login
     OSIO_LOGIN_REQUEST = '[login_osio] LOGIN_REQUEST',
@@ -34,6 +35,14 @@ export interface ICheckOSIOLoginAction {
     type : ActionTypes.CHECK_OSIO_LOGIN,
     payload : {
         OSIOAuthenticated : boolean,
+    }
+}
+
+export interface IOSIOLoginFailed {
+    type : ActionTypes.OSIO_LOGIN_FAILED,
+    payload : {
+        OSIOAuthenticated : boolean,
+        OSIOAuthError : string
     }
 }
 
@@ -127,7 +136,7 @@ export function checkOSIOLogin() {
                     OSIOAuthError : result[key],
                     OSIOAuthenticated : false
                 },
-                type: ActionTypes.CHECK_OSIO_LOGIN
+                type: ActionTypes.OSIO_LOGIN_FAILED
             }
         }
         // existsInURL = false
@@ -191,7 +200,7 @@ export function requestOSIOLogin() {
 export function requestCheLogin(cheServerURL : string, cheUserName : string, chePassword : string) {
     return (dispatch : Dispatch) => {
         dispatch(makeRequestCheLogin())
-        cheLoginRequest(cheServerURL, cheUserName, chePassword, dispatch)
+        cheLoginRequest(cheServerURL, cheUserName, chePassword)
     }
 }
 
@@ -205,7 +214,7 @@ function setLocalStorageForCheServer(cheServerURL : string, cheServerAuth : stri
     }
 }
 
-function cheLoginRequest(cheServerURL : string, cheUserName : string, chePassword : string, dispatch : Dispatch) {
+export const cheLoginRequest = (cheServerURL : string, cheUserName : string, chePassword : string) => (dispatch : Dispatch) => {
     let keycloakSettings = {}
     const cheClientId = 'che.keycloak.client_id'
     // const cheAuthEndpoint= "che.keycloak.auth_server_url"
@@ -266,7 +275,7 @@ function makeRequestCheLogin() {
     }
 }
 
-function cheLoginValidate(isAuthenticated : boolean, cheURL : string) {
+export function cheLoginValidate(isAuthenticated : boolean, cheURL : string) {
     return {
         payload : {
             CheAuthenticated : isAuthenticated,
@@ -277,4 +286,4 @@ function cheLoginValidate(isAuthenticated : boolean, cheURL : string) {
 }
 
 export type Action = IOSIOLoginRequestAction | ICheckOSIOLoginAction | ICheckCheLoginAction
-                    | ICheLoginRequestAction | ICheLoginValidateAction
+                    | ICheLoginRequestAction | ICheLoginValidateAction | IOSIOLoginFailed
