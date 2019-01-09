@@ -6,6 +6,8 @@ import { Dispatch } from 'redux';
 
 import MockLocalStorage from '../__mocks__/MockLocalStorage';
 
+import { workspaceApi, workspacesApi } from '../apicalls/GetApi';
+
 let localStorage : any;
 
 if (!window.localStorage) {
@@ -185,14 +187,14 @@ export function updateWorkspacesList() {
 
         if (state.dashboard.currentServer) {
             dispatch(requestWorkspaces(state.dashboard.currentServer))
-            fetch('http://' + state.dashboard.currentServer + '/api/workspace?token=' +
-            state.dashboard.servers[ state.dashboard.currentServer ].authToken).then((resp : any) => {
+            fetch(workspaceApi(state.dashboard.currentServer,
+                state.dashboard.servers[ state.dashboard.currentServer ].authToken)).then((resp : any) => {
                 return resp.json()
             }).then(async (body : any) => {
                 for (const i in body) {
                     if (i) {
-                        fetch('http://' + state.dashboard.currentServer + '/api/workspace/' + body[i].id + '?token=' +
-                        state.dashboard.servers[ state.dashboard.currentServer ].authToken).then((resp : any) => {
+                        fetch(workspacesApi(state.dashboard.currentServer, body[i].id,
+                            state.dashboard.servers[ state.dashboard.currentServer ].authToken)).then((resp : any) => {
                             return resp.json()
                         }).then((linkBody) => {
                             body[i].ideLink = linkBody.links.ide

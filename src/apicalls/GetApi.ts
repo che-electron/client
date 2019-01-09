@@ -1,23 +1,23 @@
-export function workspacesApi()
-{
-     return 'https://che.openshift.io/api/workspace?token=' + localStorage.OSIOAuthToken;
-    // return "http://che-mini-che..nip.io/api/workspace";
+export function workspacesApi(currentServer : string, id : string, token : string) {
+    return 'http://' + currentServer + '/api/workspace/' + id + '?token=' + token;
 }
 
-export function workspaceApi(id : string)
-{
-     return 'https://che.openshift.io/api/workspace/' + id + '?token=' + localStorage.OSIOAuthToken;
-    // return "http://che-mini-che..nip.io/api/workspace"+id;
+export function workspaceApi(currentServer : string, token : string) {
+    return 'http://' + currentServer + '/api/workspace?token=' + token;
 }
 
-export function startWorkspaceApi(id : string)
-{
-     return 'https://che.openshift.io/api/workspace/' + id + '/runtime+?token=' + localStorage.OSIOAuthToken;
-    // return "http://che-mini-che..nip.io/api/workspace/"+id+"/runtime";
+export function cheKeycloakSettingsApi(cheServerURL : string) {
+    return 'http://' + cheServerURL + '/api/keycloak/settings'
 }
 
-export function stopWorkspaceApi(id : string)
-{
-     return 'https://che.openshift.io/api/workspace/' + id + '/runtime+?token=' + localStorage.OSIOAuthToken;
-    // return "http://che-mini-che..nip.io/api/workspace/"+id+"/runtime";
+export function startWorkspaceApi(currentServer : string, workspaceId : string, token : string) {
+    return 'http://' + currentServer + '/api/workspace' + workspaceId + '/runtime?token=' + token;
+}
+
+export function stopWorkspaceApi(currentServer : string, workspaceId : string, token : string) {
+    return 'http://' + currentServer + '/api/workspace' + workspaceId + '/runtime?token=' + token;
+}
+
+export function reloadWorkspaceApi(currentServer : string, workspaceId : string, token : string) {
+    return 'http://' + currentServer + '/api/workspace' + workspaceId + '?token=' + token;
 }

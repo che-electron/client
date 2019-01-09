@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import MockLocalStorage from '../__mocks__/MockLocalStorage';
 import { populateServers } from '../actions/Dashboard';
+import { cheKeycloakSettingsApi } from '../apicalls/GetApi';
 
 // import * as Keycloak from 'keycloak-js'
 const osioCheURL = 'che.openshift.io';
@@ -221,7 +222,7 @@ export const cheLoginRequest = (cheServerURL : string, cheUserName : string, che
     const cheTokenEndpoint = 'che.keycloak.token.endpoint'
     // const cheRealm = "che.keycloak.realm"
     if (cheServerURL) {
-        fetch('http://' + cheServerURL + '/api/keycloak/settings').then((response) => {
+        fetch(cheKeycloakSettingsApi(cheServerURL)).then((response) => {
             return response.json()
         }).then((data) => {
             keycloakSettings = data
