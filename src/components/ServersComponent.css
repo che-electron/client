@@ -1,0 +1,49 @@
+.servers-component{
+    color : white;
+    width: 130px;
+    padding : 4px;
+}
+
+.add-che-server{
+    background-color: #282e44;
+    font-size: 14px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 1px;
+  }
+  
+.add-che-server:hover {
+  background-color: #3b629c;
+  color: "white";
+}
+
+.server-name{
+  background-color: #282e44;
+  color: white;
+  border: none;
+  font-size: 15px;
+  margin : 5px 0; 
+  text-align : left;
+  width : 100%;
+  cursor: pointer;
+}
+
+.workspace-sidebar{
+  background-color : #282e44;
+  width: 150px;
+  transition: .3s ease;
+}
+
+.fa-angle-down{
+  background: #282e44;
+  border: none;
+  color: white;
+  cursor : pointer;
+  padding: 1px;
+  font-size: 1.3em;
+}
+
+.fa-angle-down:focus{
+  outline: none;
+}

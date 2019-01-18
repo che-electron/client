@@ -1,4 +1,3 @@
-
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -10,9 +9,11 @@ const isDev = require('electron-is-dev');
 let mainWindow;
 
 function createWindow() {
+
   mainWindow = new BrowserWindow({width: 900, height: 680});
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
+  mainWindow.loadURL(isDev ? 'http://localhost:8000' : `file://${path.join(__dirname, '../build/index.html')}`);
   mainWindow.on('closed', () => mainWindow = null);
+  mainWindow.webPreferences = {webSecurity: false}
 }
 
 app.on('ready', createWindow);

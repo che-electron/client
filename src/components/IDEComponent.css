@@ -1,0 +1,7 @@
+.IDEComponent{
+    position : relative;
+    flex : 1;
+    height: 960px;
+    width: 100%;
+    background-color: #333;
+}

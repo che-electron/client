@@ -51,7 +51,7 @@ export default function register() {
       } else {
         // Is not local host. Just register service worker
         registerValidSW(swUrl);
-      }
+        }
     });
   }
 }
@@ -92,10 +92,8 @@ function checkValidServiceWorker(swUrl: string) {
   fetch(swUrl)
     .then(response => {
       // Ensure service worker exists, and that we really are getting a JS file.
-      if (
-        response.status === 404 ||
-        response.headers.get('content-type')!.indexOf('javascript') === -1
-      ) {
+      if (response.status === 404 ||
+        response.headers.get('content-type')!.indexOf('javascript') === -1) {
         // No service worker found. Probably a different app. Reload the page.
         navigator.serviceWorker.ready.then(registration => {
           registration.unregister().then(() => {
