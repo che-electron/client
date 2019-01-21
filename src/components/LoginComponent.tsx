@@ -72,7 +72,7 @@ class LoginComponent extends React.Component<IProps, IState> {
                 cheServerURL : this.url
             })
         }
-}
+    }
 
     public handleLogin(event : any) {
         this.props.PrequestCheLogin(this.state.cheServerURL, this.state.cheUserName, this.state.chePassword)

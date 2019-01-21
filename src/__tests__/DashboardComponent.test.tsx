@@ -74,7 +74,7 @@ describe('Dashboard Components', () => {
       expect(enzymeWrapper.find('div').hasClass('Dashboard')).toBe(true);
       expect(enzymeWrapper.find('SidebarComponent').prop('PsidebarIsActive')).toBe(true);
       expect(enzymeWrapper.find('SidebarComponent').prop('PcurrentServer')).toEqual('che.openshift.io');
-  })
+  });
 
   it('renders Dashboard when sidebar is inactive', () => {
     const { enzymeWrapper } = mountSetup();
