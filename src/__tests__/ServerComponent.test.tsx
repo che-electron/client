@@ -27,7 +27,7 @@ function shallowSetup() {
   }
 }
 
-describe('Dashboard Components', () => {
+describe('Server Component', () => {
     it('should render self and subcomponents', () => {
         const { enzymeWrapper } = shallowSetup();
         expect(enzymeWrapper.exists()).toBe(true);

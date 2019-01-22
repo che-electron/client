@@ -39,7 +39,7 @@ function mountSetup() {
   }
 }
 
-describe('Dashboard Components', () => {
+describe('IDE Component', () => {
     it('should render self and subcomponents', () => {
       const { enzymeWrapper } = shallowSetup();
       expect(enzymeWrapper.exists()).toBe(true);
