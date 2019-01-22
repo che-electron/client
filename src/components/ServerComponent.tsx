@@ -35,7 +35,7 @@ class ServerComponent extends React.Component<IProps, IState> {
         )
     }
 
-    private handleClick() {
+    public handleClick() {
         this.props.PsetCurrentServer(this.props.server.url)
         this.props.PupdateWorkspacesList(this.props.PcurrentServer)
     }
