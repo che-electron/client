@@ -23,31 +23,7 @@ function shallowSetup() {
     PtoggleSidebar : jest.fn(),
     PupdateWorkspacesList : jest.fn()
   }
-
   const enzymeWrapper = Enzyme.shallow(<DashboardComponent {...props} />)
-
-  return {
-    enzymeWrapper,
-    props
-  }
-}
-
-function mountSetup() {
-  const props = {
-    PIDELoginIsActive : true,
-
-    PcurrentServer : 'che.openshift.io',
-    PcurrentWorkspacePerServer : {},
-    PpopulateServers : jest.fn(),
-    Pservers : {},
-    PsetCurrentServer : jest.fn(),
-    PsetCurrentWorkspace : jest.fn(),
-    PsidebarIsActive : false,
-    PtoggleIDELogin : jest.fn(),
-    PtoggleSidebar : jest.fn(),
-    PupdateWorkspacesList : jest.fn()
-  }
-  const enzymeWrapper = Enzyme.mount(<DashboardComponent {...props} />)
 
   return {
     enzymeWrapper,
@@ -68,7 +44,7 @@ describe('Dashboard Components', () => {
   });
 
   it('renders Dashboard when sidebar is inactive', () => {
-    const { enzymeWrapper } = mountSetup();
+    const { enzymeWrapper } = shallowSetup();
 
     enzymeWrapper.setProps({
       PsidebarIsActive: false
@@ -77,7 +53,7 @@ describe('Dashboard Components', () => {
   });
 
   it('renders Dashboard when current server is changed', () => {
-    const { enzymeWrapper } = mountSetup();
+    const { enzymeWrapper } = shallowSetup();
     enzymeWrapper.setProps({
       PcurrentServer: 'che-eclipse-che-178.90.89.100'
     });
@@ -85,7 +61,7 @@ describe('Dashboard Components', () => {
   });
 
   it('renders IDE Component', () => {
-    const { enzymeWrapper } = mountSetup();
+    const { enzymeWrapper } = shallowSetup();
     expect(enzymeWrapper.find('IDEComponent').prop('PcurrentServer')).toEqual('che.openshift.io');
   })
 })
