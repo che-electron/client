@@ -10,56 +10,20 @@ Enzyme.configure({ adapter: new Adapter() })
 
 function shallowSetup() {
   const props = {
-    // Sidebar
-    PsidebarIsActive : true,
-    PtoggleSidebar : jest.fn(),
+    PIDELoginIsActive : false,
 
-    // Servers
     PcurrentServer : 'che.openshift.io',
     PcurrentWorkspacePerServer : {},
     PpopulateServers : jest.fn(),
     Pservers : {},
     PsetCurrentServer : jest.fn(),
-
-    // Workspaces
     PsetCurrentWorkspace : jest.fn(),
-    PupdateWorkspacesList : jest.fn(),
-
-    // IDE|Login Toggle
-    PIDELoginIsActive : false,
-    PtoggleIDELogin : jest.fn()
+    PsidebarIsActive : false,
+    PtoggleIDELogin : jest.fn(),
+    PtoggleSidebar : jest.fn(),
+    PupdateWorkspacesList : jest.fn()
   }
-
   const enzymeWrapper = Enzyme.shallow(<DashboardComponent {...props} />)
-
-  return {
-    enzymeWrapper,
-    props
-  }
-}
-
-function mountSetup() {
-  const props = {
-    // Sidebar
-    PsidebarIsActive : true,
-    PtoggleSidebar : jest.fn(),
-
-    // Servers
-    PcurrentServer : 'che.openshift.io',
-    PcurrentWorkspacePerServer : {},
-    PpopulateServers : jest.fn(),
-    Pservers : {},
-    PsetCurrentServer : jest.fn(),
-
-    // Workspaces
-    PsetCurrentWorkspace : jest.fn(),
-    PupdateWorkspacesList : jest.fn(),
-
-    // IDE|Login Toggle
-    PIDELoginIsActive : false,
-    PtoggleIDELogin : jest.fn()
-  }
-  const enzymeWrapper = Enzyme.mount(<DashboardComponent {...props} />)
 
   return {
     enzymeWrapper,
@@ -70,14 +34,17 @@ function mountSetup() {
 describe('Dashboard Components', () => {
   it('should render self and subcomponents', () => {
       const { enzymeWrapper } = shallowSetup();
+      enzymeWrapper.setProps({
+        PsidebarIsActive: true
+      });
       expect(enzymeWrapper.exists()).toBe(true);
       expect(enzymeWrapper.find('div').hasClass('Dashboard')).toBe(true);
       expect(enzymeWrapper.find('SidebarComponent').prop('PsidebarIsActive')).toBe(true);
       expect(enzymeWrapper.find('SidebarComponent').prop('PcurrentServer')).toEqual('che.openshift.io');
-  })
+  });
 
   it('renders Dashboard when sidebar is inactive', () => {
-    const { enzymeWrapper } = mountSetup();
+    const { enzymeWrapper } = shallowSetup();
 
     enzymeWrapper.setProps({
       PsidebarIsActive: false
@@ -86,10 +53,15 @@ describe('Dashboard Components', () => {
   });
 
   it('renders Dashboard when current server is changed', () => {
-    const { enzymeWrapper } = mountSetup();
+    const { enzymeWrapper } = shallowSetup();
     enzymeWrapper.setProps({
-      PcurrentServer: 'che-eclipse-io-178.90.89.100'
+      PcurrentServer: 'che-eclipse-che-178.90.89.100'
     });
-    expect(enzymeWrapper.find('SidebarComponent').prop('PcurrentServer')).toEqual('che-eclipse-io-178.90.89.100');
+    expect(enzymeWrapper.find('SidebarComponent').prop('PcurrentServer')).toEqual('che-eclipse-che-178.90.89.100');
   });
+
+  it('renders IDE Component', () => {
+    const { enzymeWrapper } = shallowSetup();
+    expect(enzymeWrapper.find('IDEComponent').prop('PcurrentServer')).toEqual('che.openshift.io');
+  })
 })

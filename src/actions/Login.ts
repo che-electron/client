@@ -4,9 +4,13 @@ import { populateServers } from '../actions/Dashboard';
 import { cheKeycloakSettingsApi } from '../apicalls/GetApi';
 
 // import * as Keycloak from 'keycloak-js'
+/**
+ * @type {string}
+ */
 const osioCheURL = 'che.openshift.io';
 
- let localStorage : any
+// Define local storage
+let localStorage : any
 
 if (!window.localStorage)
 {
@@ -28,10 +32,7 @@ export enum ActionTypes {
     CHE_LOGIN_RECEIVE = '[login_che] LOGIN_RECEIVE'
 }
 
-/*
-    Interfaces defining the payload for actions
-*/
-
+// Interfaces defining the payload for actions
 export interface ICheckOSIOLoginAction {
     type : ActionTypes.CHECK_OSIO_LOGIN,
     payload : {
@@ -55,7 +56,6 @@ export interface ICheckCheLoginAction {
 }
 
 // OSIO login interfaces
-
 export interface IOSIOLoginRequestAction {
     type : ActionTypes.OSIO_LOGIN_REQUEST,
     payload : {
@@ -64,7 +64,6 @@ export interface IOSIOLoginRequestAction {
 }
 
 // Che Login interfaces
-
 export interface ICheLoginRequestAction {
     type : ActionTypes.CHE_LOGIN_REQUEST,
     payload : {
@@ -89,11 +88,15 @@ export interface ICheLoginReceiveAction {
     }
 }
 
-/*
-    Actions as funcitons
-*/
+// Actions as funcitons
 
+/**
+ * @remarks {Checks if the user is already Logged-In through OSIO}
+ * @return {payload : OSIOAuthenticated : {boolean};
+ * type : {ActionTypes}}
+ */
 export function checkOSIOLogin() {
+
     // let existsInURL : boolean
     const localStorageCheServers = JSON.parse(localStorage.getItem('Servers') || '{}')
     global.console.log(localStorageCheServers)
@@ -150,6 +153,11 @@ export function checkOSIOLogin() {
     }
 }
 
+/**
+ * @remarks {Checks if user is already Logged-In to any other Che Server}
+ * @return {payload : {CheAuthenticatedOnce : {boolean}};
+ * type : {ActionTypes}}
+ */
 export function checkCheLogin() {
     const localStorageCheServers : {} = JSON.parse(localStorage.getItem('Servers') || '{}')
     let auths : number = 0
@@ -183,6 +191,11 @@ export function checkCheLogin() {
     * If the check is done 3 times then dispatch LOGIN_FAILURE_ACTION else dispatch the LOGIN_SUCCESS_ACTION
 */
 
+/**
+ * @remarks {User has requested to Login through OSIO}
+ * @return {payload : {OSIOFetching : {boolean}};
+ * type : {ActionTypes}}
+ */
 export function requestOSIOLogin() {
     const redirectUrl = encodeURIComponent(window.location.href);
     // setLocalStorageForCheServer(cheServerURL,body.access_token)
@@ -198,6 +211,11 @@ export function requestOSIOLogin() {
     }
 }
 
+/**
+ * @param {string} cheServerURL
+ * @param {string} cheUserName
+ * @param {string} chePassword
+ */
 export function requestCheLogin(cheServerURL : string, cheUserName : string, chePassword : string) {
     return (dispatch : Dispatch) => {
         dispatch(makeRequestCheLogin())
@@ -205,6 +223,10 @@ export function requestCheLogin(cheServerURL : string, cheUserName : string, che
     }
 }
 
+/**
+ * @param {string} cheServerURL
+ * @param {string} cheServerAuth
+ */
 function setLocalStorageForCheServer(cheServerURL : string, cheServerAuth : string) {
     const localStorageServers : {} = JSON.parse(localStorage.getItem('Servers') || '{}')
     if (!localStorage.getItem('Servers') || localStorageServers === {}) {
@@ -215,6 +237,11 @@ function setLocalStorageForCheServer(cheServerURL : string, cheServerAuth : stri
     }
 }
 
+/**
+ * @param {string} cheServerURL
+ * @param {string} cheUserName
+ * @param {string} chePassword
+ */
 export const cheLoginRequest = (cheServerURL : string, cheUserName : string, chePassword : string) => (dispatch : Dispatch) => {
     let keycloakSettings = {}
     const cheClientId = 'che.keycloak.client_id'
@@ -270,12 +297,21 @@ export const cheLoginRequest = (cheServerURL : string, cheUserName : string, che
     }
 }
 
+/**
+ * @return {type : {ActionTypes}}
+ */
 function makeRequestCheLogin() {
     return {
         type : ActionTypes.CHE_LOGIN_REQUEST,
     }
 }
 
+/**
+ * @param {boolean} isAuthenticated
+ * @param {string} cheURL
+ * @return {payload : {CheAuthenticated : {boolean}, CheUrl : {string}};
+ * type : {ActionTypes}}
+ */
 export function cheLoginValidate(isAuthenticated : boolean, cheURL : string) {
     return {
         payload : {

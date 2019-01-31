@@ -4,6 +4,7 @@
   "main": "public/electron.js",
   "private": true,
   "dependencies": {
+    "@microsoft/tsdoc": "^0.12.4",
     "@types/enzyme": "^3.1.15",
     "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/react-bootstrap": "^0.32.15",

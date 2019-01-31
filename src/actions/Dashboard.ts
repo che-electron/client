@@ -8,6 +8,7 @@ import MockLocalStorage from '../__mocks__/MockLocalStorage';
 
 import { workspaceApi, workspacesApi } from '../apicalls/GetApi';
 
+// Define local storage
 let localStorage : any;
 
 if (!window.localStorage) {
@@ -36,10 +37,7 @@ export enum ActionTypes {
     TOGGLE_IDE_LOGIN = '[dashboard_IDE_login] SERVER_LOGIN'
 }
 
-/*
-    Interfaces defining the payload for actions
-*/
-
+// Interfaces defining the payload for actions
 export interface IToggleSidebarAction {
     type : ActionTypes.TOGGLE_SIDEBAR,
 }
@@ -103,9 +101,11 @@ export interface IRequestWorkpsacesFailureAction {
         error : string
     }
 }
-/*
-    Actions as funcitons
-*/
+
+// Actions as functions
+/**
+ * @return {type : ActionTypes}
+ */
 
 export function toggleSidebar() {
     return {
@@ -113,15 +113,28 @@ export function toggleSidebar() {
     }
 }
 
+/**
+ * @return {type : ActionTypes}
+ */
 export function toggleIDELogin() {
     return {
         type : ActionTypes.TOGGLE_IDE_LOGIN,
     }
 }
 
+/**
+ *  @return { payload: {servers: {};};
+ * type : ActionTypes;}
+ */
 export function populateServers() {
-
+    /**
+     * @type {*}
+     */
     const localStorageServersAuth = JSON.parse(localStorage.getItem('Servers') || '{}')
+
+   /**
+    * @type {array}
+    */
     const mapLocalStoragetoModel : {} = {}
 
     for (const key in localStorageServersAuth) {
@@ -140,6 +153,12 @@ export function populateServers() {
     }
 }
 
+/**
+ * @param  {string} server
+ * @return { payload: { currentServer: {string}
+ *  };
+ *  type : ActionTypes;}
+ */
 export function setCurrentServer(server : string) {
     return {
         payload : {
@@ -149,9 +168,14 @@ export function setCurrentServer(server : string) {
     }
 }
 
+/**
+ * @param  {string} currentServer
+ * @return {payload: fetchingWorkspaces : {boolean}, server : {string};
+ * type : ActionTypes;}
+ */
 export function requestWorkspaces(currentServer : string) {
     return {
-        payload : {
+            payload : {
             fetchingWorkspaces : true,
             server : currentServer,
         },
@@ -159,6 +183,12 @@ export function requestWorkspaces(currentServer : string) {
     }
 }
 
+/**
+ * @param  {string} currentServer
+ * @param  {array} fetchedWorkspaces
+ * @return {payload : {fetchingWorkspaces : {boolean}, server : {string}, workspaces : {array}};
+ * type : ActionTypes}
+ */
 export function receiveWorkspaces(currentServer : string, fetchedWorkspaces : {}) {
     return {
         payload : {
@@ -170,6 +200,12 @@ export function receiveWorkspaces(currentServer : string, fetchedWorkspaces : {}
     }
 }
 
+/**
+ * @param  {string} currentServer
+ * @param  {*} errorCaught
+ * @return {payload : {error : {*}, fetchingWorkspaces : {boolean}, server : {string}};
+ * type : ActionTypes}
+ */
 export function requestWorkspacesFailed(currentServer : string, errorCaught : any) {
     return {
         payload : {
@@ -183,6 +219,10 @@ export function requestWorkspacesFailed(currentServer : string, errorCaught : an
 
 export function updateWorkspacesList() {
     return (dispatch : Dispatch<any>, getState : any) => {
+
+        /**
+         * @type {*}
+         */
         const state = getState()
 
         if (state.dashboard.currentServer) {
@@ -209,6 +249,11 @@ export function updateWorkspacesList() {
     }
 }
 
+/**
+ * @param  {string} wksp
+ * @return {payload : { workspace : {string}}
+ * type : ActionTypes}
+ */
 export function setCurrentWorkspacePerServer(wksp : string) {
     return {
         payload : {

@@ -22,7 +22,7 @@ function shallowSetup() {
     }
   }
 
-describe('Login Components', () => {
+describe('Login Component', () => {
     describe('Button onClicks', () => {
         it('should invoke the handleOSIO callback', () => {
             const mockFn = jest.fn();

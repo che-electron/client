@@ -8,8 +8,10 @@ import store from '../store';
 
 import AppContainer from '../containers/AppContainer';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Provider store={store} ><AppContainer /></Provider>, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+describe('App Component', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<Provider store={store} ><AppContainer /></Provider>, div);
+    ReactDOM.unmountComponentAtNode(div);
+  })
+})
