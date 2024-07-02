@@ -1,1 +1,1 @@
-{"componentName":"client","entityOwner":"guest","prTitle":"This is the pull request title","prDescription":"This is the description of the pull request","useCodeOwnersFile":false,"yaml":{"kind":"Component","apiVersion":"v1","metadata":{"name":"client"}}}
+JSON.stringify(getPRTemplate('client', 'guest'))
