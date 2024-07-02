@@ -1,1 +1,1 @@
-JSON.stringify(getPRTemplate('client', 'guest'))
+{"componentName":"client","prTitle":"This is the pull request title","prDescription":"This is the description of the pull request","useCodeOwnersFile":false,"yaml":{"apiVersion":"backstage.io/v1alpha1","kind":"Component","metadata":{"name":"client","annotations":{"github.com/project-slug":"guest/client"}},"spec":{"type":"other","lifecycle":"unknown","owner":"guest"}}}
