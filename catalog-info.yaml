@@ -4,8 +4,7 @@ metadata:
   name: client
   annotations:
     github.com/project-slug: che-electron/client
-    a: b
 spec:
   type: other
   lifecycle: unknown
-  owner: user:default/debsmita1
+  owner: user:default/colette.brock
