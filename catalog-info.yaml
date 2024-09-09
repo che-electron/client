@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: client1
+  name: client
   annotations:
     github.com/project-slug: che-electron/client
 spec:
   type: other
   lifecycle: unknown
-  owner: user:default/guest
+  owner: user:default/debsmita1
